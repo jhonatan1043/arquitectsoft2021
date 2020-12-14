@@ -1,0 +1,80 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package controllers;
+
+import dao.DaoBusqueda;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import views.VBusqueda;
+
+/**
+ *
+ * @author Poseidon
+ */
+public class BusquedaController implements ActionListener {
+
+    Object formController;
+    VBusqueda viewBusqueda;
+    DefaultTableModel modelo = new DefaultTableModel();
+    String query;
+    int numColumns;
+    ArrayList<Object[]> listData;
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == viewBusqueda.btnBusqueda) {
+            this.clearRows();
+            this.cargarGrillaBusqueda();
+        }
+        if(e.getSource() == viewBusqueda.btnAgregar){
+            
+        }
+    }
+
+    private void initEvent() {
+        viewBusqueda.btnBusqueda.addActionListener(this);
+        viewBusqueda.btnAgregar.addActionListener(this);
+    }
+
+    public BusquedaController(
+            VBusqueda viewBusqueda,
+            Object formController,
+            String query,
+            ArrayList<String> listColumns) {
+
+        this.query = query;
+        this.numColumns = listColumns.size();
+        this.formController = formController;
+        this.viewBusqueda = viewBusqueda;
+        this.initEvent();
+        this.loadColumns(listColumns);
+        this.cargarGrillaBusqueda();
+    }
+
+    private void loadColumns(ArrayList<String> listColumns) {
+        for (int i = 0; i < listColumns.size(); i++) {
+            modelo.addColumn(listColumns.get(i));
+        }
+        viewBusqueda.tbBusqueda.setModel(modelo);
+    }
+
+    private void cargarGrillaBusqueda() {
+        DaoBusqueda busqueda = new DaoBusqueda();
+        listData = busqueda.seachData(viewBusqueda.txtBusqueda.getText(),
+                query,
+                numColumns, viewBusqueda.tbBusqueda);
+        listData.forEach((listData1) -> {
+            modelo.addRow(listData1);
+        });
+    }
+
+    private void clearRows() {
+        modelo.setRowCount(0);
+    }
+
+}
