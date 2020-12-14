@@ -18,7 +18,9 @@ public class Conexion {
     private String pass = "p0s31d0n";
     private String db = "arquitectdb";
     private String url = "jdbc:mysql://localhost:3306/" +
-                           db + "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false";
+                           db + "?useUnicode=true&useJDBCCompliantTimezoneShift=true&"
+                              + "useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false&"
+                              + "allowPublicKeyRetrieval=true";
     Connection cnx = null;
     
     public Conexion(){
