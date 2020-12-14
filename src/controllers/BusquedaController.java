@@ -18,7 +18,6 @@ import views.VBusqueda;
  */
 public class BusquedaController implements ActionListener {
 
-    Object formController;
     VBusqueda viewBusqueda;
     DefaultTableModel modelo = new DefaultTableModel();
     String query;
@@ -32,6 +31,8 @@ public class BusquedaController implements ActionListener {
             this.cargarGrillaBusqueda();
         }
         if(e.getSource() == viewBusqueda.btnAgregar){
+            int index = viewBusqueda.tbBusqueda.getSelectedRow();
+            Object id = viewBusqueda.tbBusqueda.getValueAt(index, 0);
             
         }
     }
@@ -49,7 +50,6 @@ public class BusquedaController implements ActionListener {
 
         this.query = query;
         this.numColumns = listColumns.size();
-        this.formController = formController;
         this.viewBusqueda = viewBusqueda;
         this.initEvent();
         this.loadColumns(listColumns);
