@@ -27,10 +27,7 @@ public class Contans {
      
      public static String QUERY_INSERT_SUBCOMPONENTES = "CALL spSubComponenteRegistrar(?,?,?,?,?,?,?,?)";
      
-     public static String QUERY_UPDATE_SUBCOMPONENTES = "UPDATE subcomponentes SET Id_Acabado = ?,"
-                                                                                 + "Id_Unidad = ?,"
-                                                                                 + "Codigo = ?,"
-                                                                                 + "Descripcion = ? WHERE Id_Subcomponente = ?;";
+     public static String QUERY_UPDATE_SUBCOMPONENTES = "";
      //--------------------------------------------------------------------------------------------------------------------------------
      public static String QUERY_INSERT_CORTES = "INSERT cortes (Descripcion,Corte_Derecho,Corte_Izquierdo)VALUES(?,?,?);";
     

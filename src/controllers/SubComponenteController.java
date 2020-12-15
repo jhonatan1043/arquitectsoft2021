@@ -55,7 +55,15 @@ public class SubComponenteController implements ActionListener {
         if (e.getSource() == this.viewSubcomponente.btnSave) {
             if (this.validControls()) {
                 this.loadSubComponente();
-                if (eSubcomponente.save(subcomponente)) {
+                boolean respuesta;
+
+                if (subcomponente.getIdSubcomponente() == 0) {
+                    respuesta = eSubcomponente.save(subcomponente);
+                } else {
+                    respuesta = eSubcomponente.update(subcomponente);
+                }
+                
+                if (respuesta) {
                     ValidControlsSystem.disableControls(viewSubcomponente.jLayeredPane1);
                     ValidButtonSystem.disableButton(viewSubcomponente.pnlButton);
                     viewSubcomponente.btnNew.setEnabled(true);
@@ -71,7 +79,7 @@ public class SubComponenteController implements ActionListener {
                 || viewSubcomponente.cbAcabado.getSelectedIndex() == 0
                 || viewSubcomponente.cbUnidad.getSelectedIndex() == 0
                 || "".equals(viewSubcomponente.txtCodigo.getText())
-                ||viewSubcomponente.cbUnidadCalculada.getSelectedIndex() == 0 ) {
+                || viewSubcomponente.cbUnidadCalculada.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(viewSubcomponente, "¡ hay Datos sin realizar !");
         } else {
             result = true;
@@ -82,9 +90,9 @@ public class SubComponenteController implements ActionListener {
     private void loadSubComponente() {
         String idAcabado = viewSubcomponente.cbAcabado.getSelectedItem().toString().split("|")[0];
         String idUnidadMedida = viewSubcomponente.cbUnidad.getSelectedItem().toString().split("|")[0];
-        int cantidadDefauld = (int)viewSubcomponente.txtCantidadDefauld.getValue();
-        int cantidadAdicional = (int)viewSubcomponente.txtCantidadAdicional.getValue();
-        
+        int cantidadDefauld = (int) viewSubcomponente.txtCantidadDefauld.getValue();
+        int cantidadAdicional = (int) viewSubcomponente.txtCantidadAdicional.getValue();
+
         subcomponente.setCodigo(viewSubcomponente.txtCodigo.getText());
         subcomponente.setDescripcion(viewSubcomponente.txtDescripcion.getText());
         subcomponente.setIdAcabado(Integer.parseInt(idAcabado));
@@ -93,7 +101,7 @@ public class SubComponenteController implements ActionListener {
         subcomponente.setCantDefault(cantidadDefauld);
         subcomponente.setAplicaDecremento(viewSubcomponente.ckAplicaDecremento.isSelected());
         subcomponente.setCantAdicional(cantidadAdicional);
-        
+
     }
 
     private void start() {

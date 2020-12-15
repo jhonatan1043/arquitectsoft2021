@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 import models.SubComponente;
 import interfaces.ISubComponente;
 import java.sql.PreparedStatement;
+import java.sql.Statement;
 
 /**
  *
@@ -27,11 +28,12 @@ public class DaoSubComponente implements ISubComponente {
     Querys query = new Querys();
 
     @Override
-    public boolean save(SubComponente subcomponente) {  
+    public boolean save(SubComponente subcomponente) {
         boolean result = false;
         Conexion cnx = new Conexion();
-        try {   
-            try (PreparedStatement psmt = cnx.getConnection().prepareStatement(Contans.QUERY_INSERT_SUBCOMPONENTES)) {
+        try {
+            try (PreparedStatement psmt = cnx.getConnection().prepareStatement(Contans.QUERY_INSERT_SUBCOMPONENTES,
+                    Statement.RETURN_GENERATED_KEYS)) {
                 psmt.setInt(1, subcomponente.getIdAcabado());
                 psmt.setInt(2, subcomponente.getIdUnidad());
                 psmt.setString(3, subcomponente.getCodigo());
@@ -40,8 +42,19 @@ public class DaoSubComponente implements ISubComponente {
                 psmt.setInt(6, subcomponente.getCantDefault());
                 psmt.setBoolean(7, subcomponente.isAplicaDecremento());
                 psmt.setInt(8, subcomponente.getCantAdicional());
-                psmt.execute();
-                cnx.getConnection().close(); 
+                int affectedRows = psmt.executeUpdate();
+
+                if (affectedRows == 0) {
+                    throw new SQLException("No se pudo guardar");
+                }
+
+                ResultSet generatedKeys = psmt.getGeneratedKeys();
+
+                if (generatedKeys.next()) {
+                    subcomponente.setIdSubcomponente(generatedKeys.getInt(1));
+                }
+
+                cnx.getConnection().close();
                 psmt.close();
                 result = true;
             }
@@ -53,16 +66,25 @@ public class DaoSubComponente implements ISubComponente {
 
     @Override
     public boolean update(SubComponente subcomponente) {
-            boolean result = false;
+        boolean result = false;
         Conexion cnx = new Conexion();
-        try {   
+        try {
             try (PreparedStatement psmt = cnx.getConnection().prepareStatement(Contans.QUERY_UPDATE_SUBCOMPONENTES)) {
                 psmt.setInt(1, subcomponente.getIdAcabado());
                 psmt.setInt(2, subcomponente.getIdUnidad());
                 psmt.setString(3, subcomponente.getCodigo());
                 psmt.setString(4, subcomponente.getDescripcion());
-                psmt.setInt(5, subcomponente.getIdSubcomponente());
-                psmt.execute();
+                psmt.setInt(5, subcomponente.getIdUnidadCalculada());
+                psmt.setInt(6, subcomponente.getCantDefault());
+                psmt.setBoolean(7, subcomponente.isAplicaDecremento());
+                psmt.setInt(8, subcomponente.getCantAdicional());
+                psmt.setInt(9, subcomponente.getIdSubcomponente());
+                int affectedRows = psmt.executeUpdate();
+
+                if (affectedRows == 0) {
+                    throw new SQLException("No se pudo actualizar");
+                }
+                
                 result = true;
                 cnx.getConnection().close();
             }

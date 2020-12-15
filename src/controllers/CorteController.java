@@ -20,7 +20,7 @@ import views.VCorte;
  */
 public final class CorteController implements ActionListener {
 
-   VCorte viewCorte;
+    VCorte viewCorte;
     Corte corte = new Corte();
     DaoCorte daoUnidadMedida = new DaoCorte();
 
@@ -44,13 +44,21 @@ public final class CorteController implements ActionListener {
             viewCorte.btnNew.setEnabled(true);
         }
         if (e.getSource() == viewCorte.btnSave) {
-            if ("".equals(viewCorte.spCorteDerecho.getValue()) || 
-                    "".equals(viewCorte.spCorteIzquierdo.getValue())
+            boolean result;
+            if ("".equals(viewCorte.spCorteDerecho.getValue())
+                    || "".equals(viewCorte.spCorteIzquierdo.getValue())
                     || "".equals(viewCorte.txtConvencion.getText())) {
                 JOptionPane.showMessageDialog(viewCorte, "¡ hay Datos sin realizar !");
             } else {
                 loadCorte();
-                if (daoUnidadMedida.save(corte)) {
+
+                if (corte.getIdCorte() == 0) {
+                    result = daoUnidadMedida.save(corte);
+                } else {
+                    result = daoUnidadMedida.update(corte);
+                }
+
+                if (result) {
                     ValidControlsSystem.disableControls(viewCorte.jLayeredPane1);
                     ValidButtonSystem.disableButton(viewCorte.pnlButton);
                     viewCorte.btnNew.setEnabled(true);
@@ -61,9 +69,9 @@ public final class CorteController implements ActionListener {
     }
 
     private void loadCorte() {
-      corte.setConvencion(viewCorte.txtConvencion.getText());
-      corte.setCorteDerecho((int)viewCorte.spCorteDerecho.getValue());
-      corte.setCorteIzquierdo((int)viewCorte.spCorteIzquierdo.getValue());
+        corte.setConvencion(viewCorte.txtConvencion.getText());
+        corte.setCorteDerecho((int) viewCorte.spCorteDerecho.getValue());
+        corte.setCorteIzquierdo((int) viewCorte.spCorteIzquierdo.getValue());
     }
 
     private void initEvent() {
@@ -77,5 +85,5 @@ public final class CorteController implements ActionListener {
         ValidButtonSystem.disableButton(viewCorte.pnlButton);
         viewCorte.btnNew.setEnabled(true);
     }
-    
+
 }
