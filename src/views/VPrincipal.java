@@ -180,7 +180,7 @@ public class VPrincipal extends javax.swing.JFrame {
 
     private void itemComponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemComponenteActionPerformed
         VSubComponente viewSubcomponente = new VSubComponente();
-        SubComponenteController subComponenteCont = new SubComponenteController(viewSubcomponente);
+        SubComponenteController subComponenteCont = new SubComponenteController(viewSubcomponente,this);
         this.Desktop.add(viewSubcomponente);
         ValidForm.centeForm(viewSubcomponente, Desktop);
         viewSubcomponente.show();

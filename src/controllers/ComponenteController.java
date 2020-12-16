@@ -59,6 +59,7 @@ public class ComponenteController implements ActionListener {
             ValidControlsSystem.disableControls(viewComponente.jLayeredPane1);
             ValidButtonSystem.disableButton(viewComponente.pnlButton);
             viewComponente.btnNew.setEnabled(true);
+            viewComponente.btnBuscar.setEnabled(true);
         }
 
         if (e.getSource() == this.viewComponente.btnAgregar) {
@@ -76,6 +77,7 @@ public class ComponenteController implements ActionListener {
         this.cargarComboCategoria();
         modelo = (DefaultTableModel) viewComponente.tbComponente.getModel();
         viewComponente.btnNew.setEnabled(true);
+        viewComponente.btnBuscar.setEnabled(true);
     }
 
     public void setRowsRemove() {

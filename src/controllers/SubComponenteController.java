@@ -13,10 +13,13 @@ import generals.ValidButtonSystem;
 import generals.ValidControlsSystem;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import models.SubComponente;
+import views.VBusqueda;
+import views.VPrincipal;
 
 /**
  *
@@ -24,12 +27,15 @@ import models.SubComponente;
  */
 public class SubComponenteController implements ActionListener {
 
+    VPrincipal viewPrincipal;
+    BusquedaController busquedaC;
     VSubComponente viewSubcomponente;
     DaoSubComponente eSubcomponente = new DaoSubComponente();
     SubComponente subcomponente = new SubComponente();
 
-    public SubComponenteController(VSubComponente viewSubcomponente) {
+    public SubComponenteController(VSubComponente viewSubcomponente,VPrincipal viewPrincipal ) {
         this.viewSubcomponente = viewSubcomponente;
+        this.viewPrincipal = viewPrincipal;
         this.start();
     }
 
@@ -50,6 +56,7 @@ public class SubComponenteController implements ActionListener {
             ValidButtonSystem.disableButton(viewSubcomponente.pnlButton);
             controlsClean();
             viewSubcomponente.btnNew.setEnabled(true);
+            viewSubcomponente.btnBuscar.setEnabled(true);
         }
 
         if (e.getSource() == this.viewSubcomponente.btnSave) {
@@ -62,15 +69,29 @@ public class SubComponenteController implements ActionListener {
                 } else {
                     respuesta = eSubcomponente.update(subcomponente);
                 }
-                
+
                 if (respuesta) {
                     ValidControlsSystem.disableControls(viewSubcomponente.jLayeredPane1);
                     ValidButtonSystem.disableButton(viewSubcomponente.pnlButton);
                     viewSubcomponente.btnNew.setEnabled(true);
+                    viewSubcomponente.btnBuscar.setEnabled(true);
                     JOptionPane.showMessageDialog(viewSubcomponente, "¡ Registrado con exito !");
                 }
             }
         }
+        if (e.getSource() == this.viewSubcomponente.btnBuscar) {
+            VBusqueda busqueda = new VBusqueda(viewPrincipal, true);
+            busquedaC = new BusquedaController(busqueda, viewSubcomponente, Contans.QUERY_SUBCOMPONENTES, createColumns());
+            busqueda.setVisible(true);
+        }
+    }
+
+    private ArrayList<String> createColumns() {
+        ArrayList<String> listColumns = new ArrayList<>();
+        listColumns.add("Id");
+        listColumns.add("Codigo");
+        listColumns.add("Descripcion");
+        return listColumns;
     }
 
     private boolean validControls() {
@@ -111,6 +132,7 @@ public class SubComponenteController implements ActionListener {
         this.loadComboUnidadMedicas();
         initEvent();
         viewSubcomponente.btnNew.setEnabled(true);
+        viewSubcomponente.btnBuscar.setEnabled(true);
     }
 
     private void loadComboAcabados() {
@@ -137,6 +159,7 @@ public class SubComponenteController implements ActionListener {
         viewSubcomponente.btnNew.addActionListener(this);
         viewSubcomponente.btnCancel.addActionListener(this);
         viewSubcomponente.btnSave.addActionListener(this);
+        viewSubcomponente.btnBuscar.addActionListener(this);
     }
 
     private void controlsClean() {
