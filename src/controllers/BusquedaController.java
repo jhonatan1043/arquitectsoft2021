@@ -31,7 +31,7 @@ public class BusquedaController implements ActionListener {
             this.cargarGrillaBusqueda();
         }
         if (e.getSource() == viewBusqueda.btnAgregar) {
-
+          returnValue();
         }
     }
 
@@ -75,10 +75,11 @@ public class BusquedaController implements ActionListener {
         modelo.setRowCount(0);
     }
 
-    public int returnValue() {
+    public void returnValue() {
         int index = viewBusqueda.tbBusqueda.getSelectedRow();
         Object id = viewBusqueda.tbBusqueda.getValueAt(index, 0);
-        return (int)id;
+         System.setProperty("id", (String) id);
+         viewBusqueda.dispose();
     }
 
 }

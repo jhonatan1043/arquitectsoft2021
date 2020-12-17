@@ -5,9 +5,17 @@
  */
 package dao;
 
+import com.mysql.cj.Query;
+import generals.Conexion;
+import generals.Querys;
 import java.util.List;
 import models.Componente;
 import interfaces.IComponente;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -15,18 +23,20 @@ import interfaces.IComponente;
  */
 public class DaoComponente implements IComponente {
 
+    Conexion cnx = new Conexion();
+
     @Override
-    public boolean save(Componente perfilComponente) {
+    public boolean save(Componente componente) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean update(Componente perfilComponente) {
+    public boolean update(Componente componente) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean delete(Componente perfilComponente) {
+    public boolean delete(Componente componente) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -36,8 +46,24 @@ public class DaoComponente implements IComponente {
     }
 
     @Override
-    public Componente getPerfilComponente(int idPerfil) {
+    public Componente getComponente(int idComponente) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
+    @Override
+    public Object[] getSubComponente(int idSubComponente) {
+        Querys querys = new Querys();
+        Object[] list = new Object[4];
+        ResultSet result = querys.queryListComponente("");
+        try {
+            while(result.next()){
+             //  list = {'a','a','a','a','a'};
+            }
+            result.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoComponente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      return list;
+    }
+
 }

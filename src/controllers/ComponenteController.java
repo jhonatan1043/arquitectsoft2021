@@ -5,6 +5,7 @@
  */
 package controllers;
 
+import dao.DaoComponente;
 import generals.Combos;
 import generals.Contans;
 import generals.ValidButtonSystem;
@@ -31,6 +32,7 @@ public class ComponenteController implements ActionListener {
     VComponente viewComponente;
     VPrincipal viewPrincipal;
     BusquedaController busquedaC;
+    DaoComponente daoComponente = new DaoComponente();
 
     public ComponenteController(VComponente viewComponente, VPrincipal viewPrincipal) {
         this.viewComponente = viewComponente;
@@ -66,6 +68,7 @@ public class ComponenteController implements ActionListener {
             VBusqueda busqueda = new VBusqueda(viewPrincipal, true);
             busquedaC = new BusquedaController(busqueda, viewComponente, Contans.QUERY_SUBCOMPONENTES, createColumns());
             busqueda.setVisible(true);
+            loadSubcomponente(Integer.parseInt(System.getProperty("id")));
         }
     }
 
@@ -78,10 +81,6 @@ public class ComponenteController implements ActionListener {
         modelo = (DefaultTableModel) viewComponente.tbComponente.getModel();
         viewComponente.btnNew.setEnabled(true);
         viewComponente.btnBuscar.setEnabled(true);
-    }
-
-    public void setRowsRemove() {
-        modelo.removeRow(index);
     }
 
     private ArrayList<String> createColumns() {
@@ -127,5 +126,10 @@ public class ComponenteController implements ActionListener {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ComponenteController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    private void loadSubcomponente(int idSubcomponente){
+       Object[] list = daoComponente.getSubComponente(idSubcomponente);
+       modelo.addRow(list);
     }
 }

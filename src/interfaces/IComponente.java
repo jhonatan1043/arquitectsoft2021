@@ -13,9 +13,16 @@ import models.Componente;
  * @author Programador 1
  */
 public interface IComponente {
-    public boolean save(Componente perfilComponente);
-    public boolean update(Componente perfilComponente);
-    public boolean delete(Componente perfilComponente);
+
+    public boolean save(Componente componente);
+
+    public boolean update(Componente componente);
+
+    public boolean delete(Componente componente);
+
     public List<Componente> listar();
-    public Componente getPerfilComponente(int idPerfil);
+
+    public Componente getComponente(int idComponente);
+
+    public Object[] getSubComponente(int idSubComponente);
 }
