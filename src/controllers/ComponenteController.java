@@ -8,6 +8,7 @@ package controllers;
 import dao.DaoComponente;
 import generals.Combos;
 import generals.Contans;
+import generals.FileTxt;
 import generals.ValidButtonSystem;
 import generals.ValidControlsSystem;
 import generals.ValidTable;
@@ -44,6 +45,7 @@ public class ComponenteController implements ActionListener {
         viewComponente.btnAgregar.addActionListener(this);
         viewComponente.btnNew.addActionListener(this);
         viewComponente.btnCancel.addActionListener(this);
+        viewComponente.btnOpenTxt.addActionListener(this);
     }
 
     @Override
@@ -69,6 +71,11 @@ public class ComponenteController implements ActionListener {
             busquedaC = new BusquedaController(busqueda, viewComponente, Contans.QUERY_SUBCOMPONENTES, createColumns());
             busqueda.setVisible(true);
             loadSubcomponente(Integer.parseInt(System.getProperty("id")));
+        }
+        
+        if(e.getSource() == this.viewComponente.btnOpenTxt){
+            FileTxt file = new  FileTxt();
+            file.openFile(viewPrincipal);
         }
     }
 
