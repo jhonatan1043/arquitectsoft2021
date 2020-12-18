@@ -17,6 +17,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import views.VBusqueda;
 import views.VComponente;
@@ -28,7 +29,6 @@ import views.VPrincipal;
  */
 public class ComponenteController implements ActionListener {
 
-    int index;
     DefaultTableModel modelo;
     VComponente viewComponente;
     VPrincipal viewPrincipal;
@@ -46,6 +46,7 @@ public class ComponenteController implements ActionListener {
         viewComponente.btnNew.addActionListener(this);
         viewComponente.btnCancel.addActionListener(this);
         viewComponente.btnOpenTxt.addActionListener(this);
+        viewComponente.btnTrabajar.addActionListener(this);
     }
 
     @Override
@@ -67,15 +68,29 @@ public class ComponenteController implements ActionListener {
         }
 
         if (e.getSource() == this.viewComponente.btnAgregar) {
-            VBusqueda busqueda = new VBusqueda(viewPrincipal, true);
-            busquedaC = new BusquedaController(busqueda, viewComponente, Contans.QUERY_SUBCOMPONENTES, createColumns());
-            busqueda.setVisible(true);
-            loadSubcomponente(Integer.parseInt(System.getProperty("id")));
+            if (validCampos()) {
+                VBusqueda busqueda = new VBusqueda(viewPrincipal, true);
+                busquedaC = new BusquedaController(busqueda, viewComponente, Contans.QUERY_SUBCOMPONENTES, createColumns());
+                busqueda.setVisible(true);
+                if (System.getProperty("id") != null) {
+                    loadSubcomponente(Integer.parseInt(System.getProperty("id")));
+                }
+            }
         }
-        
-        if(e.getSource() == this.viewComponente.btnOpenTxt){
-            FileTxt file = new  FileTxt();
-            file.openFile(viewPrincipal);
+
+        if (e.getSource() == this.viewComponente.btnOpenTxt) {
+            if (viewComponente.comboCategoria.getSelectedIndex() != 0) {
+                FileTxt file = new FileTxt();
+                file.openFile(viewPrincipal,
+                        viewComponente.tbComponenteMayor,
+                        setCreateColumns(viewComponente.comboCategoria.getSelectedIndex()));
+            } else {
+                JOptionPane.showMessageDialog(viewComponente, "¡ categoria del componente !");
+            }
+        }
+
+        if (e.getSource() == this.viewComponente.btnTrabajar) {
+            loadInfoComponenteMayor(viewComponente.comboCategoria.getSelectedIndex());
         }
     }
 
@@ -98,26 +113,29 @@ public class ComponenteController implements ActionListener {
         return listColumns;
     }
 
-    private int setCalcularMedida(int idCategoria,
-            int logitud,
-            int altura,
-            int anchura,
-            int area,
-            int incremento) {
-        int resultado = 0;
+    private ArrayList<String> setCreateColumns(int idCategoria) {
+        ArrayList<String> listColumns = new ArrayList<>();
 
         switch (idCategoria) {
 
             case 1:
-                resultado = logitud + incremento;
+                //-----------------
+                listColumns.add("Codigo");
+                listColumns.add("ComponenteMayor");
+                listColumns.add("Logitud");
+                listColumns.add("Ubicacion");
+                listColumns.add("Comentario");
+                //-----------------
                 break;
             case 2:
+
                 break;
             case 3:
+
                 break;
         }
 
-        return resultado;
+        return listColumns;
     }
 
     private void hideColumns() {
@@ -134,9 +152,47 @@ public class ComponenteController implements ActionListener {
             Logger.getLogger(ComponenteController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    private void loadSubcomponente(int idSubcomponente){
-       Object[] list = daoComponente.getSubComponente(idSubcomponente);
-       modelo.addRow(list);
+
+    private void loadSubcomponente(int idSubcomponente) {
+        Object[] list = daoComponente.getSubComponente(idSubcomponente);
+        modelo.addRow(list);
+    }
+
+    private boolean validCampos() {
+        boolean result = false;
+
+        if ("".equals(viewComponente.txtCodigo.getText())) {
+            JOptionPane.showMessageDialog(viewComponente, "¡ Se necesita el codigo del componente !");
+        } else if ("".equals(viewComponente.txtDescripcion.getText())) {
+            JOptionPane.showMessageDialog(viewComponente, "¡ el nombre del componente !");
+        } else if (viewComponente.comboCategoria.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(viewComponente, "¡ categoria del componente !");
+        } else {
+            result = true;
+        }
+
+        return result;
+    }
+
+    private void loadInfoComponenteMayor(int idCategoria) {
+
+        int indexRow = viewComponente.tbComponenteMayor.getSelectedRow();
+        int value = Integer.parseInt(viewComponente.tbComponenteMayor.getValueAt(indexRow, 2).toString().trim().replace("\"", ""));
+        
+        switch (idCategoria) {
+
+            case 1:
+                viewComponente.txtCodigo.setText(viewComponente.tbComponenteMayor.getValueAt(indexRow, 0).toString().trim());
+                viewComponente.txtDescripcion.setText(viewComponente.tbComponenteMayor.getValueAt(indexRow, 1).toString().trim());
+                viewComponente.txtLongitud.setValue(value);
+                viewComponente.txtUbicacion.setText(viewComponente.tbComponenteMayor.getValueAt(indexRow, 3).toString().trim());
+                break;
+            case 2:
+
+                break;
+            case 3:
+
+                break;
+        }
     }
 }
