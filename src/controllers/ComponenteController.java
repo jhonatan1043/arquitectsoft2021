@@ -177,14 +177,12 @@ public class ComponenteController implements ActionListener {
     private void loadInfoComponenteMayor(int idCategoria) {
 
         int indexRow = viewComponente.tbComponenteMayor.getSelectedRow();
-        int value = Integer.parseInt(viewComponente.tbComponenteMayor.getValueAt(indexRow, 2).toString().trim().replace("\"", ""));
-        
         switch (idCategoria) {
 
             case 1:
                 viewComponente.txtCodigo.setText(viewComponente.tbComponenteMayor.getValueAt(indexRow, 0).toString().trim());
                 viewComponente.txtDescripcion.setText(viewComponente.tbComponenteMayor.getValueAt(indexRow, 1).toString().trim());
-                viewComponente.txtLongitud.setValue(value);
+                viewComponente.txtLogitud.setText(viewComponente.tbComponenteMayor.getValueAt(indexRow, 2).toString().trim());
                 viewComponente.txtUbicacion.setText(viewComponente.tbComponenteMayor.getValueAt(indexRow, 3).toString().trim());
                 break;
             case 2:
