@@ -154,7 +154,16 @@ public class ComponenteController implements ActionListener {
     }
 
     private void loadSubcomponente(int idSubcomponente) {
-        Object[] list = daoComponente.getSubComponente(idSubcomponente);
+        int longitud = Integer.valueOf(viewComponente.txtLogitud.getText());
+        int anchura = Integer.valueOf(viewComponente.txtAnchura.getText());
+        int altura = Integer.valueOf(viewComponente.txtAnchura.getText());
+        int area = Integer.valueOf(viewComponente.txtArea.getText());
+
+        Object[] list = daoComponente.getSubComponente(idSubcomponente,
+                longitud,
+                anchura,
+                altura,
+                area);
         modelo.addRow(list);
     }
 
@@ -175,7 +184,7 @@ public class ComponenteController implements ActionListener {
     }
 
     private void loadInfoComponenteMayor(int idCategoria) {
-
+        
         int indexRow = viewComponente.tbComponenteMayor.getSelectedRow();
         switch (idCategoria) {
 

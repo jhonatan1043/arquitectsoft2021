@@ -25,6 +25,8 @@ public class Contans {
      // querys subComponentes
      public static String QUERY_SUBCOMPONENTES = "CALL spSubComponenteConsultar('";
      
+     public static String QUERY_SUBCOMPONENTES_CARGAR = "CALL spComponenteCargar(";
+     
      public static String QUERY_INSERT_SUBCOMPONENTES = "CALL spSubComponenteRegistrar(?,?,?,?,?,?,?,?)";
      
      public static String QUERY_UPDATE_SUBCOMPONENTES = "";

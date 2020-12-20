@@ -24,5 +24,5 @@ public interface IComponente {
 
     public Componente getComponente(int idComponente);
 
-    public Object[] getSubComponente(int idSubComponente);
+    public Object[] getSubComponente(int idSubComponente, int logitud, int anchura, int altura, int area);
 }

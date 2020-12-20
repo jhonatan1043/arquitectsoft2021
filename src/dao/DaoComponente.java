@@ -5,15 +5,15 @@
  */
 package dao;
 
-import com.mysql.cj.Query;
 import generals.Conexion;
+import generals.Contans;
 import generals.Querys;
 import java.util.List;
 import models.Componente;
 import interfaces.IComponente;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -51,19 +51,36 @@ public class DaoComponente implements IComponente {
     }
 
     @Override
-    public Object[] getSubComponente(int idSubComponente) {
-        Querys querys = new Querys();
-        Object[] list = new Object[4];
-        ResultSet result = querys.queryListComponente("");
-        try {
-            while(result.next()){
-             //  list = {'a','a','a','a','a'};
+    public Object[] getSubComponente(int idSubComponente,
+            int logitud,
+            int anchura,
+            int altura,
+            int area) {
+
+        Object[] list = new Object[5];
+
+        ResultSet result = null;
+
+        try (PreparedStatement preparedStatement = cnx.getConnection().prepareStatement(Contans.QUERY_SUBCOMPONENTES_CARGAR + idSubComponente + ","
+                + logitud + ","
+                + anchura + ","
+                + altura + ","
+                + area + ")")) {
+            result = preparedStatement.executeQuery();
+
+            while (result.next()) {
+                list[0] = result.getObject(1);
+                list[1] = result.getObject(2);
+                list[2] = result.getObject(3);
+                list[3] = result.getObject(4);
+                list[4] = result.getObject(5);
             }
+
             result.close();
         } catch (SQLException ex) {
             Logger.getLogger(DaoComponente.class.getName()).log(Level.SEVERE, null, ex);
         }
-      return list;
+        return list;
     }
 
 }
