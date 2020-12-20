@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import models.Acabado;
-import models.SubComponente;
+
 
 /**
  *
@@ -27,9 +27,9 @@ public class DaoAcabado implements IAcabado {
         boolean result = false;
         Conexion cnx = new Conexion();
         try {
-            try (PreparedStatement psmt = cnx.getConnection().prepareStatement(Contans.QUERY_INSERT_UNIDAD_MEDIDA)) {
-                psmt.setString(1, acabado.getDescripcion());
-                psmt.setString(3, acabado.getCodigo());
+            try (PreparedStatement psmt = cnx.getConnection().prepareStatement(Contans.QUERY_INSERT_ACABADOS)) {
+                psmt.setInt(1, acabado.getCodigo());
+                psmt.setString(2, acabado.getDescripcion());
                 psmt.execute();
                 cnx.getConnection().close();
                 psmt.close();
@@ -47,7 +47,7 @@ public class DaoAcabado implements IAcabado {
         Conexion cnx = new Conexion();
         try {
             try (PreparedStatement psmt = cnx.getConnection().prepareStatement(Contans.QUERY_UPDATE_SUBCOMPONENTES)) {
-                psmt.setString(3, acabado.getCodigo());
+                psmt.setInt(3, acabado.getCodigo());
                 psmt.setString(4, acabado.getDescripcion());
             int affectedRows = psmt.executeUpdate();
 
@@ -77,5 +77,5 @@ public class DaoAcabado implements IAcabado {
     public Acabado getPerfilComponente(int idAcabado) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
 }
+

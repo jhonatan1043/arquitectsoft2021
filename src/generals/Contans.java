@@ -13,6 +13,8 @@ public class Contans {
  // query of system 
     //--------------------------------------------------------------------------------------------------------------------------------
     public static String QUERY_ACABADO = "SELECT Id_Acabado, Descripcion FROM Acabados;";
+    
+    public static String QUERY_INSERT_ACABADOS = "INSERT acabados (Codigo_Homologacion, descripcion)VALUES(?,?)";
 //--------------------------------------------------------------------------------------------------------------------------------
     public static String QUERY_UNIDAD_MEDIDA = "SELECT Id_Unidad_Medida, Descripcion FROM Unidades_Medidas;";
     

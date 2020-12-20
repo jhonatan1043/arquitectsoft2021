@@ -5,8 +5,7 @@
  */
 package views;
 
-import generals.ValidButtonSystem;
-import generals.ValidControlsSystem;
+
 
 /**
  *
@@ -14,19 +13,14 @@ import generals.ValidControlsSystem;
  */
 public final class VAcabado extends javax.swing.JInternalFrame {
 
+
     /**
      * Creates new form VAcabado
      */
     public VAcabado() {
         initComponents();
-        start();
     }
 
-    public void start() {
-        ValidControlsSystem.disableControls(this.jLayeredPane1);
-        ValidButtonSystem.disableButton(pnlButton);
-        this.btnNew.setEnabled(true);
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -135,6 +129,12 @@ public final class VAcabado extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Descripción:");
 
+        txtCodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodigoActionPerformed(evt);
+            }
+        });
+
         jLabel7.setText("Codigo");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -205,6 +205,10 @@ public final class VAcabado extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCodigoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

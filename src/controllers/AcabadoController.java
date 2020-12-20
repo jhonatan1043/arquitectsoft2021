@@ -44,12 +44,11 @@ public final class AcabadoController implements ActionListener {
             viewAcabado.btnNew.setEnabled(true);
         }
         if (e.getSource() == viewAcabado.btnSave) {
-            if ("".equals(viewAcabado.txtDescripcion.getText())) 
-            if ("".equals(viewAcabado.txtCodigo.getText()))
-                JOptionPane.showMessageDialog(viewAcabado, "¡ hay Datos sin realizar !");
-             else {
-                loadAcabado();
 
+            if ("".equals(viewAcabado.txtDescripcion.getText()) || "".equals(viewAcabado.txtCodigo.getText())) {
+                JOptionPane.showMessageDialog(viewAcabado, "¡ hay Datos sin realizar !");
+            } else {
+                loadAcabado();
                 if (daoAcabado.save(acabado)) {
                     ValidControlsSystem.disableControls(viewAcabado.jLayeredPane1);
                     ValidButtonSystem.disableButton(viewAcabado.pnlButton);
@@ -62,7 +61,7 @@ public final class AcabadoController implements ActionListener {
 
     private void loadAcabado() {
         acabado.setDescripcion(viewAcabado.txtDescripcion.getText());
-        acabado.setCodigo(viewAcabado.txtCodigo.getText());
+        acabado.setCodigo(Integer.parseInt(viewAcabado.txtCodigo.getText()));
     }
 
     private void initEvent() {
@@ -76,5 +75,5 @@ public final class AcabadoController implements ActionListener {
         ValidButtonSystem.disableButton(viewAcabado.pnlButton);
         viewAcabado.btnNew.setEnabled(true);
     }
-
+    
 }

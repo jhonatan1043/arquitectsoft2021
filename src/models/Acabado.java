@@ -12,14 +12,15 @@ package models;
 public class Acabado {
 
     private int idAcabado;
+    private int codigo;
     private String descripcion;
 
     public Acabado() {
     }
 
     public Acabado(int idAcabado, String descripcion) {
-      this.idAcabado = idAcabado;
-      this.descripcion = descripcion;
+        this.idAcabado = idAcabado;
+        this.descripcion = descripcion;
     }
 
     public int getIdAcabado() {
@@ -38,12 +39,11 @@ public class Acabado {
         this.descripcion = descripcion;
     }
 
-    public void setCodigo(String text) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int getCodigo() {
+        return codigo;
     }
 
-    public String getCodigo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
-
 }
