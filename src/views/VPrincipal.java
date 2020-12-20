@@ -82,7 +82,7 @@ public class VPrincipal extends javax.swing.JFrame {
 
         jMenu1.setText("Opciones");
 
-        itemComponente.setText("Subcomponentes");
+        itemComponente.setText("Nuevo Subcomponentes");
         itemComponente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 itemComponenteActionPerformed(evt);
@@ -91,7 +91,7 @@ public class VPrincipal extends javax.swing.JFrame {
         jMenu1.add(itemComponente);
         jMenu1.add(jSeparator1);
 
-        itemAcabado.setText("Acabados");
+        itemAcabado.setText("Nuevo Acabados");
         itemAcabado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 itemAcabadoActionPerformed(evt);
@@ -100,7 +100,7 @@ public class VPrincipal extends javax.swing.JFrame {
         jMenu1.add(itemAcabado);
         jMenu1.add(jSeparator2);
 
-        itemUnidadMedida.setText("Unidades de Medidas");
+        itemUnidadMedida.setText("Nuevo Unidades de Medidas");
         itemUnidadMedida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 itemUnidadMedidaActionPerformed(evt);
@@ -109,7 +109,7 @@ public class VPrincipal extends javax.swing.JFrame {
         jMenu1.add(itemUnidadMedida);
         jMenu1.add(jSeparator3);
 
-        itemCorte.setText("Cortes");
+        itemCorte.setText("Nuevo Cortes");
         itemCorte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 itemCorteActionPerformed(evt);
@@ -121,7 +121,7 @@ public class VPrincipal extends javax.swing.JFrame {
 
         jMenu4.setText("Proyecto");
 
-        itemIniciar.setText("Componentes");
+        itemIniciar.setText("Nuevo Proyecto");
         itemIniciar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 itemIniciarActionPerformed(evt);

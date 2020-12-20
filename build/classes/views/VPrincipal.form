@@ -11,7 +11,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="itemComponente">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Subcomponentes"/>
+                <Property name="text" type="java.lang.String" value="Nuevo Subcomponentes"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemComponenteActionPerformed"/>
@@ -24,7 +24,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="itemAcabado">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Acabados"/>
+                <Property name="text" type="java.lang.String" value="Nuevo Acabados"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemAcabadoActionPerformed"/>
@@ -37,7 +37,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="itemUnidadMedida">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Unidades de Medidas"/>
+                <Property name="text" type="java.lang.String" value="Nuevo Unidades de Medidas"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemUnidadMedidaActionPerformed"/>
@@ -50,7 +50,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="itemCorte">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Cortes"/>
+                <Property name="text" type="java.lang.String" value="Nuevo Cortes"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemCorteActionPerformed"/>
@@ -65,7 +65,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="itemIniciar">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Componentes"/>
+                <Property name="text" type="java.lang.String" value="Nuevo Proyecto"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemIniciarActionPerformed"/>
