@@ -5,28 +5,66 @@
  */
 package dao;
 
+import generals.Conexion;
+import generals.Contans;
 import interfaces.IAcabado;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import models.Acabado;
+import models.SubComponente;
 
 /**
  *
- * @author danid
+ * @author Poseidon
  */
 public class DaoAcabado implements IAcabado {
 
     @Override
-    public boolean save(Acabado corte) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean save(Acabado acabado) {
+        boolean result = false;
+        Conexion cnx = new Conexion();
+        try {
+            try (PreparedStatement psmt = cnx.getConnection().prepareStatement(Contans.QUERY_INSERT_UNIDAD_MEDIDA)) {
+                psmt.setString(1, acabado.getDescripcion());
+                psmt.setString(3, acabado.getCodigo());
+                psmt.execute();
+                cnx.getConnection().close();
+                psmt.close();
+                result = true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoSubComponente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
     }
 
     @Override
-    public boolean update(Acabado corte) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public boolean update(Acabado acabado) {
+        boolean result = false;
+        Conexion cnx = new Conexion();
+        try {
+            try (PreparedStatement psmt = cnx.getConnection().prepareStatement(Contans.QUERY_UPDATE_SUBCOMPONENTES)) {
+                psmt.setString(3, acabado.getCodigo());
+                psmt.setString(4, acabado.getDescripcion());
+            int affectedRows = psmt.executeUpdate();
 
+                if (affectedRows == 0) {
+                    throw new SQLException("No se pudo actualizar");
+                }
+                
+                result = true;
+                cnx.getConnection().close();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoSubComponente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
     @Override
-    public boolean delete(Acabado corte) {
+    public boolean delete(Acabado Acabado) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -36,8 +74,8 @@ public class DaoAcabado implements IAcabado {
     }
 
     @Override
-    public Acabado getPerfilComponente(int idCorte) {
+    public Acabado getPerfilComponente(int idAcabado) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

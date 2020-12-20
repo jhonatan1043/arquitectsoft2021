@@ -6,8 +6,11 @@
 package controllers;
 
 import dao.DaoAcabado;
+import generals.ValidButtonSystem;
+import generals.ValidControlsSystem;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 import models.Acabado;
 import views.VAcabado;
 
@@ -15,16 +18,63 @@ import views.VAcabado;
  *
  * @author Poseidon
  */
-public class AcabadoController implements ActionListener {
+public final class AcabadoController implements ActionListener {
+
     VAcabado viewAcabado;
-    Acabado acabado =  new Acabado();
+    Acabado acabado = new Acabado();
     DaoAcabado daoAcabado = new DaoAcabado();
-    
-    @Override
-    public void actionPerformed(ActionEvent ae) {
-       
+
+    public AcabadoController(VAcabado viewAcabado) {
+        this.viewAcabado = viewAcabado;
+        start();
+        initEvent();
     }
-    
-    
-    
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == viewAcabado.btnNew) {
+            ValidControlsSystem.enabledControls(viewAcabado.jLayeredPane1);
+            ValidButtonSystem.disableButton(viewAcabado.pnlButton);
+            viewAcabado.btnSave.setEnabled(true);
+            viewAcabado.btnCancel.setEnabled(true);
+        }
+        if (e.getSource() == viewAcabado.btnCancel) {
+            ValidControlsSystem.disableControls(viewAcabado.jLayeredPane1);
+            ValidButtonSystem.disableButton(viewAcabado.pnlButton);
+            viewAcabado.btnNew.setEnabled(true);
+        }
+        if (e.getSource() == viewAcabado.btnSave) {
+            if ("".equals(viewAcabado.txtDescripcion.getText())) 
+            if ("".equals(viewAcabado.txtCodigo.getText()))
+                JOptionPane.showMessageDialog(viewAcabado, "¡ hay Datos sin realizar !");
+             else {
+                loadAcabado();
+
+                if (daoAcabado.save(acabado)) {
+                    ValidControlsSystem.disableControls(viewAcabado.jLayeredPane1);
+                    ValidButtonSystem.disableButton(viewAcabado.pnlButton);
+                    viewAcabado.btnNew.setEnabled(true);
+                    JOptionPane.showMessageDialog(viewAcabado, "¡ Registrado con exito !");
+                }
+            }
+        }
+    }
+
+    private void loadAcabado() {
+        acabado.setDescripcion(viewAcabado.txtDescripcion.getText());
+        acabado.setCodigo(viewAcabado.txtCodigo.getText());
+    }
+
+    private void initEvent() {
+        viewAcabado.btnNew.addActionListener(this);
+        viewAcabado.btnCancel.addActionListener(this);
+        viewAcabado.btnSave.addActionListener(this);
+    }
+
+    public void start() {
+        ValidControlsSystem.disableControls(viewAcabado.jLayeredPane1);
+        ValidButtonSystem.disableButton(viewAcabado.pnlButton);
+        viewAcabado.btnNew.setEnabled(true);
+    }
+
 }
