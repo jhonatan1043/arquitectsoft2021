@@ -5,6 +5,7 @@
  */
 package views;
 
+import controllers.AcabadoController;
 import controllers.ComponenteController;
 import controllers.CorteController;
 import controllers.SubComponenteController;
@@ -157,6 +158,7 @@ public class VPrincipal extends javax.swing.JFrame {
 
     private void itemAcabadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAcabadoActionPerformed
         VAcabado viewAcabado = new VAcabado();
+        AcabadoController acabadoC = new AcabadoController(viewAcabado);
         this.Desktop.add(viewAcabado);
         ValidForm.centeForm(viewAcabado, Desktop);
         viewAcabado.show();
