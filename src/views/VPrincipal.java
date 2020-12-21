@@ -6,7 +6,7 @@
 package views;
 
 import controllers.AcabadoController;
-import controllers.ComponenteController;
+import controllers.ProyectoController;
 import controllers.CorteController;
 import controllers.SubComponenteController;
 import controllers.UnidadMedidaController;
@@ -44,6 +44,8 @@ public class VPrincipal extends javax.swing.JFrame {
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         itemComponente = new javax.swing.JMenuItem();
+        jSeparator4 = new javax.swing.JPopupMenu.Separator();
+        itemSubComponente = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         itemAcabado = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
@@ -83,13 +85,22 @@ public class VPrincipal extends javax.swing.JFrame {
 
         jMenu1.setText("Opciones");
 
-        itemComponente.setText("Nuevo Subcomponentes");
+        itemComponente.setText("Nuevo Componente ");
         itemComponente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 itemComponenteActionPerformed(evt);
             }
         });
         jMenu1.add(itemComponente);
+        jMenu1.add(jSeparator4);
+
+        itemSubComponente.setText("Nuevo Subcomponentes");
+        itemSubComponente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemSubComponenteActionPerformed(evt);
+            }
+        });
+        jMenu1.add(itemSubComponente);
         jMenu1.add(jSeparator1);
 
         itemAcabado.setText("Nuevo Acabados");
@@ -149,8 +160,8 @@ public class VPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void itemIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemIniciarActionPerformed
-        VComponente viewComponente = new VComponente();
-        ComponenteController perfilComponenteCont = new ComponenteController(viewComponente,this);
+        VProyecto viewComponente = new VProyecto();
+        ProyectoController perfilComponenteCont = new ProyectoController(viewComponente,this);
         this.Desktop.add(viewComponente);
         ValidForm.centeForm(viewComponente, Desktop);
         viewComponente.show();
@@ -180,12 +191,16 @@ public class VPrincipal extends javax.swing.JFrame {
         viewCorte.show();
     }//GEN-LAST:event_itemCorteActionPerformed
 
-    private void itemComponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemComponenteActionPerformed
+    private void itemSubComponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemSubComponenteActionPerformed
         VSubComponente viewSubcomponente = new VSubComponente();
         SubComponenteController subComponenteCont = new SubComponenteController(viewSubcomponente,this);
         this.Desktop.add(viewSubcomponente);
         ValidForm.centeForm(viewSubcomponente, Desktop);
         viewSubcomponente.show();
+    }//GEN-LAST:event_itemSubComponenteActionPerformed
+
+    private void itemComponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemComponenteActionPerformed
+        // TODO add your handling code here:
     }//GEN-LAST:event_itemComponenteActionPerformed
 
     /**
@@ -227,9 +242,10 @@ public class VPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JDesktopPane Desktop;
     public javax.swing.JMenuItem itemAcabado;
-    public javax.swing.JMenuItem itemComponente;
+    private javax.swing.JMenuItem itemComponente;
     private javax.swing.JMenuItem itemCorte;
     public javax.swing.JMenuItem itemIniciar;
+    public javax.swing.JMenuItem itemSubComponente;
     public javax.swing.JMenuItem itemUnidadMedida;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JMenu jMenu1;
@@ -238,5 +254,6 @@ public class VPrincipal extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
+    private javax.swing.JPopupMenu.Separator jSeparator4;
     // End of variables declaration//GEN-END:variables
 }

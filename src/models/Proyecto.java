@@ -11,13 +11,13 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Programador 1
  */
-public class Componente {
+public class Proyecto {
     private int idPerfil;
     private String codigo;
     private String descripcion;
     private DefaultTableModel modelo;
     
-    public Componente(){}
+    public Proyecto(){}
 
     public int getIdPerfil() {
         return idPerfil;

@@ -11,10 +11,20 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="itemComponente">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Nuevo Subcomponentes"/>
+                <Property name="text" type="java.lang.String" value="Nuevo Componente "/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemComponenteActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator4">
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="itemSubComponente">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Nuevo Subcomponentes"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemSubComponenteActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

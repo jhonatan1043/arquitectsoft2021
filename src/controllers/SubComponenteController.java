@@ -141,7 +141,7 @@ public class SubComponenteController implements ActionListener {
         try {
             combo.setCombo(viewSubcomponente.cbAcabado);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ComponenteController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProyectoController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -151,7 +151,7 @@ public class SubComponenteController implements ActionListener {
         try {
             combo.setCombo(viewSubcomponente.cbUnidad);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ComponenteController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProyectoController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

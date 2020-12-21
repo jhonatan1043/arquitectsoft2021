@@ -5,7 +5,7 @@
  */
 package controllers;
 
-import dao.DaoComponente;
+import dao.DaoProyecto;
 import generals.Combos;
 import generals.Contans;
 import generals.FileTxt;
@@ -17,22 +17,22 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import views.VComponente;
+import views.VProyecto;
 import views.VPrincipal;
 
 /**
  *
  * @author Programador 1
  */
-public class ComponenteController implements ActionListener {
+public class ProyectoController implements ActionListener {
 
     DefaultTableModel modelo;
-    VComponente viewComponente;
+    VProyecto viewComponente;
     VPrincipal viewPrincipal;
     BusquedaController busquedaC;
-    DaoComponente daoComponente = new DaoComponente();
+    DaoProyecto daoComponente = new DaoProyecto();
 
-    public ComponenteController(VComponente viewComponente, VPrincipal viewPrincipal) {
+    public ProyectoController(VProyecto viewComponente, VPrincipal viewPrincipal) {
         this.viewComponente = viewComponente;
         this.viewPrincipal = viewPrincipal;
         start();
@@ -109,7 +109,7 @@ public class ComponenteController implements ActionListener {
         try {
             combo.setCombo(viewComponente.comboCategoria);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ComponenteController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProyectoController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

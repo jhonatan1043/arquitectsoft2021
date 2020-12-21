@@ -9,44 +9,44 @@ import generals.Conexion;
 import generals.Contans;
 import generals.Querys;
 import java.util.List;
-import models.Componente;
-import interfaces.IComponente;
+import models.Proyecto;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import interfaces.IProyecto;
 
 /**
  *
  * @author Programador 1
  */
-public class DaoComponente implements IComponente {
+public class DaoProyecto implements IProyecto {
 
     Conexion cnx = new Conexion();
 
     @Override
-    public boolean save(Componente componente) {
+    public boolean save(Proyecto componente) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean update(Componente componente) {
+    public boolean update(Proyecto componente) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean delete(Componente componente) {
+    public boolean delete(Proyecto componente) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Componente> listar() {
+    public List<Proyecto> listar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Componente getComponente(int idComponente) {
+    public Proyecto getComponente(int idComponente) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -78,7 +78,7 @@ public class DaoComponente implements IComponente {
 
             result.close();
         } catch (SQLException ex) {
-            Logger.getLogger(DaoComponente.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DaoProyecto.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
     }
