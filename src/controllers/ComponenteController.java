@@ -9,8 +9,6 @@ import dao.DaoComponente;
 import generals.Combos;
 import generals.Contans;
 import generals.FileTxt;
-import generals.ValidButtonSystem;
-import generals.ValidControlsSystem;
 import generals.ValidTable;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,7 +17,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import views.VBusqueda;
 import views.VComponente;
 import views.VPrincipal;
 
@@ -42,41 +39,11 @@ public class ComponenteController implements ActionListener {
     }
 
     private void initEvent() {
-        viewComponente.btnAgregar.addActionListener(this);
-        viewComponente.btnNew.addActionListener(this);
-        viewComponente.btnCancel.addActionListener(this);
         viewComponente.btnOpenTxt.addActionListener(this);
-        viewComponente.btnTrabajar.addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
-        if (e.getSource() == this.viewComponente.btnNew) {
-            ValidControlsSystem.enabledControls(viewComponente.jLayeredPane1);
-            ValidButtonSystem.disableButton(viewComponente.pnlButton);
-            viewComponente.btnSave.setEnabled(true);
-            viewComponente.btnCancel.setEnabled(true);
-
-        }
-
-        if (e.getSource() == this.viewComponente.btnCancel) {
-            ValidControlsSystem.disableControls(viewComponente.jLayeredPane1);
-            ValidButtonSystem.disableButton(viewComponente.pnlButton);
-            viewComponente.btnNew.setEnabled(true);
-            viewComponente.btnBuscar.setEnabled(true);
-        }
-
-        if (e.getSource() == this.viewComponente.btnAgregar) {
-            if (validCampos()) {
-                VBusqueda busqueda = new VBusqueda(viewPrincipal, true);
-                busquedaC = new BusquedaController(busqueda, viewComponente, Contans.QUERY_SUBCOMPONENTES, createColumns());
-                busqueda.setVisible(true);
-                if (System.getProperty("id") != null) {
-                    loadSubcomponente(Integer.parseInt(System.getProperty("id")));
-                }
-            }
-        }
 
         if (e.getSource() == this.viewComponente.btnOpenTxt) {
             if (viewComponente.comboCategoria.getSelectedIndex() != 0) {
@@ -89,20 +56,13 @@ public class ComponenteController implements ActionListener {
             }
         }
 
-        if (e.getSource() == this.viewComponente.btnTrabajar) {
-            loadInfoComponenteMayor(viewComponente.comboCategoria.getSelectedIndex());
-        }
     }
 
     public final void start() {
-        ValidControlsSystem.disableControls(viewComponente.jLayeredPane1);
-        ValidButtonSystem.disableButton(viewComponente.pnlButton);
         this.hideColumns();
         this.initEvent();
         this.cargarComboCategoria();
         modelo = (DefaultTableModel) viewComponente.tbComponente.getModel();
-        viewComponente.btnNew.setEnabled(true);
-        viewComponente.btnBuscar.setEnabled(true);
     }
 
     private ArrayList<String> createColumns() {
@@ -154,27 +114,23 @@ public class ComponenteController implements ActionListener {
     }
 
     private void loadSubcomponente(int idSubcomponente) {
-        int longitud = Integer.valueOf(viewComponente.txtLogitud.getText());
-        int anchura = Integer.valueOf(viewComponente.txtAnchura.getText());
-        int altura = Integer.valueOf(viewComponente.txtAnchura.getText());
-        int area = Integer.valueOf(viewComponente.txtArea.getText());
-
-        Object[] list = daoComponente.getSubComponente(idSubcomponente,
-                longitud,
-                anchura,
-                altura,
-                area);
-        modelo.addRow(list);
+//        int longitud = Integer.valueOf(viewComponente.txtLogitud.getText());
+//        int anchura = Integer.valueOf(viewComponente.txtAnchura.getText());
+//        int altura = Integer.valueOf(viewComponente.txtAnchura.getText());
+//        int area = Integer.valueOf(viewComponente.txtArea.getText());
+//
+//        Object[] list = daoComponente.getSubComponente(idSubcomponente,
+//                longitud,
+//                anchura,
+//                altura,
+//                area);
+//        modelo.addRow(list);
     }
 
     private boolean validCampos() {
         boolean result = false;
 
-        if ("".equals(viewComponente.txtCodigo.getText())) {
-            JOptionPane.showMessageDialog(viewComponente, "¡ Se necesita el codigo del componente !");
-        } else if ("".equals(viewComponente.txtDescripcion.getText())) {
-            JOptionPane.showMessageDialog(viewComponente, "¡ el nombre del componente !");
-        } else if (viewComponente.comboCategoria.getSelectedIndex() == 0) {
+        if (viewComponente.comboCategoria.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(viewComponente, "¡ categoria del componente !");
         } else {
             result = true;
@@ -183,23 +139,4 @@ public class ComponenteController implements ActionListener {
         return result;
     }
 
-    private void loadInfoComponenteMayor(int idCategoria) {
-        
-        int indexRow = viewComponente.tbComponenteMayor.getSelectedRow();
-        switch (idCategoria) {
-
-            case 1:
-                viewComponente.txtCodigo.setText(viewComponente.tbComponenteMayor.getValueAt(indexRow, 0).toString().trim());
-                viewComponente.txtDescripcion.setText(viewComponente.tbComponenteMayor.getValueAt(indexRow, 1).toString().trim());
-                viewComponente.txtLogitud.setText(viewComponente.tbComponenteMayor.getValueAt(indexRow, 2).toString().trim());
-                viewComponente.txtUbicacion.setText(viewComponente.tbComponenteMayor.getValueAt(indexRow, 3).toString().trim());
-                break;
-            case 2:
-
-                break;
-            case 3:
-
-                break;
-        }
-    }
 }
