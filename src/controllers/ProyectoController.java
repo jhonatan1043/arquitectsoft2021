@@ -65,14 +65,6 @@ public class ProyectoController implements ActionListener {
         modelo = (DefaultTableModel) viewComponente.tbComponente.getModel();
     }
 
-    private ArrayList<String> createColumns() {
-        ArrayList<String> listColumns = new ArrayList<>();
-        listColumns.add("Id");
-        listColumns.add("Codigo");
-        listColumns.add("Descripcion");
-        return listColumns;
-    }
-
     private ArrayList<String> setCreateColumns(int idCategoria) {
         ArrayList<String> listColumns = new ArrayList<>();
 

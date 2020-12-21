@@ -6,6 +6,7 @@
 package views;
 
 import controllers.AcabadoController;
+import controllers.ComponenteController;
 import controllers.ProyectoController;
 import controllers.CorteController;
 import controllers.SubComponenteController;
@@ -161,7 +162,7 @@ public class VPrincipal extends javax.swing.JFrame {
 
     private void itemIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemIniciarActionPerformed
         VProyecto viewComponente = new VProyecto();
-        ProyectoController perfilComponenteCont = new ProyectoController(viewComponente,this);
+        ProyectoController perfilComponenteCont = new ProyectoController(viewComponente, this);
         this.Desktop.add(viewComponente);
         ValidForm.centeForm(viewComponente, Desktop);
         viewComponente.show();
@@ -177,7 +178,7 @@ public class VPrincipal extends javax.swing.JFrame {
 
     private void itemUnidadMedidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemUnidadMedidaActionPerformed
         VUnidadMedida viewUnidadMedida = new VUnidadMedida();
-        UnidadMedidaController unidadMedidaC =  new UnidadMedidaController(viewUnidadMedida);
+        UnidadMedidaController unidadMedidaC = new UnidadMedidaController(viewUnidadMedida);
         this.Desktop.add(viewUnidadMedida);
         ValidForm.centeForm(viewUnidadMedida, Desktop);
         viewUnidadMedida.show();
@@ -193,14 +194,18 @@ public class VPrincipal extends javax.swing.JFrame {
 
     private void itemSubComponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemSubComponenteActionPerformed
         VSubComponente viewSubcomponente = new VSubComponente();
-        SubComponenteController subComponenteCont = new SubComponenteController(viewSubcomponente,this);
+        SubComponenteController subComponenteCont = new SubComponenteController(viewSubcomponente, this);
         this.Desktop.add(viewSubcomponente);
         ValidForm.centeForm(viewSubcomponente, Desktop);
         viewSubcomponente.show();
     }//GEN-LAST:event_itemSubComponenteActionPerformed
 
     private void itemComponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemComponenteActionPerformed
-        // TODO add your handling code here:
+        VComponente viewcomponente = new VComponente();
+        ComponenteController ComponenteCont = new ComponenteController(viewcomponente, this);
+        this.Desktop.add(viewcomponente);
+        ValidForm.centeForm(viewcomponente, Desktop);
+        viewcomponente.show();
     }//GEN-LAST:event_itemComponenteActionPerformed
 
     /**
