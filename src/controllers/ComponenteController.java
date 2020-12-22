@@ -5,6 +5,7 @@
  */
 package controllers;
 
+import dao.DaoComponente;
 import generals.Contans;
 import generals.ValidButtonSystem;
 import generals.ValidControlsSystem;
@@ -15,6 +16,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 import views.VBusqueda;
 import views.VComponente;
 import views.VPrincipal;
@@ -23,9 +25,11 @@ import views.VPrincipal;
  *
  * @author Programador 1
  */
-public class ComponenteController implements ActionListener, KeyListener  {
+public class ComponenteController implements ActionListener, KeyListener {
 
+    DefaultTableModel modelo;
     VComponente viewComponente;
+    DaoComponente daoComponente = new DaoComponente();
     VPrincipal viewPrincipal;
 
     public ComponenteController(VComponente viewComponente,
@@ -33,13 +37,14 @@ public class ComponenteController implements ActionListener, KeyListener  {
         this.viewComponente = viewComponente;
         this.viewPrincipal = viewPrincipal;
         start();
-        initEvent();
-        hideColumns();
     }
 
     private void start() {
         ValidControlsSystem.disableControls(viewComponente.jLayeredPane1);
         ValidButtonSystem.disableButton(viewComponente.pnlButton);
+        initEvent();
+        hideColumns();
+        modelo = (DefaultTableModel) viewComponente.tbComponente.getModel();
         viewComponente.btnNew.setEnabled(true);
         viewComponente.btnBuscar.setEnabled(true);
     }
@@ -57,6 +62,11 @@ public class ComponenteController implements ActionListener, KeyListener  {
     private void hideColumns() {
         int[] list = {0};
         ValidTable.hideColumnsTable(viewComponente.tbComponente, list);
+    }
+
+    private void loadSubComponente(int id) {
+        Object[] list = daoComponente.getSubComponente(id);
+        modelo.addRow(list);
     }
 
     private ArrayList<String> createColumns() {
@@ -91,21 +101,22 @@ public class ComponenteController implements ActionListener, KeyListener  {
                     Contans.QUERY_SUBCOMPONENTES,
                     createColumns());
             viewBusqueda.setVisible(true);
+            loadSubComponente(Integer.parseInt(System.getProperty("id")));
         }
 
         if (e.getSource() == viewComponente.btnQuitar) {
-            viewComponente.tbComponente.remove(viewComponente.tbComponente.getSelectedRow());
+            modelo.removeRow(viewComponente.tbComponente.getSelectedRow());
         }
     }
 
     @Override
     public void keyTyped(KeyEvent e) {
-       if(e.getSource() == viewComponente.txtCodigo){
-         ValidEnterCaracter.validMaxCaracter(viewComponente.txtCodigo, e, 10, viewComponente);
-       }
-       if(e.getSource() == viewComponente.txtDescripcion){
-         ValidEnterCaracter.validMaxCaracter(viewComponente.txtDescripcion, e, 45, viewComponente);
-       }
+        if (e.getSource() == viewComponente.txtCodigo) {
+            ValidEnterCaracter.validMaxCaracter(viewComponente.txtCodigo, e, 10, viewComponente);
+        }
+        if (e.getSource() == viewComponente.txtDescripcion) {
+            ValidEnterCaracter.validMaxCaracter(viewComponente.txtDescripcion, e, 45, viewComponente);
+        }
     }
 
     @Override

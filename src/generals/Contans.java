@@ -21,13 +21,17 @@ public class Contans {
     public static String QUERY_INSERT_UNIDAD_MEDIDA = "INSERT unidades_medidas (Descripcion,Convencion)VALUES(?,?);";
     //--------------------------------------------------------------------------------------------------------------------------------
     public static String QUERY_COMPONENTES = "SELECT Id_Componente,Codigo,Descripcion FROM arquitectdb.componentes;";
+    
     //--------------------------------------------------------------------------------------------------------------------------------
     public static String QUERY_CATEGORIAS = "SELECT Id_categoria,Descripcion,Tipo_Formula FROM arquitectdb.categorias;";
     //--------------------------------------------------------------------------------------------------------------------------------
      // querys subComponentes
      public static String QUERY_SUBCOMPONENTES = "CALL spSubComponenteConsultar('";
      
-     public static String QUERY_SUBCOMPONENTES_CARGAR = "CALL spComponenteCargar(";
+     public static String QUERY_SUBCOMPONENTES_CALC_CARGAR = "CALL spComponenteCargar(";
+     
+        public static String QUERY_SUBCOMPONENTES_CARGAR = "SELECT Codigo_Homologacion Codigo,Descripcion "
+                + "                                         FROM arquitectdb.subcomponentes WHERE Id_subcomponente= ";
      
      public static String QUERY_INSERT_SUBCOMPONENTES = "CALL spSubComponenteRegistrar(?,?,?,?,?,?,?,?)";
      

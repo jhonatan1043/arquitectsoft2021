@@ -7,51 +7,45 @@ package dao;
 
 import generals.Conexion;
 import generals.Contans;
-import generals.Querys;
 import java.util.List;
-import models.Proyecto;
+import models.Componente;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import interfaces.IProyecto;
+import interfaces.IComponente;
 
 /**
  *
  * @author Programador 1
  */
-public class DaoProyecto implements IProyecto {
+public class DaoComponente implements IComponente {
 
     Conexion cnx = new Conexion();
 
     @Override
-    public boolean save(Proyecto componente) {
+    public boolean save(Componente componente) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean update(Proyecto componente) {
+    public boolean update(Componente componente) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean delete(Proyecto componente) {
+    public boolean delete(Componente componente) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Proyecto> listar() {
+    public List<Componente> listar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Proyecto getComponente(int idComponente) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Object[] getSubComponente(int idSubComponente,
+    public Object[] getSubComponenteCalc(int idSubComponente,
             int logitud,
             int anchura,
             int altura,
@@ -78,7 +72,34 @@ public class DaoProyecto implements IProyecto {
 
             result.close();
         } catch (SQLException ex) {
-            Logger.getLogger(DaoProyecto.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DaoComponente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
+    @Override
+    public Componente getComponte(int idComponente) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object[] getSubComponente(int idSubComponente) {
+        Object[] list = new Object[3];
+
+        ResultSet result;
+
+        try (PreparedStatement preparedStatement = cnx.getConnection().prepareStatement(Contans.QUERY_SUBCOMPONENTES_CARGAR +
+                                                                                        idSubComponente + ";")) {
+            result = preparedStatement.executeQuery();
+            while (result.next()) {
+                list[0] = idSubComponente;
+                list[1] = result.getObject(1);
+                list[2] = result.getObject(2);
+            }
+            
+            result.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoComponente.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
     }

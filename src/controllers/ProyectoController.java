@@ -5,7 +5,7 @@
  */
 package controllers;
 
-import dao.DaoProyecto;
+import dao.DaoComponente;
 import generals.Combos;
 import generals.Contans;
 import generals.FileTxt;
@@ -30,7 +30,7 @@ public class ProyectoController implements ActionListener {
     VProyecto viewComponente;
     VPrincipal viewPrincipal;
     BusquedaController busquedaC;
-    DaoProyecto daoComponente = new DaoProyecto();
+    DaoComponente daoComponente = new DaoComponente();
 
     public ProyectoController(VProyecto viewComponente, VPrincipal viewPrincipal) {
         this.viewComponente = viewComponente;
@@ -111,7 +111,7 @@ public class ProyectoController implements ActionListener {
 //        int altura = Integer.valueOf(viewComponente.txtAnchura.getText());
 //        int area = Integer.valueOf(viewComponente.txtArea.getText());
 //
-//        Object[] list = daoComponente.getSubComponente(idSubcomponente,
+//        Object[] list = daoComponente.getSubComponenteCalc(idSubcomponente,
 //                longitud,
 //                anchura,
 //                altura,
