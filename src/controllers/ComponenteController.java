@@ -8,9 +8,12 @@ package controllers;
 import generals.Contans;
 import generals.ValidButtonSystem;
 import generals.ValidControlsSystem;
+import generals.ValidEnterCaracter;
 import generals.ValidTable;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import views.VBusqueda;
 import views.VComponente;
@@ -20,7 +23,7 @@ import views.VPrincipal;
  *
  * @author Programador 1
  */
-public class ComponenteController implements ActionListener {
+public class ComponenteController implements ActionListener, KeyListener  {
 
     VComponente viewComponente;
     VPrincipal viewPrincipal;
@@ -47,6 +50,8 @@ public class ComponenteController implements ActionListener {
         viewComponente.btnSave.addActionListener(this);
         viewComponente.btnAgregar.addActionListener(this);
         viewComponente.btnQuitar.addActionListener(this);
+        viewComponente.txtCodigo.addKeyListener(this);
+        viewComponente.txtDescripcion.addKeyListener(this);
     }
 
     private void hideColumns() {
@@ -91,6 +96,26 @@ public class ComponenteController implements ActionListener {
         if (e.getSource() == viewComponente.btnQuitar) {
             viewComponente.tbComponente.remove(viewComponente.tbComponente.getSelectedRow());
         }
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+       if(e.getSource() == viewComponente.txtCodigo){
+         ValidEnterCaracter.validMaxCaracter(viewComponente.txtCodigo, e, 10, viewComponente);
+       }
+       if(e.getSource() == viewComponente.txtDescripcion){
+         ValidEnterCaracter.validMaxCaracter(viewComponente.txtDescripcion, e, 45, viewComponente);
+       }
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

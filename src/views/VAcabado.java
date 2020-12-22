@@ -131,28 +131,6 @@ public final class VAcabado extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Descripción:");
 
-        txtDescripcion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDescripcionActionPerformed(evt);
-            }
-        });
-        txtDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtDescripcionKeyTyped(evt);
-            }
-        });
-
-        txtCodigo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCodigoActionPerformed(evt);
-            }
-        });
-        txtCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtCodigoKeyTyped(evt);
-            }
-        });
-
         jLabel7.setText("Codigo");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -223,46 +201,7 @@ public final class VAcabado extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCodigoActionPerformed
-
-    private void txtCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyTyped
-        // TODO add your handling code here:
-        char validar=evt.getKeyChar();
-        
-        if(Character.isLetter(validar)){
-            getToolkit().beep();
-            evt.consume();
-            
-            JOptionPane.showMessageDialog(this, "Ingresar Solo Números");
-        }
-        else if((int)evt.getKeyChar()>32 && (int)evt.getKeyChar()<=47
-                ||(int)evt.getKeyChar()>=58 && (int)evt.getKeyChar()<=64
-                ||(int)evt.getKeyChar()>=91 && (int)evt.getKeyChar()<=96
-                ||(int)evt.getKeyChar()>=123 && (int)evt.getKeyChar()<=255)
-        {
-            getToolkit().beep();
-            evt.consume();
-            
-            JOptionPane.showMessageDialog(this, "Ingresar Solo Números");
-    }//GEN-LAST:event_txtCodigoKeyTyped
-    }
-    private void txtDescripcionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionKeyTyped
-        // TODO add your handling code here:    
-        int limite=50;
-        if (txtDescripcion.getText().length()>=limite) {
-            evt.consume();
-            JOptionPane.showMessageDialog(rootPane, "Máximo 50 carácteres");
-        }
-               
-    }//GEN-LAST:event_txtDescripcionKeyTyped
-
-    private void txtDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescripcionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDescripcionActionPerformed
- 
+     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnBuscar;
