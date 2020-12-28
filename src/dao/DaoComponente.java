@@ -122,18 +122,18 @@ public class DaoComponente implements IComponente {
             ResultSet result;
                     
             String codigo = modelo.getValueAt(i, 0).toString().trim().replace("\"", "").replace("�", "");
-            String longitud = modelo.getValueAt(i, 2).toString().trim().replace("\"", "");
+            String auxLongitud = modelo.getValueAt(i, 2).toString().trim().replace("\"", "");
             String ubicacion = modelo.getValueAt(i, 3).toString().trim().replace("\"", "");
 
+            int longitud = Integer.parseInt(auxLongitud.trim().replace(" ", "").replace("\"", ""));
+            
             try {
 
                 String query = "call spComponentePerfilesCargar(?,?,?);";
 
-                System.out.println(query);
-
                 try (PreparedStatement preparedStatement = cnx.getConnection().prepareStatement(query)) {
                     preparedStatement.setString(1, codigo);
-                    preparedStatement.setString(2, longitud);
+                    preparedStatement.setInt(2, longitud);
                     preparedStatement.setString(3, ubicacion);
                     result = preparedStatement.executeQuery();
 

@@ -52,8 +52,6 @@ public class ProyectoController implements ActionListener {
                         viewComponente.tbComponenteMayor,
                         setCreateColumns(viewComponente.comboCategoria.getSelectedIndex()));
                 loadSubcomponente();
-            } else {
-                JOptionPane.showMessageDialog(viewComponente, "¡ categoria del componente !");
             }
         }
     }
