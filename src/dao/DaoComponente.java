@@ -120,17 +120,17 @@ public class DaoComponente implements IComponente {
         for (int i = 0; i < modelo.getRowCount(); i++) {
 
             ResultSet result;
-                    
+
             String codigo = modelo.getValueAt(i, 0).toString().trim().replace("\"", "").replace("�", "");
             String auxLongitud = modelo.getValueAt(i, 2).toString().trim().replace("\"", "");
-            String ubicacion = modelo.getValueAt(i, 3).toString().trim().replace("\"", "");
+            String ubicacion = modelo.getValueAt(i, 3).toString().trim();
 
             int longitud = Integer.parseInt(auxLongitud.trim().replace(" ", "").replace("\"", ""));
-            
+
             try {
 
                 String query = "call spComponentePerfilesCargar(?,?,?);";
-
+                
                 try (PreparedStatement preparedStatement = cnx.getConnection().prepareStatement(query)) {
                     preparedStatement.setString(1, codigo);
                     preparedStatement.setInt(2, longitud);
@@ -141,7 +141,6 @@ public class DaoComponente implements IComponente {
 
                     while (result.next()) {
                         data = new Object[6];
-
                         data[0] = result.getInt(1);
                         data[1] = result.getString(2);
                         data[2] = result.getString(3);
@@ -155,7 +154,6 @@ public class DaoComponente implements IComponente {
 
                     result.close();
                 }
-                ///cnx.getConnection().close();
 
             } catch (SQLException ex) {
                 Logger.getLogger(DaoComponente.class.getName()).log(Level.SEVERE, null, ex);

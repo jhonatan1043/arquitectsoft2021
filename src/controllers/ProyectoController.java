@@ -104,18 +104,14 @@ public class ProyectoController implements ActionListener {
     }
 
     private void loadSubcomponente() {
-
         ArrayList<ArrayList<Object[]>> list;
-
         if (viewComponente.tbComponenteMayor.getRowCount() > 0) {
             list = daoComponente.getSubComponenteCalc(viewComponente.tbComponenteMayor.getModel());
-
             list.forEach((list1) -> {
                 list1.forEach((data) -> {
                     modelo.addRow(data);
                 });
             });
-
         }
     }
 
