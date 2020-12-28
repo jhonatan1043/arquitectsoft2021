@@ -117,7 +117,7 @@ public class DaoComponente implements IComponente {
         ArrayList<ArrayList<Object[]>> list = new ArrayList<>();
         ArrayList<Object[]> listDta;
         Object[] data;
-        for (int i = 0; i < modelo.getRowCount() - 1 ; i++) {
+        for (int i = 0; i < modelo.getRowCount(); i++) {
 
             ResultSet result;
                     
