@@ -12,19 +12,21 @@ import javax.swing.table.DefaultTableModel;
  * @author Programador 1
  */
 public class Componente {
-    private int idPerfil;
+
+    private int idComponente;
     private String codigo;
     private String descripcion;
     private DefaultTableModel modelo;
-    
-    public Componente(){}
 
-    public int getIdPerfil() {
-        return idPerfil;
+    public Componente() {
     }
 
-    public void setIdPerfil(int idPerfil) {
-        this.idPerfil = idPerfil;
+    public int getIdComponente() {
+        return idComponente;
+    }
+
+    public void setIdComponente(int idComponente) {
+        this.idComponente = idComponente;
     }
 
     public String getCodigo() {
@@ -51,5 +53,4 @@ public class Componente {
         this.modelo = modelo;
     }
 
-    
 }

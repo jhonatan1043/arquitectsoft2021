@@ -22,6 +22,10 @@ public class Contans {
     //--------------------------------------------------------------------------------------------------------------------------------
     public static String QUERY_COMPONENTES = "SELECT Id_Componente,Codigo,Descripcion FROM arquitectdb.componentes;";
     
+    public static String QUERY_INSERT_COMPONENTES = "INSERT arquitectdb.componentes(codigo, descripcion) VALUES (?,?);";
+    
+    public static String QUERY_INSERT_COMPONENTE_DETALLE = "INSERT arquitectdb.componentes_detalle (Id_Componente, Id_Subcomponente) VALUES (?,?);";
+    
     //--------------------------------------------------------------------------------------------------------------------------------
     public static String QUERY_CATEGORIAS = "SELECT Id_categoria,Descripcion,Tipo_Formula FROM arquitectdb.categorias;";
     //--------------------------------------------------------------------------------------------------------------------------------

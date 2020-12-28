@@ -15,6 +15,9 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import interfaces.IComponente;
+import java.sql.Statement;
+import java.util.ArrayList;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -26,7 +29,45 @@ public class DaoComponente implements IComponente {
 
     @Override
     public boolean save(Componente componente) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            cnx.getConnection().setAutoCommit(false);
+            PreparedStatement insertComponente = cnx.getConnection().prepareStatement(Contans.QUERY_INSERT_COMPONENTES, Statement.RETURN_GENERATED_KEYS);
+            insertComponente.setString(1, componente.getCodigo());
+            insertComponente.setString(2, componente.getDescripcion());
+            insertComponente.executeUpdate();
+            try (ResultSet idGenerador = insertComponente.getGeneratedKeys()) {
+                idGenerador.next();
+                int idComponente = idGenerador.getInt(1);
+                idGenerador.close();
+                insertComponente.close();
+
+                try (PreparedStatement insertComponenteDetalle = cnx.getConnection().prepareStatement(Contans.QUERY_INSERT_COMPONENTE_DETALLE)) {
+                    for (int i = 0; i < componente.getModelo().getRowCount(); i++) {
+                        insertComponenteDetalle.setInt(1, idComponente);
+                        insertComponenteDetalle.setInt(2, Integer.parseInt(componente.getModelo().getValueAt(i, 0).toString()));
+                        insertComponenteDetalle.executeUpdate();
+                    }
+
+                    cnx.getConnection().commit();
+                }
+                componente.setIdComponente(idComponente);
+            }
+        } catch (SQLException ex) {
+            try {
+                Logger.getLogger(DaoComponente.class.getName()).log(Level.SEVERE, null, ex);
+                cnx.getConnection().rollback();
+                return false;
+            } catch (SQLException ex1) {
+                Logger.getLogger(DaoComponente.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        } finally {
+            try {
+                cnx.getConnection().setAutoCommit(true);
+            } catch (SQLException ex) {
+                Logger.getLogger(DaoComponente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return true;
     }
 
     @Override
@@ -45,39 +86,6 @@ public class DaoComponente implements IComponente {
     }
 
     @Override
-    public Object[] getSubComponenteCalc(int idSubComponente,
-            int logitud,
-            int anchura,
-            int altura,
-            int area) {
-
-        Object[] list = new Object[5];
-
-        ResultSet result = null;
-
-        try (PreparedStatement preparedStatement = cnx.getConnection().prepareStatement(Contans.QUERY_SUBCOMPONENTES_CARGAR + idSubComponente + ","
-                + logitud + ","
-                + anchura + ","
-                + altura + ","
-                + area + ")")) {
-            result = preparedStatement.executeQuery();
-
-            while (result.next()) {
-                list[0] = result.getObject(1);
-                list[1] = result.getObject(2);
-                list[2] = result.getObject(3);
-                list[3] = result.getObject(4);
-                list[4] = result.getObject(5);
-            }
-
-            result.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(DaoComponente.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return list;
-    }
-
-    @Override
     public Componente getComponte(int idComponente) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -88,18 +96,71 @@ public class DaoComponente implements IComponente {
 
         ResultSet result;
 
-        try (PreparedStatement preparedStatement = cnx.getConnection().prepareStatement(Contans.QUERY_SUBCOMPONENTES_CARGAR +
-                                                                                        idSubComponente + ";")) {
+        try (PreparedStatement preparedStatement = cnx.getConnection().prepareStatement(Contans.QUERY_SUBCOMPONENTES_CARGAR
+                + idSubComponente + ";")) {
             result = preparedStatement.executeQuery();
             while (result.next()) {
                 list[0] = idSubComponente;
                 list[1] = result.getObject(1);
                 list[2] = result.getObject(2);
             }
-            
+
             result.close();
         } catch (SQLException ex) {
             Logger.getLogger(DaoComponente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
+    @Override
+    public ArrayList<ArrayList<Object[]>> getSubComponenteCalc(TableModel modelo) {
+        ArrayList<ArrayList<Object[]>> list = new ArrayList<>();
+        ArrayList<Object[]> listDta;
+        Object[] data;
+        for (int i = 0; i < modelo.getRowCount() - 1 ; i++) {
+
+            ResultSet result;
+                    
+            String codigo = modelo.getValueAt(i, 0).toString().trim().replace("\"", "").replace("�", "");
+            String longitud = modelo.getValueAt(i, 2).toString().trim().replace("\"", "");
+            String ubicacion = modelo.getValueAt(i, 3).toString().trim().replace("\"", "");
+
+            try {
+
+                String query = "call spComponentePerfilesCargar(?,?,?);";
+
+                System.out.println(query);
+
+                try (PreparedStatement preparedStatement = cnx.getConnection().prepareStatement(query)) {
+                    preparedStatement.setString(1, codigo);
+                    preparedStatement.setString(2, longitud);
+                    preparedStatement.setString(3, ubicacion);
+                    result = preparedStatement.executeQuery();
+
+                    listDta = new ArrayList<>();
+
+                    while (result.next()) {
+                        data = new Object[6];
+
+                        data[0] = result.getInt(1);
+                        data[1] = result.getString(2);
+                        data[2] = result.getString(3);
+                        data[3] = result.getInt(4);
+                        data[4] = result.getInt(5);
+                        data[5] = result.getString(6);
+                        listDta.add(data);
+                    }
+
+                    list.add(listDta);
+
+                    result.close();
+                }
+                ///cnx.getConnection().close();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(DaoComponente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         }
         return list;
     }

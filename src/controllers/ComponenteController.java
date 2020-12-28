@@ -16,7 +16,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import models.Componente;
 import views.VBusqueda;
 import views.VComponente;
 import views.VPrincipal;
@@ -29,8 +31,9 @@ public class ComponenteController implements ActionListener, KeyListener {
 
     DefaultTableModel modelo;
     VComponente viewComponente;
-    DaoComponente daoComponente = new DaoComponente();
     VPrincipal viewPrincipal;
+    Componente componente = new Componente();
+    DaoComponente daoComponente = new DaoComponente();
 
     public ComponenteController(VComponente viewComponente,
             VPrincipal viewPrincipal) {
@@ -77,6 +80,12 @@ public class ComponenteController implements ActionListener, KeyListener {
         return listColumns;
     }
 
+    private void loadComponente() {
+        componente.setCodigo(viewComponente.txtCodigo.getText());
+        componente.setDescripcion(viewComponente.txtDescripcion.getText());
+        componente.setModelo((DefaultTableModel) viewComponente.tbComponente.getModel());
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -107,6 +116,22 @@ public class ComponenteController implements ActionListener, KeyListener {
         if (e.getSource() == viewComponente.btnQuitar) {
             modelo.removeRow(viewComponente.tbComponente.getSelectedRow());
         }
+
+        if (e.getSource() == viewComponente.btnSave) {
+            if ("".equals(viewComponente.txtCodigo.getText())
+                    || "".equals(viewComponente.txtDescripcion.getText())
+                    || viewComponente.tbComponente.getRowCount() == 0) {
+                JOptionPane.showMessageDialog(viewComponente, "¡ hay Datos sin realizar !");
+            } else {
+                loadComponente();
+                if (daoComponente.save(componente)) {
+                    ValidControlsSystem.disableControls(viewComponente.jLayeredPane1);
+                    ValidButtonSystem.disableButton(viewComponente.pnlButton);
+                    viewComponente.btnNew.setEnabled(true);
+                    JOptionPane.showMessageDialog(viewComponente, "¡ Registrado con exito !");
+                }
+            }
+        }
     }
 
     @Override
@@ -121,7 +146,7 @@ public class ComponenteController implements ActionListener, KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      
     }
 
     @Override

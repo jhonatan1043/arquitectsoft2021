@@ -46,16 +46,16 @@ public class ProyectoController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == this.viewComponente.btnOpenTxt) {
-            if (viewComponente.comboCategoria.getSelectedIndex() != 0) {
+            if (validCampos()) {
                 FileTxt file = new FileTxt();
                 file.openFile(viewPrincipal,
                         viewComponente.tbComponenteMayor,
                         setCreateColumns(viewComponente.comboCategoria.getSelectedIndex()));
+                loadSubcomponente();
             } else {
                 JOptionPane.showMessageDialog(viewComponente, "¡ categoria del componente !");
             }
         }
-
     }
 
     public final void start() {
@@ -105,18 +105,20 @@ public class ProyectoController implements ActionListener {
         }
     }
 
-    private void loadSubcomponente(int idSubcomponente) {
-//        int longitud = Integer.valueOf(viewComponente.txtLogitud.getText());
-//        int anchura = Integer.valueOf(viewComponente.txtAnchura.getText());
-//        int altura = Integer.valueOf(viewComponente.txtAnchura.getText());
-//        int area = Integer.valueOf(viewComponente.txtArea.getText());
-//
-//        Object[] list = daoComponente.getSubComponenteCalc(idSubcomponente,
-//                longitud,
-//                anchura,
-//                altura,
-//                area);
-//        modelo.addRow(list);
+    private void loadSubcomponente() {
+
+        ArrayList<ArrayList<Object[]>> list;
+
+        if (viewComponente.tbComponenteMayor.getRowCount() > 0) {
+            list = daoComponente.getSubComponenteCalc(viewComponente.tbComponenteMayor.getModel());
+
+            list.forEach((list1) -> {
+                list1.forEach((data) -> {
+                    modelo.addRow(data);
+                });
+            });
+
+        }
     }
 
     private boolean validCampos() {

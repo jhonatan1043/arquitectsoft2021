@@ -5,7 +5,9 @@
  */
 package interfaces;
 
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.table.TableModel;
 import models.Componente;
 
 /**
@@ -24,7 +26,7 @@ public interface IComponente {
 
     public Componente getComponte(int idComponente);
 
-    public Object[] getSubComponenteCalc(int idSubComponente, int logitud, int anchura, int altura, int area);
+    public ArrayList<ArrayList<Object[]>> getSubComponenteCalc(TableModel modelo);
 
     public Object[] getSubComponente(int idSubComponente);
 }
