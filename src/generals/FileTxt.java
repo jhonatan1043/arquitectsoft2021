@@ -16,6 +16,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -32,23 +33,24 @@ public class FileTxt {
     DefaultTableModel modelo = new DefaultTableModel();
 
     public void openFile(VPrincipal viewPrincipal, JTable tabla, ArrayList<String> listColumns) {
-        JFileChooser chooser = new JFileChooser();
         ArrayList<Object[]> listData;
+        JFileChooser chooser = new JFileChooser();
+        chooser.setCurrentDirectory(new File(".txt"));
+        chooser.setDialogTitle("Selecciona la carpeta de los archivos");
+        chooser.setMultiSelectionEnabled(true);
 
         if (chooser.showOpenDialog(viewPrincipal) == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = chooser.getSelectedFile();
-
-            listColumns.forEach((listColumns1) -> {
-                modelo.addColumn(listColumns1);
-            });
-
-            listData = readFileTxt(selectedFile);
-
-            listData.forEach((listData1) -> {
-                modelo.addRow(listData1);
-            });
-
-            tabla.setModel(modelo);
+//            File selectedFile = chooser.getSelectedFile();
+//            listColumns.forEach((listColumns1) -> {
+//                modelo.addColumn(listColumns1);
+//            });
+//            listData = readFileTxt(selectedFile);
+//            listData.forEach((listData1) -> {
+//                modelo.addRow(listData1);
+//            });
+//            tabla.setModel(modelo);
+            File[] files = chooser.getSelectedFiles();
+            //System.out.println(files.length);
         }
     }
 

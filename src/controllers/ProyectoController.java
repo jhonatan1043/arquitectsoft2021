@@ -6,16 +6,11 @@
 package controllers;
 
 import dao.DaoComponente;
-import generals.Combos;
-import generals.Contans;
 import generals.FileTxt;
 import generals.ValidTable;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import views.VProyecto;
 import views.VPrincipal;
@@ -46,27 +41,24 @@ public class ProyectoController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == this.viewComponente.btnOpenTxt) {
-            if (validCampos()) {
                 FileTxt file = new FileTxt();
                 file.openFile(viewPrincipal,
                         viewComponente.tbComponenteMayor,
-                        setCreateColumns(viewComponente.comboCategoria.getSelectedIndex()));
+                        setCreateColumns(1));
                 loadSubcomponente();
-            }
         }
     }
 
     public final void start() {
         this.hideColumns();
         this.initEvent();
-        this.cargarComboCategoria();
         modelo = (DefaultTableModel) viewComponente.tbComponente.getModel();
     }
 
-    private ArrayList<String> setCreateColumns(int idCategoria) {
+    private ArrayList<String> setCreateColumns(int index) {
         ArrayList<String> listColumns = new ArrayList<>();
 
-        switch (idCategoria) {
+        switch (index) {
 
             case 1:
                 //-----------------
@@ -93,16 +85,6 @@ public class ProyectoController implements ActionListener {
         ValidTable.hideColumnsTable(viewComponente.tbComponente, list);
     }
 
-    private void cargarComboCategoria() {
-        Combos combo = new Combos();
-        combo.setSqlConsult(Contans.QUERY_CATEGORIAS);
-        try {
-            combo.setCombo(viewComponente.comboCategoria);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ProyectoController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
     private void loadSubcomponente() {
         ArrayList<ArrayList<Object[]>> list;
         if (viewComponente.tbComponenteMayor.getRowCount() > 0) {
@@ -113,18 +95,6 @@ public class ProyectoController implements ActionListener {
                 });
             });
         }
-    }
-
-    private boolean validCampos() {
-        boolean result = false;
-
-        if (viewComponente.comboCategoria.getSelectedIndex() == 0) {
-            JOptionPane.showMessageDialog(viewComponente, "¡ categoria del componente !");
-        } else {
-            result = true;
-        }
-
-        return result;
     }
 
 }
