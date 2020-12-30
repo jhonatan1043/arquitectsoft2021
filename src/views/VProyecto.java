@@ -32,25 +32,26 @@ public class VProyecto extends javax.swing.JInternalFrame {
         pnlButton = new javax.swing.JPanel();
         btnSave = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tbComponenteMayor = new javax.swing.JTable();
-        jPanel4 = new javax.swing.JPanel();
+        jTabComponentes = new javax.swing.JTabbedPane();
+        jPnPerfilMetalico = new javax.swing.JPanel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        tbPerfilMetalico = new javax.swing.JTable();
+        jPnVidrioPanel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tbVidrioPanele = new javax.swing.JTable();
-        jPanel6 = new javax.swing.JPanel();
+        jPnUnionVidrio = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tbUnionVidrio = new javax.swing.JTable();
-        jPanel7 = new javax.swing.JPanel();
+        jPnPuerta = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         tbPuerta = new javax.swing.JTable();
-        jPanel8 = new javax.swing.JPanel();
+        jPnUnionPanele = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         tbUnionPaneles = new javax.swing.JTable();
-        jPanel9 = new javax.swing.JPanel();
+        jPnTuboMetalico = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
         tbTuboMetalico = new javax.swing.JTable();
-        jPanel10 = new javax.swing.JPanel();
+        jPnMamparas = new javax.swing.JPanel();
         jScrollPane8 = new javax.swing.JScrollPane();
         tbMampara = new javax.swing.JTable();
 
@@ -83,6 +84,7 @@ public class VProyecto extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        tbComponente.setEnabled(false);
         jScrollPane1.setViewportView(tbComponente);
         if (tbComponente.getColumnModel().getColumnCount() > 0) {
             tbComponente.getColumnModel().getColumn(0).setResizable(false);
@@ -181,8 +183,8 @@ public class VProyecto extends javax.swing.JInternalFrame {
 
         jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        tbComponenteMayor.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        tbComponenteMayor.setModel(new javax.swing.table.DefaultTableModel(
+        tbPerfilMetalico.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        tbPerfilMetalico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -190,9 +192,21 @@ public class VProyecto extends javax.swing.JInternalFrame {
 
             }
         ));
-        jScrollPane2.setViewportView(tbComponenteMayor);
+        tbPerfilMetalico.setEnabled(false);
+        jScrollPane9.setViewportView(tbPerfilMetalico);
 
-        jTabbedPane1.addTab("PERFIL METALICO", jScrollPane2);
+        javax.swing.GroupLayout jPnPerfilMetalicoLayout = new javax.swing.GroupLayout(jPnPerfilMetalico);
+        jPnPerfilMetalico.setLayout(jPnPerfilMetalicoLayout);
+        jPnPerfilMetalicoLayout.setHorizontalGroup(
+            jPnPerfilMetalicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 1047, Short.MAX_VALUE)
+        );
+        jPnPerfilMetalicoLayout.setVerticalGroup(
+            jPnPerfilMetalicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+        );
+
+        jTabComponentes.addTab("PERFIL METALICO", jPnPerfilMetalico);
 
         tbVidrioPanele.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         tbVidrioPanele.setModel(new javax.swing.table.DefaultTableModel(
@@ -203,24 +217,21 @@ public class VProyecto extends javax.swing.JInternalFrame {
 
             }
         ));
+        tbVidrioPanele.setEnabled(false);
         jScrollPane3.setViewportView(tbVidrioPanele);
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 1037, javax.swing.GroupLayout.PREFERRED_SIZE))
+        javax.swing.GroupLayout jPnVidrioPanelLayout = new javax.swing.GroupLayout(jPnVidrioPanel);
+        jPnVidrioPanel.setLayout(jPnVidrioPanelLayout);
+        jPnVidrioPanelLayout.setHorizontalGroup(
+            jPnVidrioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1047, Short.MAX_VALUE)
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+        jPnVidrioPanelLayout.setVerticalGroup(
+            jPnVidrioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("VIDRIOS Y PANELES", jPanel4);
+        jTabComponentes.addTab("VIDRIOS Y PANELES", jPnVidrioPanel);
 
         tbUnionVidrio.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         tbUnionVidrio.setModel(new javax.swing.table.DefaultTableModel(
@@ -231,24 +242,25 @@ public class VProyecto extends javax.swing.JInternalFrame {
 
             }
         ));
+        tbUnionVidrio.setEnabled(false);
         jScrollPane4.setViewportView(tbUnionVidrio);
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1037, Short.MAX_VALUE)
-            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1037, Short.MAX_VALUE))
+        javax.swing.GroupLayout jPnUnionVidrioLayout = new javax.swing.GroupLayout(jPnUnionVidrio);
+        jPnUnionVidrio.setLayout(jPnUnionVidrioLayout);
+        jPnUnionVidrioLayout.setHorizontalGroup(
+            jPnUnionVidrioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1047, Short.MAX_VALUE)
+            .addGroup(jPnUnionVidrioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1047, Short.MAX_VALUE))
         );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 212, Short.MAX_VALUE)
-            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE))
+        jPnUnionVidrioLayout.setVerticalGroup(
+            jPnUnionVidrioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 205, Short.MAX_VALUE)
+            .addGroup(jPnUnionVidrioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("UNION DE VIDRIOS", jPanel6);
+        jTabComponentes.addTab("UNION DE VIDRIOS", jPnUnionVidrio);
 
         tbPuerta.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         tbPuerta.setModel(new javax.swing.table.DefaultTableModel(
@@ -259,24 +271,25 @@ public class VProyecto extends javax.swing.JInternalFrame {
 
             }
         ));
+        tbPuerta.setEnabled(false);
         jScrollPane5.setViewportView(tbPuerta);
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1037, Short.MAX_VALUE)
-            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 1037, Short.MAX_VALUE))
+        javax.swing.GroupLayout jPnPuertaLayout = new javax.swing.GroupLayout(jPnPuerta);
+        jPnPuerta.setLayout(jPnPuertaLayout);
+        jPnPuertaLayout.setHorizontalGroup(
+            jPnPuertaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1047, Short.MAX_VALUE)
+            .addGroup(jPnPuertaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 1047, Short.MAX_VALUE))
         );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 212, Short.MAX_VALUE)
-            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE))
+        jPnPuertaLayout.setVerticalGroup(
+            jPnPuertaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 205, Short.MAX_VALUE)
+            .addGroup(jPnPuertaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("PUERTAS", jPanel7);
+        jTabComponentes.addTab("PUERTAS", jPnPuerta);
 
         tbUnionPaneles.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         tbUnionPaneles.setModel(new javax.swing.table.DefaultTableModel(
@@ -287,24 +300,25 @@ public class VProyecto extends javax.swing.JInternalFrame {
 
             }
         ));
+        tbUnionPaneles.setEnabled(false);
         jScrollPane6.setViewportView(tbUnionPaneles);
 
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1037, Short.MAX_VALUE)
-            .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 1037, Short.MAX_VALUE))
+        javax.swing.GroupLayout jPnUnionPaneleLayout = new javax.swing.GroupLayout(jPnUnionPanele);
+        jPnUnionPanele.setLayout(jPnUnionPaneleLayout);
+        jPnUnionPaneleLayout.setHorizontalGroup(
+            jPnUnionPaneleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1047, Short.MAX_VALUE)
+            .addGroup(jPnUnionPaneleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 1047, Short.MAX_VALUE))
         );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 212, Short.MAX_VALUE)
-            .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE))
+        jPnUnionPaneleLayout.setVerticalGroup(
+            jPnUnionPaneleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 205, Short.MAX_VALUE)
+            .addGroup(jPnUnionPaneleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("UNION DE PANELES", jPanel8);
+        jTabComponentes.addTab("UNION DE PANELES", jPnUnionPanele);
 
         tbTuboMetalico.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         tbTuboMetalico.setModel(new javax.swing.table.DefaultTableModel(
@@ -315,24 +329,25 @@ public class VProyecto extends javax.swing.JInternalFrame {
 
             }
         ));
+        tbTuboMetalico.setEnabled(false);
         jScrollPane7.setViewportView(tbTuboMetalico);
 
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1037, Short.MAX_VALUE)
-            .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 1037, Short.MAX_VALUE))
+        javax.swing.GroupLayout jPnTuboMetalicoLayout = new javax.swing.GroupLayout(jPnTuboMetalico);
+        jPnTuboMetalico.setLayout(jPnTuboMetalicoLayout);
+        jPnTuboMetalicoLayout.setHorizontalGroup(
+            jPnTuboMetalicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1047, Short.MAX_VALUE)
+            .addGroup(jPnTuboMetalicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 1047, Short.MAX_VALUE))
         );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 212, Short.MAX_VALUE)
-            .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE))
+        jPnTuboMetalicoLayout.setVerticalGroup(
+            jPnTuboMetalicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 205, Short.MAX_VALUE)
+            .addGroup(jPnTuboMetalicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("TUBOS METALICOS", jPanel9);
+        jTabComponentes.addTab("TUBOS METALICOS", jPnTuboMetalico);
 
         tbMampara.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         tbMampara.setModel(new javax.swing.table.DefaultTableModel(
@@ -343,24 +358,25 @@ public class VProyecto extends javax.swing.JInternalFrame {
 
             }
         ));
+        tbMampara.setEnabled(false);
         jScrollPane8.setViewportView(tbMampara);
 
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1037, Short.MAX_VALUE)
-            .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 1037, Short.MAX_VALUE))
+        javax.swing.GroupLayout jPnMamparasLayout = new javax.swing.GroupLayout(jPnMamparas);
+        jPnMamparas.setLayout(jPnMamparasLayout);
+        jPnMamparasLayout.setHorizontalGroup(
+            jPnMamparasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1047, Short.MAX_VALUE)
+            .addGroup(jPnMamparasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 1047, Short.MAX_VALUE))
         );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 212, Short.MAX_VALUE)
-            .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE))
+        jPnMamparasLayout.setVerticalGroup(
+            jPnMamparasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 205, Short.MAX_VALUE)
+            .addGroup(jPnMamparasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("MAMPARAS", jPanel10);
+        jTabComponentes.addTab("MAMPARAS", jPnMamparas);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -368,14 +384,14 @@ public class VProyecto extends javax.swing.JInternalFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
+                .addComponent(jTabComponentes)
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, Short.MAX_VALUE)
+                .addComponent(jTabComponentes)
                 .addContainerGap())
         );
 
@@ -411,8 +427,8 @@ public class VProyecto extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(pnlButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -440,28 +456,29 @@ public class VProyecto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     public javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
+    public javax.swing.JPanel jPnMamparas;
+    public javax.swing.JPanel jPnPerfilMetalico;
+    public javax.swing.JPanel jPnPuerta;
+    public javax.swing.JPanel jPnTuboMetalico;
+    public javax.swing.JPanel jPnUnionPanele;
+    public javax.swing.JPanel jPnUnionVidrio;
+    public javax.swing.JPanel jPnVidrioPanel;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JScrollPane jScrollPane9;
+    public javax.swing.JTabbedPane jTabComponentes;
     public javax.swing.JPanel pnlButton;
     public javax.swing.JTable tbComponente;
-    public javax.swing.JTable tbComponenteMayor;
     public javax.swing.JTable tbMampara;
+    public javax.swing.JTable tbPerfilMetalico;
     public javax.swing.JTable tbPuerta;
     public javax.swing.JTable tbTuboMetalico;
     public javax.swing.JTable tbUnionPaneles;

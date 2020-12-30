@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import interfaces.IComponente;
+import java.io.UnsupportedEncodingException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.table.TableModel;
@@ -119,43 +120,53 @@ public class DaoComponente implements IComponente {
         Object[] data;
         for (int i = 0; i < modelo.getRowCount(); i++) {
 
-            ResultSet result;
-
-            String codigo = modelo.getValueAt(i, 0).toString().trim().replace("\"", "").replace("�", "");
-            String auxLongitud = modelo.getValueAt(i, 2).toString().trim().replace("\"", "");
-            String ubicacion = modelo.getValueAt(i, 3).toString().trim();
-
-            int longitud = Integer.parseInt(auxLongitud.trim().replace(" ", "").replace("\"", ""));
-
             try {
-
-                String query = "call spComponentePerfilesCargar(?,?,?);";
                 
-                try (PreparedStatement preparedStatement = cnx.getConnection().prepareStatement(query)) {
-                    preparedStatement.setString(1, codigo);
-                    preparedStatement.setInt(2, longitud);
-                    preparedStatement.setString(3, ubicacion);
-                    result = preparedStatement.executeQuery();
-
-                    listDta = new ArrayList<>();
-
-                    while (result.next()) {
-                        data = new Object[6];
-                        data[0] = result.getInt(1);
-                        data[1] = result.getString(2);
-                        data[2] = result.getString(3);
-                        data[3] = result.getInt(4);
-                        data[4] = result.getInt(5);
-                        data[5] = result.getString(6);
-                        listDta.add(data);
+                ResultSet result;
+                
+                String codigo =  new String(modelo.getValueAt(i, 0).toString().trim().replace("\"", "").replace("�", "").getBytes("CP850"), "ISO-8859-1");
+                String auxLongitud = new String(modelo.getValueAt(i, 2).toString().trim().replace("\"", "").getBytes("CP850"), "ISO-8859-1");
+                String ubicacion = new String(modelo.getValueAt(i, 3).toString().trim().getBytes("CP850"), "ISO-8859-1");
+                
+                codigo = new String(codigo.getBytes(), "UTF-8");
+                auxLongitud = new String(auxLongitud.getBytes(), "UTF-8");
+                ubicacion = new String(ubicacion.getBytes(), "UTF-8");
+                
+                int longitud = Integer.parseInt(auxLongitud.trim().replace(" ", "").replace("\"", ""));
+                
+                try {
+                    
+                    String query = "call spComponentePerfilesCargar(?,?,?);";
+                    
+                    try (PreparedStatement preparedStatement = cnx.getConnection().prepareStatement(query)) {
+                        preparedStatement.setString(1, codigo);
+                        preparedStatement.setInt(2, longitud);
+                        preparedStatement.setString(3, ubicacion);
+                        result = preparedStatement.executeQuery();
+                        
+                        listDta = new ArrayList<>();
+                        
+                        while (result.next()) {
+                            data = new Object[6];
+                            data[0] = result.getInt(1);
+                            data[1] = result.getString(2);
+                            data[2] = result.getString(3);
+                            data[3] = result.getInt(4);
+                            data[4] = result.getInt(5);
+                            data[5] = result.getString(6);
+                            listDta.add(data);
+                        }
+                        
+                        list.add(listDta);
+                        
+                        result.close();
                     }
-
-                    list.add(listDta);
-
-                    result.close();
+                    
+                } catch (SQLException ex) {
+                    Logger.getLogger(DaoComponente.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
-            } catch (SQLException ex) {
+                
+            } catch (UnsupportedEncodingException ex) {
                 Logger.getLogger(DaoComponente.class.getName()).log(Level.SEVERE, null, ex);
             }
 

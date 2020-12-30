@@ -11,18 +11,24 @@
 package generals;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.io.Writer;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import views.VPrincipal;
+import views.VProyecto;
 
 /**
  *
@@ -30,31 +36,72 @@ import views.VPrincipal;
  */
 public class FileTxt {
 
-    DefaultTableModel modelo = new DefaultTableModel();
-
-    public void openFile(VPrincipal viewPrincipal, JTable tabla, ArrayList<String> listColumns) {
+    public void openFile(VPrincipal viewPrincipal,
+            VProyecto viewProyecto) throws IOException {
         ArrayList<Object[]> listData;
+        int idDocumento;
         JFileChooser chooser = new JFileChooser();
         chooser.setCurrentDirectory(new File(".txt"));
         chooser.setDialogTitle("Selecciona la carpeta de los archivos");
         chooser.setMultiSelectionEnabled(true);
 
         if (chooser.showOpenDialog(viewPrincipal) == JFileChooser.APPROVE_OPTION) {
-//            File selectedFile = chooser.getSelectedFile();
-//            listColumns.forEach((listColumns1) -> {
-//                modelo.addColumn(listColumns1);
-//            });
-//            listData = readFileTxt(selectedFile);
-//            listData.forEach((listData1) -> {
-//                modelo.addRow(listData1);
-//            });
-//            tabla.setModel(modelo);
             File[] files = chooser.getSelectedFiles();
-            //System.out.println(files.length);
+            for (File file : files) {
+                idDocumento = Integer.parseInt(file.getName().split("-")[0].trim());
+                listData = readFileTxt(file);
+                showTab(idDocumento, viewProyecto, listData);
+            }
         }
     }
 
-    public ArrayList<Object[]> readFileTxt(File file) {
+    private void showTab(int index,
+            VProyecto viewProyecto, ArrayList<Object[]> listData) {
+        ArrayList<String> listColumns = GenerarColumns.setCreateColumns(index);
+        DefaultTableModel modelo = new DefaultTableModel();
+
+        listColumns.forEach((listColumns1) -> {
+            modelo.addColumn(listColumns1);
+        });
+
+        listData.forEach((listData1) -> {
+            modelo.addRow(listData1);
+        });
+
+        switch (index) {
+
+            case 1:
+                viewProyecto.jTabComponentes.add(viewProyecto.jPnPerfilMetalico, "PERFIL METALICO");
+                viewProyecto.tbPerfilMetalico.setModel(modelo);
+                break;
+            case 2:
+                viewProyecto.jTabComponentes.add(viewProyecto.jPnVidrioPanel, "VIDRIOS Y PANELES");
+                viewProyecto.tbVidrioPanele.setModel(modelo);
+                break;
+            case 3:
+                viewProyecto.jTabComponentes.add(viewProyecto.jPnUnionVidrio, "UNION DE VIDRIOS");
+                viewProyecto.tbUnionVidrio.setModel(modelo);
+                break;
+            case 4:
+                viewProyecto.jTabComponentes.add(viewProyecto.jPnPuerta, "PUERTAS");
+                viewProyecto.tbPuerta.setModel(modelo);
+                break;
+            case 5:
+                viewProyecto.jTabComponentes.add(viewProyecto.jPnUnionPanele, "UNION DE PANELES");
+                viewProyecto.tbUnionPaneles.setModel(modelo);
+                break;
+            case 6:
+                viewProyecto.jTabComponentes.add(viewProyecto.jPnTuboMetalico, "TUBOS METALICOS");
+                viewProyecto.tbTuboMetalico.setModel(modelo);
+                break;
+            case 7:
+                viewProyecto.jTabComponentes.add(viewProyecto.jPnMamparas, "MAMPARAS");
+                viewProyecto.tbMampara.setModel(modelo);
+                break;
+        }
+    }
+
+    public ArrayList<Object[]> readFileTxt(File file) throws IOException {
         ArrayList<Object[]> list = new ArrayList<>();
 
         FileReader fr = null;
@@ -84,5 +131,24 @@ public class FileTxt {
         }
 
         return list;
+    }
+
+    private File convertCodeToUtf(File file) throws UnsupportedEncodingException, IOException {
+        File FileResultado = File.createTempFile(file.toString(),null);
+        String sCadena;
+        try {
+            Writer out;
+            try (BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(file), "8859_1"))) {
+                out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(FileResultado), "utf-8"));
+                while ((sCadena = in.readLine()) != null) {
+                    System.out.println(sCadena);
+                    out.write(sCadena);
+                }
+            }
+            out.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(FileTxt.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return FileResultado;
     }
 }

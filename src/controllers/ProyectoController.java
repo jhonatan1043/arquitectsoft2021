@@ -8,6 +8,7 @@ package controllers;
 import dao.DaoComponente;
 import generals.FileTxt;
 import generals.ValidTable;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -41,43 +42,17 @@ public class ProyectoController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == this.viewComponente.btnOpenTxt) {
-                FileTxt file = new FileTxt();
-                file.openFile(viewPrincipal,
-                        viewComponente.tbComponenteMayor,
-                        setCreateColumns(1));
-                loadSubcomponente();
+            FileTxt file = new FileTxt();
+            file.openFile(viewPrincipal, viewComponente);
+            loadSubcomponente();
         }
     }
 
     public final void start() {
         this.hideColumns();
         this.initEvent();
+        this.hideTab();
         modelo = (DefaultTableModel) viewComponente.tbComponente.getModel();
-    }
-
-    private ArrayList<String> setCreateColumns(int index) {
-        ArrayList<String> listColumns = new ArrayList<>();
-
-        switch (index) {
-
-            case 1:
-                //-----------------
-                listColumns.add("Codigo");
-                listColumns.add("ComponenteMayor");
-                listColumns.add("Logitud");
-                listColumns.add("Ubicacion");
-                listColumns.add("Comentario");
-                //-----------------
-                break;
-            case 2:
-
-                break;
-            case 3:
-
-                break;
-        }
-
-        return listColumns;
     }
 
     private void hideColumns() {
@@ -85,16 +60,21 @@ public class ProyectoController implements ActionListener {
         ValidTable.hideColumnsTable(viewComponente.tbComponente, list);
     }
 
+    private void hideTab() {
+        System.out.println(viewComponente.jTabComponentes.getTabCount());
+        for (Component jPane : viewComponente.jTabComponentes.getComponents()) {
+            viewComponente.jTabComponentes.remove(jPane);
+        }
+    }
+
     private void loadSubcomponente() {
         ArrayList<ArrayList<Object[]>> list;
-        if (viewComponente.tbComponenteMayor.getRowCount() > 0) {
-            list = daoComponente.getSubComponenteCalc(viewComponente.tbComponenteMayor.getModel());
+            list = daoComponente.getSubComponenteCalc(viewComponente.tbPerfilMetalico.getModel());
             list.forEach((list1) -> {
                 list1.forEach((data) -> {
                     modelo.addRow(data);
                 });
             });
-        }
     }
 
 }
