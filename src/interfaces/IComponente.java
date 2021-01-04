@@ -22,9 +22,9 @@ public interface IComponente {
 
     public boolean delete(Componente componente);
 
-    public List<Componente> listar();
-
     public Componente getComponte(int idComponente);
+
+    public ArrayList<Object[]> getComponenteDetalle(int idSubComponente);
 
     public ArrayList<ArrayList<Object[]>> getSubComponenteCalc(TableModel modelo);
 

@@ -180,6 +180,7 @@ public class VComponente extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        tbComponente.setEnabled(false);
         jScrollPane1.setViewportView(tbComponente);
         if (tbComponente.getColumnModel().getColumnCount() > 0) {
             tbComponente.getColumnModel().getColumn(1).setPreferredWidth(100);

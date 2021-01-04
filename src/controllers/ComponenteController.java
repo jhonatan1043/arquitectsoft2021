@@ -58,6 +58,9 @@ public class ComponenteController implements ActionListener, KeyListener {
         viewComponente.btnSave.addActionListener(this);
         viewComponente.btnAgregar.addActionListener(this);
         viewComponente.btnQuitar.addActionListener(this);
+        viewComponente.btnDelete.addActionListener(this);
+        viewComponente.btnBuscar.addActionListener(this);
+        viewComponente.btnEdit.addActionListener(this);
         viewComponente.txtCodigo.addKeyListener(this);
         viewComponente.txtDescripcion.addKeyListener(this);
     }
@@ -68,8 +71,36 @@ public class ComponenteController implements ActionListener, KeyListener {
     }
 
     private void loadSubComponente(int id) {
-        Object[] list = daoComponente.getSubComponente(id);
-        modelo.addRow(list);
+        if (id != 0) {
+            Object[] list = daoComponente.getSubComponente(id);
+            modelo.addRow(list);
+            System.setProperty("id", "");
+        }
+    }
+
+    private void loadComponente(int id) {
+        if (id != 0) {
+
+            modelo.setRowCount(0);
+
+            componente = daoComponente.getComponte(id);
+
+            viewComponente.txtCodigo.setText(componente.getCodigo());
+            viewComponente.txtDescripcion.setText(componente.getDescripcion());
+
+            ArrayList<Object[]> list = daoComponente.getComponenteDetalle(id);
+
+            list.forEach((list1) -> {
+                modelo.addRow(list1);
+            });
+
+            System.setProperty("id", "");
+
+            ValidButtonSystem.enabledButton(viewComponente.pnlButton);
+
+            viewComponente.btnSave.setEnabled(false);
+            viewComponente.btnCancel.setEnabled(false);
+        }
     }
 
     private ArrayList<String> createColumns() {
@@ -82,8 +113,15 @@ public class ComponenteController implements ActionListener, KeyListener {
 
     private void loadComponente() {
         componente.setCodigo(viewComponente.txtCodigo.getText());
-        componente.setDescripcion(viewComponente.txtDescripcion.getText());
+        componente.setDescripcion(viewComponente.txtDescripcion.getText());;
         componente.setModelo((DefaultTableModel) viewComponente.tbComponente.getModel());
+    }
+
+    private void controlsClear() {
+        componente = new Componente();
+        viewComponente.txtCodigo.setText("");
+        viewComponente.txtDescripcion.setText("");
+        modelo.setRowCount(0);
     }
 
     @Override
@@ -92,6 +130,7 @@ public class ComponenteController implements ActionListener, KeyListener {
         if (e.getSource() == viewComponente.btnNew) {
             ValidControlsSystem.enabledControls(viewComponente.jLayeredPane1);
             ValidButtonSystem.disableButton(viewComponente.pnlButton);
+            controlsClear();
             viewComponente.btnSave.setEnabled(true);
             viewComponente.btnCancel.setEnabled(true);
         }
@@ -99,6 +138,7 @@ public class ComponenteController implements ActionListener, KeyListener {
         if (e.getSource() == viewComponente.btnCancel) {
             ValidControlsSystem.disableControls(viewComponente.jLayeredPane1);
             ValidButtonSystem.disableButton(viewComponente.pnlButton);
+            controlsClear();
             viewComponente.btnNew.setEnabled(true);
             viewComponente.btnBuscar.setEnabled(true);
         }
@@ -110,7 +150,9 @@ public class ComponenteController implements ActionListener, KeyListener {
                     Contans.QUERY_SUBCOMPONENTES,
                     createColumns());
             viewBusqueda.setVisible(true);
+
             loadSubComponente(Integer.parseInt(System.getProperty("id")));
+
         }
 
         if (e.getSource() == viewComponente.btnQuitar) {
@@ -118,17 +160,60 @@ public class ComponenteController implements ActionListener, KeyListener {
         }
 
         if (e.getSource() == viewComponente.btnSave) {
+            boolean resultado;
+
             if ("".equals(viewComponente.txtCodigo.getText())
                     || "".equals(viewComponente.txtDescripcion.getText())
                     || viewComponente.tbComponente.getRowCount() == 0) {
                 JOptionPane.showMessageDialog(viewComponente, "¡ hay Datos sin realizar !");
             } else {
                 loadComponente();
-                if (daoComponente.save(componente)) {
+
+                if (componente.getIdComponente() != 0) {
+                    resultado = daoComponente.update(componente);
+                } else {
+                    resultado = daoComponente.save(componente);
+                }
+
+                if (resultado) {
                     ValidControlsSystem.disableControls(viewComponente.jLayeredPane1);
                     ValidButtonSystem.disableButton(viewComponente.pnlButton);
                     viewComponente.btnNew.setEnabled(true);
+                    viewComponente.btnBuscar.setEnabled(true);
                     JOptionPane.showMessageDialog(viewComponente, "¡ Registrado con exito !");
+                }
+            }
+        }
+
+        if (e.getSource() == viewComponente.btnEdit) {
+            int resp = JOptionPane.showConfirmDialog(viewComponente, "¿Esta seguro de editar el registro?", "Alerta!", JOptionPane.YES_NO_OPTION);
+            if (resp != 1) {
+                ValidControlsSystem.enabledControls(viewComponente.jLayeredPane1);
+                ValidButtonSystem.disableButton(viewComponente.pnlButton);
+                viewComponente.btnSave.setEnabled(true);
+                viewComponente.btnCancel.setEnabled(true);
+            }
+        }
+
+        if (e.getSource() == viewComponente.btnBuscar) {
+            VBusqueda viewBusqueda = new VBusqueda(viewPrincipal, true);
+            BusquedaController busquedaC = new BusquedaController(viewBusqueda,
+                    viewComponente,
+                    Contans.QUERY_COMPONENTES_LISTAR,
+                    createColumns());
+            viewBusqueda.setVisible(true);
+            loadComponente(Integer.parseInt(System.getProperty("id")));
+        }
+
+        if (e.getSource() == viewComponente.btnDelete) {
+            int resp = JOptionPane.showConfirmDialog(viewComponente, "¿Esta seguro de eliminar el registro?", "Alerta!", JOptionPane.YES_NO_OPTION);
+            if (resp != 1) {
+                if (daoComponente.delete(componente)) {
+                    ValidButtonSystem.disableButton(viewComponente.pnlButton);
+                    controlsClear();
+                    viewComponente.btnNew.setEnabled(true);
+                    viewComponente.btnBuscar.setEnabled(true);
+                    JOptionPane.showMessageDialog(viewComponente, "¡ Eliminado con Exito !");
                 }
             }
         }
@@ -146,12 +231,10 @@ public class ComponenteController implements ActionListener, KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-      
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
