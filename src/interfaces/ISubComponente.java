@@ -15,9 +15,9 @@ import models.SubComponente;
  */
 public interface ISubComponente {
     
-    public boolean save(SubComponente componente);
-    public boolean update(SubComponente componente);
-    public boolean delete(SubComponente componente);
+    public boolean save(SubComponente idSubcomponente);
+    public boolean update(SubComponente idSubcomponente);
+    public boolean delete(SubComponente idSubcomponente);
     public List<SubComponente> listar();
-    public SubComponente getComponente(int idComponente);
+    public SubComponente getSubcomponente(int idSubcomponente);
 }

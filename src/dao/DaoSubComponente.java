@@ -72,9 +72,9 @@ public class DaoSubComponente implements ISubComponente {
             try (PreparedStatement psmt = cnx.getConnection().prepareStatement(Contans.QUERY_UPDATE_SUBCOMPONENTES)) {
                 psmt.setInt(1, subcomponente.getIdAcabado());
                 psmt.setInt(2, subcomponente.getIdUnidad());
-                psmt.setString(3, subcomponente.getCodigo());
-                psmt.setString(4, subcomponente.getDescripcion());
-                psmt.setInt(5, subcomponente.getIdUnidadCalculada());
+                psmt.setInt(3, subcomponente.getIdUnidadCalculada());
+                psmt.setString(4, subcomponente.getCodigo());
+                psmt.setString(5, subcomponente.getDescripcion());
                 psmt.setInt(6, subcomponente.getCantDefault());
                 psmt.setBoolean(7, subcomponente.isAplicaDecremento());
                 psmt.setInt(8, subcomponente.getCantAdicional());
@@ -84,7 +84,7 @@ public class DaoSubComponente implements ISubComponente {
                 if (affectedRows == 0) {
                     throw new SQLException("No se pudo actualizar");
                 }
-                
+
                 result = true;
                 cnx.getConnection().close();
             }
@@ -95,8 +95,28 @@ public class DaoSubComponente implements ISubComponente {
     }
 
     @Override
-    public boolean delete(SubComponente componente) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean delete(SubComponente subComponente) {
+        boolean result = false;
+        Conexion cnx = new Conexion();
+
+        try {
+            try (PreparedStatement psmt = cnx.getConnection().prepareStatement(Contans.QUERY_DELETE_SUBCOMPONENTES)) {
+                psmt.setInt(1, subComponente.getIdSubcomponente());
+                int affectedRows = psmt.executeUpdate();
+
+                if (affectedRows == 0) {
+                    throw new SQLException("No se pudo ELIMINAR");
+                }
+
+                result = true;
+                psmt.close();
+                cnx.getConnection().close();
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoSubComponente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
     }
 
     @Override
@@ -118,8 +138,35 @@ public class DaoSubComponente implements ISubComponente {
     }
 
     @Override
-    public SubComponente getComponente(int idComponente) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public SubComponente getSubcomponente(int idSubcomponente) {
+        Conexion cnx = new Conexion();
+        SubComponente subComponente = new SubComponente();
+        ResultSet result;
+
+        try (PreparedStatement preparedStatement = cnx.getConnection().prepareStatement(Contans.QUERY_COMPONENTES_CARGAR)) {
+            preparedStatement.setInt(1, idSubcomponente);
+            result = preparedStatement.executeQuery();
+
+            while (result.next()) {
+                subComponente.setIdSubcomponente(idSubcomponente);
+                subComponente.setIdAcabado(result.getInt(1));
+                subComponente.setIdUnidad(result.getInt(2));
+                subComponente.setCantAdicional(result.getInt(3));
+                subComponente.setCodigo(result.getString(4));
+                subComponente.setDescripcion(result.getString(5));
+                subComponente.setCantDefault(result.getInt(6));
+                subComponente.setAplicaDecremento(result.getBoolean(7));
+                subComponente.setCantAdicional(result.getInt(8));
+
+            }
+
+            result.close();
+            cnx.getConnection().close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoComponente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return subComponente;
     }
 
 }

@@ -33,7 +33,7 @@ public class SubComponenteController implements ActionListener {
     DaoSubComponente eSubcomponente = new DaoSubComponente();
     SubComponente subcomponente = new SubComponente();
 
-    public SubComponenteController(VSubComponente viewSubcomponente,VPrincipal viewPrincipal ) {
+    public SubComponenteController(VSubComponente viewSubcomponente, VPrincipal viewPrincipal) {
         this.viewSubcomponente = viewSubcomponente;
         this.viewPrincipal = viewPrincipal;
         this.start();
@@ -83,6 +83,28 @@ public class SubComponenteController implements ActionListener {
             VBusqueda busqueda = new VBusqueda(viewPrincipal, true);
             busquedaC = new BusquedaController(busqueda, viewSubcomponente, Contans.QUERY_SUBCOMPONENTES, createColumns());
             busqueda.setVisible(true);
+            loadSubComponente(Integer.parseInt(System.getProperty("id")));
+        }
+        if (e.getSource() == viewSubcomponente.btnEdit) {
+            int resp = JOptionPane.showConfirmDialog(viewSubcomponente, "¿Esta seguro de editar el registro?", "Alerta!", JOptionPane.YES_NO_OPTION);
+            if (resp != 1) {
+                ValidControlsSystem.enabledControls(viewSubcomponente.jLayeredPane1);
+                ValidButtonSystem.disableButton(viewSubcomponente.pnlButton);
+                viewSubcomponente.btnSave.setEnabled(true);
+                viewSubcomponente.btnCancel.setEnabled(true);
+            }
+        }
+        if (e.getSource() == viewSubcomponente.btnDelete) {
+            int resp = JOptionPane.showConfirmDialog(viewSubcomponente, "¿Esta seguro de eliminar el registro?", "Alerta!", JOptionPane.YES_NO_OPTION);
+            if (resp != 1) {
+                if (eSubcomponente.delete(subcomponente)) {
+                    ValidButtonSystem.disableButton(viewSubcomponente.pnlButton);
+                    controlsClean();
+                    viewSubcomponente.btnNew.setEnabled(true);
+                    viewSubcomponente.btnBuscar.setEnabled(true);
+                    JOptionPane.showMessageDialog(viewSubcomponente, "¡ Eliminado con Exito !");
+                }
+            }
         }
     }
 
@@ -125,6 +147,28 @@ public class SubComponenteController implements ActionListener {
 
     }
 
+    private void loadSubComponente(int id) {
+        if (id != 0) {
+
+            subcomponente = eSubcomponente.getSubcomponente(id);
+
+            viewSubcomponente.txtCodigo.setText(subcomponente.getCodigo());
+            viewSubcomponente.txtDescripcion.setText(subcomponente.getDescripcion());
+//            viewSubcomponente.cbAcabado.(subcomponente.getCodigo());
+//            viewSubcomponente.cbUnidad.setSelectedIndex(subcomponente.getDescripcion());
+//            viewSubcomponente.cbUnidadCalculada.setText(subcomponente.getCodigo());
+//            viewSubcomponente..setText(subcomponente.getDescripcion());
+//            viewSubcomponente.txtCodigo.setText(subcomponente.getCodigo());
+//            viewSubcomponente.txtDescripcion.setText(subcomponente.getDescripcion());
+
+            System.setProperty("id", "");
+
+            ValidButtonSystem.enabledButton(viewSubcomponente.pnlButton);
+            viewSubcomponente.btnSave.setEnabled(false);
+            viewSubcomponente.btnCancel.setEnabled(false);
+        }
+    }
+
     private void start() {
         ValidControlsSystem.disableControls(viewSubcomponente.jLayeredPane1);
         ValidButtonSystem.disableButton(viewSubcomponente.pnlButton);
@@ -160,14 +204,20 @@ public class SubComponenteController implements ActionListener {
         viewSubcomponente.btnCancel.addActionListener(this);
         viewSubcomponente.btnSave.addActionListener(this);
         viewSubcomponente.btnBuscar.addActionListener(this);
+        viewSubcomponente.btnEdit.addActionListener(this);
+        viewSubcomponente.btnDelete.addActionListener(this);
     }
 
     private void controlsClean() {
+        
+        SubComponente subcomponente = new SubComponente();
         viewSubcomponente.txtCodigo.setText("");
         viewSubcomponente.txtDescripcion.setText("");
         viewSubcomponente.cbAcabado.setSelectedIndex(0);
         viewSubcomponente.cbUnidad.setSelectedIndex(0);
         viewSubcomponente.cbUnidadCalculada.setSelectedIndex(0);
+        viewSubcomponente.txtCantidadAdicional.setValue(30);
+        viewSubcomponente.txtCantidadDefauld.setValue(1);
     }
 
 }

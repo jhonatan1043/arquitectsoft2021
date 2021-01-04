@@ -50,11 +50,24 @@ public class Contans {
     public static String QUERY_SUBCOMPONENTES_CARGAR = "SELECT Codigo_Homologacion Codigo,Descripcion "
             + "                                         FROM arquitectdb.subcomponentes WHERE Id_subcomponente= ";
 
-    public static String QUERY_INSERT_SUBCOMPONENTES = "CALL spSubComponenteRegistrar(?,?,?,?,?,?,?,?)";
+    public static String QUERY_INSERT_SUBCOMPONENTES = "CALL spSubComponenteRegistrar(?,?,?,?,?,?,?,?);";
 
-    public static String QUERY_UPDATE_SUBCOMPONENTES = "";
+    public static String QUERY_UPDATE_SUBCOMPONENTES = "CALL spSubcomponenteUpdate(?,?,?,?,?,?,?,?,?);";
+    
+     public static String QUERY_DELETE_SUBCOMPONENTES = "DELETE FROM arquitectdb.subcomponentes WHERE Id_subcomponente = ?";
     //--------------------------------------------------------------------------------------------------------------------------------
     public static String QUERY_INSERT_CORTES = "INSERT cortes (Descripcion,Corte_Derecho,Corte_Izquierdo)VALUES(?,?,?);";
+    
+    public static String QUERY_SUBCOMPONENTES_FORM_CARGAR = "SELECT `subcomponentes`.`Id_Acabado`,\n" +
+                                                            "`subcomponentes`.`Id_Unidad`,\n" +
+                                                            "`subcomponentes`.`Id_Unidad_Calculada`,\n" +
+                                                            "`subcomponentes`.`Codigo_Homologacion`,\n" +
+                                                            "`subcomponentes`.`Descripcion`,\n" +
+                                                            "`subcomponentes`.`Cantidad_defaultd`,\n" +
+                                                            "`subcomponentes`.`Aplica_decremento`,\n" +
+                                                            "`subcomponentes`.`Cantidad_Adicional`\n" +
+                                                            "FROM `arquitectdb`.`subcomponentes`;\n" +
+                                                            "WHERE Id_Componente = ?;";
 
 // static of system 
     public static String SELECTING = "-- Seleccionar --";
