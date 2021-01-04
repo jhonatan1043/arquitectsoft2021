@@ -13,6 +13,8 @@ public class SubComponente {
 
     private int idSubcomponente;
     private int idAcabado;
+    private String unidad;
+    private String Acabado;
     private int idUnidad;
     private String codigo;
     private String descripcion;
@@ -94,6 +96,22 @@ public class SubComponente {
 
     public void setAplicaDecremento(boolean aplicaDecremento) {
         this.aplicaDecremento = aplicaDecremento;
+    }
+
+    public String getUnidad() {
+        return unidad;
+    }
+
+    public void setUnidad(String unidad) {
+        this.unidad = unidad;
+    }
+
+    public String getAcabado() {
+        return Acabado;
+    }
+
+    public void setAcabado(String Acabado) {
+        this.Acabado = Acabado;
     }
 
     @Override

@@ -141,17 +141,17 @@ public class DaoSubComponente implements ISubComponente {
     public SubComponente getSubcomponente(int idSubcomponente) {
         Conexion cnx = new Conexion();
         SubComponente subComponente = new SubComponente();
+        
         ResultSet result;
-
-        try (PreparedStatement preparedStatement = cnx.getConnection().prepareStatement(Contans.QUERY_COMPONENTES_CARGAR)) {
+        try (PreparedStatement preparedStatement = cnx.getConnection().prepareStatement(Contans.QUERY_SUBCOMPONENTES_FORM_CARGAR)) {
             preparedStatement.setInt(1, idSubcomponente);
             result = preparedStatement.executeQuery();
 
             while (result.next()) {
                 subComponente.setIdSubcomponente(idSubcomponente);
-                subComponente.setIdAcabado(result.getInt(1));
-                subComponente.setIdUnidad(result.getInt(2));
-                subComponente.setCantAdicional(result.getInt(3));
+                subComponente.setAcabado(result.getString(1));
+                subComponente.setUnidad(result.getString(2));
+                subComponente.setIdUnidadCalculada(result.getInt(3));
                 subComponente.setCodigo(result.getString(4));
                 subComponente.setDescripcion(result.getString(5));
                 subComponente.setCantDefault(result.getInt(6));

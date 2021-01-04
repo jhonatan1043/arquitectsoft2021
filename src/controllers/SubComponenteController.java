@@ -151,15 +151,15 @@ public class SubComponenteController implements ActionListener {
         if (id != 0) {
 
             subcomponente = eSubcomponente.getSubcomponente(id);
-
+ 
             viewSubcomponente.txtCodigo.setText(subcomponente.getCodigo());
             viewSubcomponente.txtDescripcion.setText(subcomponente.getDescripcion());
-//            viewSubcomponente.cbAcabado.(subcomponente.getCodigo());
-//            viewSubcomponente.cbUnidad.setSelectedIndex(subcomponente.getDescripcion());
-//            viewSubcomponente.cbUnidadCalculada.setText(subcomponente.getCodigo());
-//            viewSubcomponente..setText(subcomponente.getDescripcion());
-//            viewSubcomponente.txtCodigo.setText(subcomponente.getCodigo());
-//            viewSubcomponente.txtDescripcion.setText(subcomponente.getDescripcion());
+           viewSubcomponente.cbAcabado.setSelectedItem(subcomponente.getAcabado());
+            viewSubcomponente.cbUnidad.setSelectedItem(subcomponente.getUnidad());
+           viewSubcomponente.cbUnidadCalculada.setSelectedIndex(subcomponente.getIdUnidadCalculada());
+            viewSubcomponente.txtCantidadDefauld.setValue(subcomponente.getCantDefault());
+            viewSubcomponente.txtCantidadAdicional.setValue(subcomponente.getCantAdicional());
+            viewSubcomponente.ckAplicaDecremento.setSelected(subcomponente.isAplicaDecremento());
 
             System.setProperty("id", "");
 
