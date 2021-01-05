@@ -47,12 +47,6 @@ public class VPrincipal extends javax.swing.JFrame {
         itemComponente = new javax.swing.JMenuItem();
         jSeparator4 = new javax.swing.JPopupMenu.Separator();
         itemSubComponente = new javax.swing.JMenuItem();
-        jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        itemAcabado = new javax.swing.JMenuItem();
-        jSeparator2 = new javax.swing.JPopupMenu.Separator();
-        itemUnidadMedida = new javax.swing.JMenuItem();
-        jSeparator3 = new javax.swing.JPopupMenu.Separator();
-        itemCorte = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         itemIniciar = new javax.swing.JMenuItem();
 
@@ -102,33 +96,6 @@ public class VPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu1.add(itemSubComponente);
-        jMenu1.add(jSeparator1);
-
-        itemAcabado.setText("Nuevo Acabados");
-        itemAcabado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemAcabadoActionPerformed(evt);
-            }
-        });
-        jMenu1.add(itemAcabado);
-        jMenu1.add(jSeparator2);
-
-        itemUnidadMedida.setText("Nuevo Unidades de Medidas");
-        itemUnidadMedida.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemUnidadMedidaActionPerformed(evt);
-            }
-        });
-        jMenu1.add(itemUnidadMedida);
-        jMenu1.add(jSeparator3);
-
-        itemCorte.setText("Nuevo Cortes");
-        itemCorte.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemCorteActionPerformed(evt);
-            }
-        });
-        jMenu1.add(itemCorte);
 
         jMenuBar2.add(jMenu1);
 
@@ -167,30 +134,6 @@ public class VPrincipal extends javax.swing.JFrame {
         ValidForm.centeForm(viewComponente, Desktop);
         viewComponente.show();
     }//GEN-LAST:event_itemIniciarActionPerformed
-
-    private void itemAcabadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAcabadoActionPerformed
-        VAcabado viewAcabado = new VAcabado();
-        AcabadoController acabadoC = new AcabadoController(viewAcabado);
-        this.Desktop.add(viewAcabado);
-        ValidForm.centeForm(viewAcabado, Desktop);
-        viewAcabado.show();
-    }//GEN-LAST:event_itemAcabadoActionPerformed
-
-    private void itemUnidadMedidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemUnidadMedidaActionPerformed
-        VUnidadMedida viewUnidadMedida = new VUnidadMedida();
-        UnidadMedidaController unidadMedidaC = new UnidadMedidaController(viewUnidadMedida);
-        this.Desktop.add(viewUnidadMedida);
-        ValidForm.centeForm(viewUnidadMedida, Desktop);
-        viewUnidadMedida.show();
-    }//GEN-LAST:event_itemUnidadMedidaActionPerformed
-
-    private void itemCorteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCorteActionPerformed
-        VCorte viewCorte = new VCorte();
-        CorteController corte = new CorteController(viewCorte);
-        this.Desktop.add(viewCorte);
-        ValidForm.centeForm(viewCorte, Desktop);
-        viewCorte.show();
-    }//GEN-LAST:event_itemCorteActionPerformed
 
     private void itemSubComponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemSubComponenteActionPerformed
         VSubComponente viewSubcomponente = new VSubComponente();
@@ -246,19 +189,13 @@ public class VPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JDesktopPane Desktop;
-    public javax.swing.JMenuItem itemAcabado;
     private javax.swing.JMenuItem itemComponente;
-    private javax.swing.JMenuItem itemCorte;
     public javax.swing.JMenuItem itemIniciar;
     public javax.swing.JMenuItem itemSubComponente;
-    public javax.swing.JMenuItem itemUnidadMedida;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar2;
-    private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JPopupMenu.Separator jSeparator2;
-    private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
     // End of variables declaration//GEN-END:variables
 }
