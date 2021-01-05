@@ -120,7 +120,6 @@ public class SubComponenteController implements ActionListener {
         boolean result = false;
         if ("".equals(viewSubcomponente.txtDescripcion.getText())
                 || viewSubcomponente.cbAcabado.getSelectedIndex() == 0
-                || viewSubcomponente.cbUnidad.getSelectedIndex() == 0
                 || "".equals(viewSubcomponente.txtCodigo.getText())
                 || viewSubcomponente.cbUnidadCalculada.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(viewSubcomponente, "¡ hay Datos sin realizar !");
@@ -132,14 +131,12 @@ public class SubComponenteController implements ActionListener {
 
     private void loadSubComponente() {
         String idAcabado = viewSubcomponente.cbAcabado.getSelectedItem().toString().split("|")[0];
-        String idUnidadMedida = viewSubcomponente.cbUnidad.getSelectedItem().toString().split("|")[0];
         int cantidadDefauld = (int) viewSubcomponente.txtCantidadDefauld.getValue();
         int cantidadAdicional = (int) viewSubcomponente.txtCantidadAdicional.getValue();
 
         subcomponente.setCodigo(viewSubcomponente.txtCodigo.getText());
         subcomponente.setDescripcion(viewSubcomponente.txtDescripcion.getText());
         subcomponente.setIdAcabado(Integer.parseInt(idAcabado));
-        subcomponente.setIdUnidad(Integer.parseInt(idUnidadMedida));
         subcomponente.setIdUnidadCalculada(viewSubcomponente.cbUnidadCalculada.getSelectedIndex());
         subcomponente.setCantDefault(cantidadDefauld);
         subcomponente.setAplicaDecremento(viewSubcomponente.ckAplicaDecremento.isSelected());
@@ -155,7 +152,6 @@ public class SubComponenteController implements ActionListener {
             viewSubcomponente.txtCodigo.setText(subcomponente.getCodigo());
             viewSubcomponente.txtDescripcion.setText(subcomponente.getDescripcion());
            viewSubcomponente.cbAcabado.setSelectedItem(subcomponente.getAcabado());
-            viewSubcomponente.cbUnidad.setSelectedItem(subcomponente.getUnidad());
            viewSubcomponente.cbUnidadCalculada.setSelectedIndex(subcomponente.getIdUnidadCalculada());
             viewSubcomponente.txtCantidadDefauld.setValue(subcomponente.getCantDefault());
             viewSubcomponente.txtCantidadAdicional.setValue(subcomponente.getCantAdicional());
@@ -173,7 +169,6 @@ public class SubComponenteController implements ActionListener {
         ValidControlsSystem.disableControls(viewSubcomponente.jLayeredPane1);
         ValidButtonSystem.disableButton(viewSubcomponente.pnlButton);
         this.loadComboAcabados();
-        this.loadComboUnidadMedicas();
         initEvent();
         viewSubcomponente.btnNew.setEnabled(true);
         viewSubcomponente.btnBuscar.setEnabled(true);
@@ -184,16 +179,6 @@ public class SubComponenteController implements ActionListener {
         combo.setSqlConsult(Contans.QUERY_ACABADO);
         try {
             combo.setCombo(viewSubcomponente.cbAcabado);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ProyectoController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    private void loadComboUnidadMedicas() {
-        Combos combo = new Combos();
-        combo.setSqlConsult(Contans.QUERY_UNIDAD_MEDIDA);
-        try {
-            combo.setCombo(viewSubcomponente.cbUnidad);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ProyectoController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -214,7 +199,6 @@ public class SubComponenteController implements ActionListener {
         viewSubcomponente.txtCodigo.setText("");
         viewSubcomponente.txtDescripcion.setText("");
         viewSubcomponente.cbAcabado.setSelectedIndex(0);
-        viewSubcomponente.cbUnidad.setSelectedIndex(0);
         viewSubcomponente.cbUnidadCalculada.setSelectedIndex(0);
         viewSubcomponente.txtCantidadAdicional.setValue(30);
         viewSubcomponente.txtCantidadDefauld.setValue(1);

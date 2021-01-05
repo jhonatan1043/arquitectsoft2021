@@ -50,9 +50,9 @@ public class Contans {
     public static String QUERY_SUBCOMPONENTES_CARGAR = "SELECT Codigo_Homologacion Codigo,Descripcion "
             + "                                         FROM arquitectdb.subcomponentes WHERE Id_subcomponente= ";
 
-    public static String QUERY_INSERT_SUBCOMPONENTES = "CALL spSubComponenteRegistrar(?,?,?,?,?,?,?,?);";
+    public static String QUERY_INSERT_SUBCOMPONENTES = "CALL spSubComponenteRegistrar(?,?,?,?,?,?,?);";
 
-    public static String QUERY_UPDATE_SUBCOMPONENTES = "CALL spSubcomponenteUpdate(?,?,?,?,?,?,?,?,?);";
+    public static String QUERY_UPDATE_SUBCOMPONENTES = "CALL spSubcomponenteUpdate(?,?,?,?,?,?,?,?);";
     
      public static String QUERY_DELETE_SUBCOMPONENTES = "DELETE FROM arquitectdb.subcomponentes WHERE Id_subcomponente = ?";
     //--------------------------------------------------------------------------------------------------------------------------------

@@ -13,9 +13,7 @@ public class SubComponente {
 
     private int idSubcomponente;
     private int idAcabado;
-    private String unidad;
     private String Acabado;
-    private int idUnidad;
     private String codigo;
     private String descripcion;
     private int idUnidadCalculada;
@@ -40,14 +38,6 @@ public class SubComponente {
 
     public void setIdAcabado(int idAcabado) {
         this.idAcabado = idAcabado;
-    }
-
-    public int getIdUnidad() {
-        return idUnidad;
-    }
-
-    public void setIdUnidad(int idUnidad) {
-        this.idUnidad = idUnidad;
     }
 
     public String getCodigo() {
@@ -98,14 +88,6 @@ public class SubComponente {
         this.aplicaDecremento = aplicaDecremento;
     }
 
-    public String getUnidad() {
-        return unidad;
-    }
-
-    public void setUnidad(String unidad) {
-        this.unidad = unidad;
-    }
-
     public String getAcabado() {
         return Acabado;
     }
@@ -118,7 +100,6 @@ public class SubComponente {
     public String toString() {
         return "SubComponente{" + "idSubcomponente=" + idSubcomponente
                 + ", idAcabado=" + idAcabado
-                + ", idUnidad=" + idUnidad
                 + ", codigo=" + codigo
                 + ", descripcion=" + descripcion
                 + ", idUnidadCalculada=" + idUnidadCalculada

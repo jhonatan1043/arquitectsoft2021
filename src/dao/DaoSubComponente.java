@@ -35,13 +35,12 @@ public class DaoSubComponente implements ISubComponente {
             try (PreparedStatement psmt = cnx.getConnection().prepareStatement(Contans.QUERY_INSERT_SUBCOMPONENTES,
                     Statement.RETURN_GENERATED_KEYS)) {
                 psmt.setInt(1, subcomponente.getIdAcabado());
-                psmt.setInt(2, subcomponente.getIdUnidad());
-                psmt.setString(3, subcomponente.getCodigo());
-                psmt.setString(4, subcomponente.getDescripcion());
-                psmt.setInt(5, subcomponente.getIdUnidadCalculada());
-                psmt.setInt(6, subcomponente.getCantDefault());
-                psmt.setBoolean(7, subcomponente.isAplicaDecremento());
-                psmt.setInt(8, subcomponente.getCantAdicional());
+                psmt.setString(2, subcomponente.getCodigo());
+                psmt.setString(3, subcomponente.getDescripcion());
+                psmt.setInt(4, subcomponente.getIdUnidadCalculada());
+                psmt.setInt(5, subcomponente.getCantDefault());
+                psmt.setBoolean(6, subcomponente.isAplicaDecremento());
+                psmt.setInt(7, subcomponente.getCantAdicional());
                 int affectedRows = psmt.executeUpdate();
 
                 if (affectedRows == 0) {
@@ -71,14 +70,13 @@ public class DaoSubComponente implements ISubComponente {
         try {
             try (PreparedStatement psmt = cnx.getConnection().prepareStatement(Contans.QUERY_UPDATE_SUBCOMPONENTES)) {
                 psmt.setInt(1, subcomponente.getIdAcabado());
-                psmt.setInt(2, subcomponente.getIdUnidad());
-                psmt.setInt(3, subcomponente.getIdUnidadCalculada());
-                psmt.setString(4, subcomponente.getCodigo());
-                psmt.setString(5, subcomponente.getDescripcion());
-                psmt.setInt(6, subcomponente.getCantDefault());
-                psmt.setBoolean(7, subcomponente.isAplicaDecremento());
-                psmt.setInt(8, subcomponente.getCantAdicional());
-                psmt.setInt(9, subcomponente.getIdSubcomponente());
+                psmt.setInt(2, subcomponente.getIdUnidadCalculada());
+                psmt.setString(3, subcomponente.getCodigo());
+                psmt.setString(4, subcomponente.getDescripcion());
+                psmt.setInt(5, subcomponente.getCantDefault());
+                psmt.setBoolean(6, subcomponente.isAplicaDecremento());
+                psmt.setInt(7, subcomponente.getCantAdicional());
+                psmt.setInt(8, subcomponente.getIdSubcomponente());
                 int affectedRows = psmt.executeUpdate();
 
                 if (affectedRows == 0) {
@@ -146,23 +144,18 @@ public class DaoSubComponente implements ISubComponente {
         try (PreparedStatement preparedStatement = cnx.getConnection().prepareStatement(Contans.QUERY_SUBCOMPONENTES_FORM_CARGAR)) {
             preparedStatement.setInt(1, idSubcomponente);
             result = preparedStatement.executeQuery();
-
             while (result.next()) {
                 subComponente.setIdSubcomponente(idSubcomponente);
                 subComponente.setAcabado(result.getString(1));
-                subComponente.setUnidad(result.getString(2));
-                subComponente.setIdUnidadCalculada(result.getInt(3));
-                subComponente.setCodigo(result.getString(4));
-                subComponente.setDescripcion(result.getString(5));
-                subComponente.setCantDefault(result.getInt(6));
-                subComponente.setAplicaDecremento(result.getBoolean(7));
-                subComponente.setCantAdicional(result.getInt(8));
-
+                subComponente.setIdUnidadCalculada(result.getInt(2));
+                subComponente.setCodigo(result.getString(3));
+                subComponente.setDescripcion(result.getString(4));
+                subComponente.setCantDefault(result.getInt(5));
+                subComponente.setAplicaDecremento(result.getBoolean(6));
+                subComponente.setCantAdicional(result.getInt(7));
             }
-
             result.close();
             cnx.getConnection().close();
-
         } catch (SQLException ex) {
             Logger.getLogger(DaoComponente.class.getName()).log(Level.SEVERE, null, ex);
         }

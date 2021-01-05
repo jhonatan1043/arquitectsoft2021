@@ -28,9 +28,6 @@ public class Conexion {
             Class.forName("com.mysql.cj.jdbc.Driver");
             try {
                 cnx = DriverManager.getConnection(url,user,pass);
-                if(cnx != null){
-                    System.out.println("Conexion Exitosa");
-                }
             } catch (SQLException ex) {
                 Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
             }
