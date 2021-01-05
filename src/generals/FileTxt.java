@@ -11,17 +11,12 @@
 package generals;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
-import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -133,22 +128,9 @@ public class FileTxt {
         return list;
     }
 
-    private File convertCodeToUtf(File file) throws UnsupportedEncodingException, IOException {
-        File FileResultado = File.createTempFile(file.toString(),null);
-        String sCadena;
-        try {
-            Writer out;
-            try (BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(file), "8859_1"))) {
-                out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(FileResultado), "utf-8"));
-                while ((sCadena = in.readLine()) != null) {
-                    System.out.println(sCadena);
-                    out.write(sCadena);
-                }
-            }
-            out.close();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(FileTxt.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return FileResultado;
+    public static String convertCodeToUtf(String cadena) throws UnsupportedEncodingException {
+        byte[] utf8 = cadena.getBytes(StandardCharsets.US_ASCII);
+        cadena = new String(utf8, StandardCharsets.UTF_8);
+        return cadena;
     }
 }

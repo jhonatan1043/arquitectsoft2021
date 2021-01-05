@@ -7,6 +7,7 @@ package dao;
 
 import generals.Conexion;
 import generals.Contans;
+import generals.FileTxt;
 import models.Componente;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -95,11 +96,11 @@ public class DaoComponente implements IComponente {
                         insertComponenteDetalle.setInt(1, componente.getIdComponente());
                         insertComponenteDetalle.setInt(2, Integer.parseInt(componente.getModelo().getValueAt(i, 0).toString()));
                         insertComponenteDetalle.executeUpdate();
-                        
+
                     }
 
                     insertComponenteDetalle.close();
-                    
+
                     cnx.getConnection().commit();
                 }
 
@@ -239,24 +240,20 @@ public class DaoComponente implements IComponente {
 
                 ResultSet result;
 
-                String codigo = new String(modelo.getValueAt(i, 0).toString().trim().replace("\"", "").replace("�", "").getBytes("CP850"), "ISO-8859-1");
-                String auxLongitud = new String(modelo.getValueAt(i, 2).toString().trim().replace("\"", "").getBytes("CP850"), "ISO-8859-1");
-                String ubicacion = new String(modelo.getValueAt(i, 3).toString().trim().getBytes("CP850"), "ISO-8859-1");
+                String codigo = modelo.getValueAt(i, 0).toString().trim().replace("\"", "").replace("�", "");
+                String auxLongitud = modelo.getValueAt(i, 2).toString().trim().replace("\"", "");
+                String ubicacion = modelo.getValueAt(i, 3).toString().trim();
 
-                codigo = new String(codigo.getBytes(), "UTF-8");
-                auxLongitud = new String(auxLongitud.getBytes(), "UTF-8");
-                ubicacion = new String(ubicacion.getBytes(), "UTF-8");
-
-                int longitud = Integer.parseInt(auxLongitud.trim().replace(" ", "").replace("\"", ""));
+                int longitud = Integer.parseInt(FileTxt.convertCodeToUtf(auxLongitud.trim().replace(" ", "").replace("\"", "")));
 
                 try {
 
                     String query = "call spComponentePerfilesCargar(?,?,?);";
 
                     try (PreparedStatement preparedStatement = cnx.getConnection().prepareStatement(query)) {
-                        preparedStatement.setString(1, codigo);
+                        preparedStatement.setString(1, FileTxt.convertCodeToUtf(codigo));
                         preparedStatement.setInt(2, longitud);
-                        preparedStatement.setString(3, ubicacion);
+                        preparedStatement.setString(3, FileTxt.convertCodeToUtf(ubicacion));
                         result = preparedStatement.executeQuery();
 
                         listDta = new ArrayList<>();
