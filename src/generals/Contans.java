@@ -13,7 +13,7 @@ public class Contans {
     // query of system 
     //--------------------------------------------------------------------------------------------------------------------------------
 
-    public static String QUERY_ACABADO = "SELECT Id_Acabado, Descripcion FROM Acabados;";
+    public static String QUERY_ACABADO = "SELECT Codigo_Homologacion codigo, Descripcion FROM Acabados;";
 
     public static String QUERY_INSERT_ACABADOS = "INSERT acabados (Codigo_Homologacion, descripcion)VALUES(?,?)";
 //--------------------------------------------------------------------------------------------------------------------------------
