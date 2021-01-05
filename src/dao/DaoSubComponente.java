@@ -146,7 +146,7 @@ public class DaoSubComponente implements ISubComponente {
             result = preparedStatement.executeQuery();
             while (result.next()) {
                 subComponente.setIdSubcomponente(idSubcomponente);
-                subComponente.setAcabado(result.getString(1));
+                subComponente.setIdAcabado(result.getInt(1));
                 subComponente.setIdUnidadCalculada(result.getInt(2));
                 subComponente.setCodigo(result.getString(3));
                 subComponente.setDescripcion(result.getString(4));

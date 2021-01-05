@@ -83,8 +83,11 @@ public class SubComponenteController implements ActionListener {
             VBusqueda busqueda = new VBusqueda(viewPrincipal, true);
             busquedaC = new BusquedaController(busqueda, viewSubcomponente, Contans.QUERY_SUBCOMPONENTES, createColumns());
             busqueda.setVisible(true);
-            loadSubComponente(Integer.parseInt(System.getProperty("id")));
+            if (System.getProperty("id") != null || "".equals(System.getProperty("id"))) {
+                loadSubComponente(Integer.parseInt(System.getProperty("id")));
+            }
         }
+
         if (e.getSource() == viewSubcomponente.btnEdit) {
             int resp = JOptionPane.showConfirmDialog(viewSubcomponente, "¿Esta seguro de editar el registro?", "Alerta!", JOptionPane.YES_NO_OPTION);
             if (resp != 1) {
@@ -94,6 +97,7 @@ public class SubComponenteController implements ActionListener {
                 viewSubcomponente.btnCancel.setEnabled(true);
             }
         }
+
         if (e.getSource() == viewSubcomponente.btnDelete) {
             int resp = JOptionPane.showConfirmDialog(viewSubcomponente, "¿Esta seguro de eliminar el registro?", "Alerta!", JOptionPane.YES_NO_OPTION);
             if (resp != 1) {
@@ -130,13 +134,14 @@ public class SubComponenteController implements ActionListener {
     }
 
     private void loadSubComponente() {
-        String idAcabado = viewSubcomponente.cbAcabado.getSelectedItem().toString().split("|")[0];
+        
+        int idAcabado = viewSubcomponente.cbAcabado.getSelectedIndex();  
         int cantidadDefauld = (int) viewSubcomponente.txtCantidadDefauld.getValue();
         int cantidadAdicional = (int) viewSubcomponente.txtCantidadAdicional.getValue();
 
         subcomponente.setCodigo(viewSubcomponente.txtCodigo.getText());
         subcomponente.setDescripcion(viewSubcomponente.txtDescripcion.getText());
-        subcomponente.setIdAcabado(Integer.parseInt(idAcabado));
+        subcomponente.setIdAcabado(idAcabado);
         subcomponente.setIdUnidadCalculada(viewSubcomponente.cbUnidadCalculada.getSelectedIndex());
         subcomponente.setCantDefault(cantidadDefauld);
         subcomponente.setAplicaDecremento(viewSubcomponente.ckAplicaDecremento.isSelected());
@@ -144,21 +149,19 @@ public class SubComponenteController implements ActionListener {
 
     }
 
-    private void loadSubComponente(int id) {
-        if (id != 0) {
+    private void loadSubComponente(Object id) {
+        if (id != null) {
 
-            subcomponente = eSubcomponente.getSubcomponente(id);
- 
+            subcomponente = eSubcomponente.getSubcomponente((int) id);
+
             viewSubcomponente.txtCodigo.setText(subcomponente.getCodigo());
             viewSubcomponente.txtDescripcion.setText(subcomponente.getDescripcion());
-           viewSubcomponente.cbAcabado.setSelectedItem(subcomponente.getAcabado());
-           viewSubcomponente.cbUnidadCalculada.setSelectedIndex(subcomponente.getIdUnidadCalculada());
+            viewSubcomponente.cbAcabado.setSelectedIndex(subcomponente.getIdAcabado());
+            viewSubcomponente.cbUnidadCalculada.setSelectedIndex(subcomponente.getIdUnidadCalculada());
             viewSubcomponente.txtCantidadDefauld.setValue(subcomponente.getCantDefault());
             viewSubcomponente.txtCantidadAdicional.setValue(subcomponente.getCantAdicional());
             viewSubcomponente.ckAplicaDecremento.setSelected(subcomponente.isAplicaDecremento());
-
             System.setProperty("id", "");
-
             ValidButtonSystem.enabledButton(viewSubcomponente.pnlButton);
             viewSubcomponente.btnSave.setEnabled(false);
             viewSubcomponente.btnCancel.setEnabled(false);
@@ -194,7 +197,7 @@ public class SubComponenteController implements ActionListener {
     }
 
     private void controlsClean() {
-        
+
         SubComponente subcomponente = new SubComponente();
         viewSubcomponente.txtCodigo.setText("");
         viewSubcomponente.txtDescripcion.setText("");

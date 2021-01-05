@@ -7,7 +7,6 @@ package dao;
 
 import generals.Conexion;
 import generals.Contans;
-import generals.FileTxt;
 import models.Componente;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,7 +14,6 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import interfaces.IComponente;
-import java.io.UnsupportedEncodingException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.table.TableModel;
@@ -236,49 +234,40 @@ public class DaoComponente implements IComponente {
         Object[] data;
         for (int i = 0; i < modelo.getRowCount(); i++) {
 
+            ResultSet result;
+            String codigo = modelo.getValueAt(i, 0).toString().trim().replace("\"", "").replace("�", "");
+            String auxLongitud = modelo.getValueAt(i, 2).toString().trim().replace("\"", "");
+            String ubicacion = modelo.getValueAt(i, 3).toString().trim();
+            int longitud = Integer.parseInt(auxLongitud.trim().replace(" ", "").replace("\"", ""));
             try {
-
-                ResultSet result;
-
-                String codigo = modelo.getValueAt(i, 0).toString().trim().replace("\"", "").replace("�", "");
-                String auxLongitud = modelo.getValueAt(i, 2).toString().trim().replace("\"", "");
-                String ubicacion = modelo.getValueAt(i, 3).toString().trim();
-
-                int longitud = Integer.parseInt(FileTxt.convertCodeToUtf(auxLongitud.trim().replace(" ", "").replace("\"", "")));
-
-                try {
-
-                    String query = "call spComponentePerfilesCargar(?,?,?);";
-
-                    try (PreparedStatement preparedStatement = cnx.getConnection().prepareStatement(query)) {
-                        preparedStatement.setString(1, FileTxt.convertCodeToUtf(codigo));
-                        preparedStatement.setInt(2, longitud);
-                        preparedStatement.setString(3, FileTxt.convertCodeToUtf(ubicacion));
-                        result = preparedStatement.executeQuery();
-
-                        listDta = new ArrayList<>();
-
-                        while (result.next()) {
-                            data = new Object[6];
-                            data[0] = result.getInt(1);
-                            data[1] = result.getString(2);
-                            data[2] = result.getString(3);
-                            data[3] = result.getInt(4);
-                            data[4] = result.getInt(5);
-                            data[5] = result.getString(6);
-                            listDta.add(data);
-                        }
-
-                        list.add(listDta);
-
-                        result.close();
+                
+                String query = "call spComponentePerfilesCargar(?,?,?);";
+                
+                try (PreparedStatement preparedStatement = cnx.getConnection().prepareStatement(query)) {
+                    preparedStatement.setString(1, codigo);
+                    preparedStatement.setInt(2, longitud);
+                    preparedStatement.setString(3, ubicacion);
+                    result = preparedStatement.executeQuery();
+                    
+                    listDta = new ArrayList<>();
+                    
+                    while (result.next()) {
+                        data = new Object[6];
+                        data[0] = result.getInt(1);
+                        data[1] = result.getString(2);
+                        data[2] = result.getString(3);
+                        data[3] = result.getInt(4);
+                        data[4] = result.getInt(5);
+                        data[5] = result.getString(6);
+                        listDta.add(data);
                     }
-
-                } catch (SQLException ex) {
-                    Logger.getLogger(DaoComponente.class.getName()).log(Level.SEVERE, null, ex);
+                    
+                    list.add(listDta);
+                    
+                    result.close();
                 }
-
-            } catch (UnsupportedEncodingException ex) {
+                
+            } catch (SQLException ex) {
                 Logger.getLogger(DaoComponente.class.getName()).log(Level.SEVERE, null, ex);
             }
 
