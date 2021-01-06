@@ -198,7 +198,7 @@ public class SubComponenteController implements ActionListener {
 
     private void controlsClean() {
 
-        SubComponente subcomponente = new SubComponente();
+        subcomponente = new SubComponente();
         viewSubcomponente.txtCodigo.setText("");
         viewSubcomponente.txtDescripcion.setText("");
         viewSubcomponente.cbAcabado.setSelectedIndex(0);
