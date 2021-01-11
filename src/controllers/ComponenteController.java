@@ -97,7 +97,6 @@ public class ComponenteController implements ActionListener, KeyListener {
             System.setProperty("id", "");
 
             ValidButtonSystem.enabledButton(viewComponente.pnlButton);
-
             viewComponente.btnSave.setEnabled(false);
             viewComponente.btnCancel.setEnabled(false);
         }
@@ -137,8 +136,8 @@ public class ComponenteController implements ActionListener, KeyListener {
 
         if (e.getSource() == viewComponente.btnCancel) {
             ValidControlsSystem.disableControls(viewComponente.jLayeredPane1);
-            ValidButtonSystem.disableButton(viewComponente.pnlButton);
             controlsClear();
+            ValidButtonSystem.disableButton(viewComponente.pnlButton);
             viewComponente.btnNew.setEnabled(true);
             viewComponente.btnBuscar.setEnabled(true);
         }
@@ -177,9 +176,9 @@ public class ComponenteController implements ActionListener, KeyListener {
 
                 if (resultado) {
                     ValidControlsSystem.disableControls(viewComponente.jLayeredPane1);
-                    ValidButtonSystem.disableButton(viewComponente.pnlButton);
-                    viewComponente.btnNew.setEnabled(true);
-                    viewComponente.btnBuscar.setEnabled(true);
+                    ValidButtonSystem.enabledButton(viewComponente.pnlButton);
+                    viewComponente.btnSave.setEnabled(false);
+                    viewComponente.btnCancel.setEnabled(false);
                     JOptionPane.showMessageDialog(viewComponente, "¡ Registrado con exito !");
                 }
             }

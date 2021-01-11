@@ -17,9 +17,6 @@ public class SubComponente {
     private String codigo;
     private String descripcion;
     private int idUnidadCalculada;
-    private int cantDefault;
-    private int cantAdicional;
-    private boolean aplicaDecremento;
 
     public SubComponente() {
     }
@@ -64,30 +61,6 @@ public class SubComponente {
         this.idUnidadCalculada = idUnidadCalculada;
     }
 
-    public int getCantDefault() {
-        return cantDefault;
-    }
-
-    public void setCantDefault(int cantDefault) {
-        this.cantDefault = cantDefault;
-    }
-
-    public int getCantAdicional() {
-        return cantAdicional;
-    }
-
-    public void setCantAdicional(int cantAdicional) {
-        this.cantAdicional = cantAdicional;
-    }
-
-    public boolean isAplicaDecremento() {
-        return aplicaDecremento;
-    }
-
-    public void setAplicaDecremento(boolean aplicaDecremento) {
-        this.aplicaDecremento = aplicaDecremento;
-    }
-
     public String getAcabado() {
         return Acabado;
     }
@@ -102,10 +75,8 @@ public class SubComponente {
                 + ", idAcabado=" + idAcabado
                 + ", codigo=" + codigo
                 + ", descripcion=" + descripcion
-                + ", idUnidadCalculada=" + idUnidadCalculada
-                + ", cantDefault=" + cantDefault
-                + ", cantAdicional=" + cantAdicional
-                + ", aplicaDecremento=" + aplicaDecremento + '}';
+                + ", idUnidadCalculada=" + idUnidadCalculada;
+
     }
 
 }

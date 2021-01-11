@@ -38,9 +38,6 @@ public class DaoSubComponente implements ISubComponente {
                 psmt.setString(2, subcomponente.getCodigo());
                 psmt.setString(3, subcomponente.getDescripcion());
                 psmt.setInt(4, subcomponente.getIdUnidadCalculada());
-                psmt.setInt(5, subcomponente.getCantDefault());
-                psmt.setBoolean(6, subcomponente.isAplicaDecremento());
-                psmt.setInt(7, subcomponente.getCantAdicional());
                 int affectedRows = psmt.executeUpdate();
 
                 if (affectedRows == 0) {
@@ -73,10 +70,7 @@ public class DaoSubComponente implements ISubComponente {
                 psmt.setInt(2, subcomponente.getIdUnidadCalculada());
                 psmt.setString(3, subcomponente.getCodigo());
                 psmt.setString(4, subcomponente.getDescripcion());
-                psmt.setInt(5, subcomponente.getCantDefault());
-                psmt.setBoolean(6, subcomponente.isAplicaDecremento());
-                psmt.setInt(7, subcomponente.getCantAdicional());
-                psmt.setInt(8, subcomponente.getIdSubcomponente());
+                psmt.setInt(5, subcomponente.getIdSubcomponente());
                 int affectedRows = psmt.executeUpdate();
 
                 if (affectedRows == 0) {
@@ -139,7 +133,7 @@ public class DaoSubComponente implements ISubComponente {
     public SubComponente getSubcomponente(int idSubcomponente) {
         Conexion cnx = new Conexion();
         SubComponente subComponente = new SubComponente();
-        
+
         ResultSet result;
         try (PreparedStatement preparedStatement = cnx.getConnection().prepareStatement(Contans.QUERY_SUBCOMPONENTES_FORM_CARGAR)) {
             preparedStatement.setInt(1, idSubcomponente);
@@ -150,9 +144,6 @@ public class DaoSubComponente implements ISubComponente {
                 subComponente.setIdUnidadCalculada(result.getInt(2));
                 subComponente.setCodigo(result.getString(3));
                 subComponente.setDescripcion(result.getString(4));
-                subComponente.setCantDefault(result.getInt(5));
-                subComponente.setAplicaDecremento(result.getBoolean(6));
-                subComponente.setCantAdicional(result.getInt(7));
             }
             result.close();
             cnx.getConnection().close();

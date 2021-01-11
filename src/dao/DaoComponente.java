@@ -44,6 +44,9 @@ public class DaoComponente implements IComponente {
                     for (int i = 0; i < componente.getModelo().getRowCount(); i++) {
                         insertComponenteDetalle.setInt(1, idComponente);
                         insertComponenteDetalle.setInt(2, Integer.parseInt(componente.getModelo().getValueAt(i, 0).toString()));
+                        insertComponenteDetalle.setInt(3, Integer.parseInt(componente.getModelo().getValueAt(i, 3).toString()));
+                        insertComponenteDetalle.setInt(4, Integer.parseInt(componente.getModelo().getValueAt(i, 4).toString()));
+                        insertComponenteDetalle.setBoolean(5, Boolean.parseBoolean(componente.getModelo().getValueAt(i, 5).toString()));
                         insertComponenteDetalle.executeUpdate();
                     }
 
@@ -93,6 +96,9 @@ public class DaoComponente implements IComponente {
                     for (int i = 0; i < componente.getModelo().getRowCount(); i++) {
                         insertComponenteDetalle.setInt(1, componente.getIdComponente());
                         insertComponenteDetalle.setInt(2, Integer.parseInt(componente.getModelo().getValueAt(i, 0).toString()));
+                        insertComponenteDetalle.setInt(3, Integer.parseInt(componente.getModelo().getValueAt(i, 3).toString()));
+                        insertComponenteDetalle.setInt(4, Integer.parseInt(componente.getModelo().getValueAt(i, 4).toString()));
+                        insertComponenteDetalle.setBoolean(5, Boolean.parseBoolean(componente.getModelo().getValueAt(i, 5).toString()));
                         insertComponenteDetalle.executeUpdate();
 
                     }
@@ -190,10 +196,13 @@ public class DaoComponente implements IComponente {
             result = preparedStatement.executeQuery();
 
             while (result.next()) {
-                Object[] lists = new Object[3];
+                Object[] lists = new Object[6];
                 lists[0] = result.getInt(1);
                 lists[1] = result.getString(2);
                 lists[2] = result.getString(3);
+                lists[3] = result.getInt(4);
+                lists[4] = result.getInt(5);
+                lists[5] = result.getBoolean(6);
                 list.add(lists);
             }
 
@@ -207,7 +216,7 @@ public class DaoComponente implements IComponente {
 
     @Override
     public Object[] getSubComponente(int idSubComponente) {
-        Object[] list = new Object[3];
+        Object[] list = new Object[6];
 
         ResultSet result;
 
@@ -218,6 +227,10 @@ public class DaoComponente implements IComponente {
                 list[0] = idSubComponente;
                 list[1] = result.getObject(1);
                 list[2] = result.getObject(2);
+                list[3] = 1;
+                list[4] = 30;
+                list[5] = false;
+
             }
 
             result.close();
@@ -240,17 +253,17 @@ public class DaoComponente implements IComponente {
             String ubicacion = modelo.getValueAt(i, 3).toString().trim();
             int longitud = Integer.parseInt(auxLongitud.trim().replace(" ", "").replace("\"", ""));
             try {
-                
+
                 String query = "call spComponentePerfilesCargar(?,?,?);";
-                
+
                 try (PreparedStatement preparedStatement = cnx.getConnection().prepareStatement(query)) {
                     preparedStatement.setString(1, codigo);
                     preparedStatement.setInt(2, longitud);
                     preparedStatement.setString(3, ubicacion);
                     result = preparedStatement.executeQuery();
-                    
+
                     listDta = new ArrayList<>();
-                    
+
                     while (result.next()) {
                         data = new Object[6];
                         data[0] = result.getInt(1);
@@ -261,12 +274,12 @@ public class DaoComponente implements IComponente {
                         data[5] = result.getString(6);
                         listDta.add(data);
                     }
-                    
+
                     list.add(listDta);
-                    
+
                     result.close();
                 }
-                
+
             } catch (SQLException ex) {
                 Logger.getLogger(DaoComponente.class.getName()).log(Level.SEVERE, null, ex);
             }

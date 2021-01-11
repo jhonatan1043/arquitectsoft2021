@@ -72,9 +72,9 @@ public class SubComponenteController implements ActionListener {
 
                 if (respuesta) {
                     ValidControlsSystem.disableControls(viewSubcomponente.jLayeredPane1);
-                    ValidButtonSystem.disableButton(viewSubcomponente.pnlButton);
-                    viewSubcomponente.btnNew.setEnabled(true);
-                    viewSubcomponente.btnBuscar.setEnabled(true);
+                    ValidButtonSystem.enabledButton(viewSubcomponente.pnlButton);
+                    viewSubcomponente.btnSave.setEnabled(false);
+                    viewSubcomponente.btnCancel.setEnabled(false);
                     JOptionPane.showMessageDialog(viewSubcomponente, "¡ Registrado con exito !");
                 }
             }
@@ -134,33 +134,21 @@ public class SubComponenteController implements ActionListener {
     }
 
     private void loadSubComponente() {
-        
-        int idAcabado = viewSubcomponente.cbAcabado.getSelectedIndex();  
-        int cantidadDefauld = (int) viewSubcomponente.txtCantidadDefauld.getValue();
-        int cantidadAdicional = (int) viewSubcomponente.txtCantidadAdicional.getValue();
-
+        int idAcabado = viewSubcomponente.cbAcabado.getSelectedIndex();
         subcomponente.setCodigo(viewSubcomponente.txtCodigo.getText());
         subcomponente.setDescripcion(viewSubcomponente.txtDescripcion.getText());
         subcomponente.setIdAcabado(idAcabado);
         subcomponente.setIdUnidadCalculada(viewSubcomponente.cbUnidadCalculada.getSelectedIndex());
-        subcomponente.setCantDefault(cantidadDefauld);
-        subcomponente.setAplicaDecremento(viewSubcomponente.ckAplicaDecremento.isSelected());
-        subcomponente.setCantAdicional(cantidadAdicional);
 
     }
 
     private void loadSubComponente(Object id) {
         if (id != null) {
-
             subcomponente = eSubcomponente.getSubcomponente((int) id);
-
             viewSubcomponente.txtCodigo.setText(subcomponente.getCodigo());
             viewSubcomponente.txtDescripcion.setText(subcomponente.getDescripcion());
             viewSubcomponente.cbAcabado.setSelectedIndex(subcomponente.getIdAcabado());
             viewSubcomponente.cbUnidadCalculada.setSelectedIndex(subcomponente.getIdUnidadCalculada());
-            viewSubcomponente.txtCantidadDefauld.setValue(subcomponente.getCantDefault());
-            viewSubcomponente.txtCantidadAdicional.setValue(subcomponente.getCantAdicional());
-            viewSubcomponente.ckAplicaDecremento.setSelected(subcomponente.isAplicaDecremento());
             System.setProperty("id", "");
             ValidButtonSystem.enabledButton(viewSubcomponente.pnlButton);
             viewSubcomponente.btnSave.setEnabled(false);
@@ -203,8 +191,6 @@ public class SubComponenteController implements ActionListener {
         viewSubcomponente.txtDescripcion.setText("");
         viewSubcomponente.cbAcabado.setSelectedIndex(0);
         viewSubcomponente.cbUnidadCalculada.setSelectedIndex(0);
-        viewSubcomponente.txtCantidadAdicional.setValue(30);
-        viewSubcomponente.txtCantidadDefauld.setValue(1);
     }
 
 }
