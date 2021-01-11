@@ -37,7 +37,7 @@ public class ValidEnterCaracter {
 
         if (field.getText().length() >= limite) {
             evt.consume();
-            JOptionPane.showMessageDialog(form, "Máximo " + limite + " carácteres");
+            form.getToolkit().beep();
         }
     }
 }

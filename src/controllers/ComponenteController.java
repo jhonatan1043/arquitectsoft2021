@@ -222,10 +222,10 @@ public class ComponenteController implements ActionListener, KeyListener {
     @Override
     public void keyTyped(KeyEvent e) {
         if (e.getSource() == viewComponente.txtCodigo) {
-            ValidEnterCaracter.validMaxCaracter(viewComponente.txtCodigo, e, 10, viewComponente);
+            ValidEnterCaracter.validMaxCaracter(viewComponente.txtCodigo, e, 20, viewComponente);
         }
         if (e.getSource() == viewComponente.txtDescripcion) {
-            ValidEnterCaracter.validMaxCaracter(viewComponente.txtDescripcion, e, 45, viewComponente);
+            ValidEnterCaracter.validMaxCaracter(viewComponente.txtDescripcion, e, 200, viewComponente);
         }
     }
 
