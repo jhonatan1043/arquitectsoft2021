@@ -8,6 +8,8 @@ package controllers;
 import dao.DaoBusqueda;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import views.VBusqueda;
@@ -16,7 +18,7 @@ import views.VBusqueda;
  *
  * @author Poseidon
  */
-public class BusquedaController implements ActionListener {
+public class BusquedaController implements ActionListener, KeyListener {
 
     VBusqueda viewBusqueda;
     DefaultTableModel modelo = new DefaultTableModel();
@@ -31,13 +33,14 @@ public class BusquedaController implements ActionListener {
             this.cargarGrillaBusqueda();
         }
         if (e.getSource() == viewBusqueda.btnAgregar) {
-          returnValue();
+            returnValue();
         }
     }
 
     private void initEvent() {
         viewBusqueda.btnBusqueda.addActionListener(this);
         viewBusqueda.btnAgregar.addActionListener(this);
+        viewBusqueda.txtBusqueda.addKeyListener(this);
     }
 
     public BusquedaController(
@@ -78,8 +81,26 @@ public class BusquedaController implements ActionListener {
     public void returnValue() {
         int index = viewBusqueda.tbBusqueda.getSelectedRow();
         Object id = viewBusqueda.tbBusqueda.getValueAt(index, 0);
-         System.setProperty("id", (String) id);
-         viewBusqueda.dispose();
+        System.setProperty("id", (String) id);
+        viewBusqueda.dispose();
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if (e.getSource() == viewBusqueda.txtBusqueda) {
+            if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                this.clearRows();
+                this.cargarGrillaBusqueda();
+            }
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
     }
 
 }
