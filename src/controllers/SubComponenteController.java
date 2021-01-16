@@ -11,8 +11,13 @@ import generals.Combos;
 import generals.Contans;
 import generals.ValidButtonSystem;
 import generals.ValidControlsSystem;
+import generals.ValidEnterCaracter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,7 +30,7 @@ import views.VPrincipal;
  *
  * @author Programador 1
  */
-public class SubComponenteController implements ActionListener {
+public class SubComponenteController implements ActionListener, FocusListener, KeyListener {
 
     VPrincipal viewPrincipal;
     BusquedaController busquedaC;
@@ -93,6 +98,7 @@ public class SubComponenteController implements ActionListener {
             if (resp != 1) {
                 ValidControlsSystem.enabledControls(viewSubcomponente.jLayeredPane1);
                 ValidButtonSystem.disableButton(viewSubcomponente.pnlButton);
+                viewSubcomponente.txtCodigo.setEnabled(false);
                 viewSubcomponente.btnSave.setEnabled(true);
                 viewSubcomponente.btnCancel.setEnabled(true);
             }
@@ -182,6 +188,9 @@ public class SubComponenteController implements ActionListener {
         viewSubcomponente.btnBuscar.addActionListener(this);
         viewSubcomponente.btnEdit.addActionListener(this);
         viewSubcomponente.btnDelete.addActionListener(this);
+        viewSubcomponente.txtCodigo.addKeyListener(this);
+        viewSubcomponente.txtDescripcion.addKeyListener(this);
+        viewSubcomponente.txtCodigo.addFocusListener(this);
     }
 
     private void controlsClean() {
@@ -191,6 +200,39 @@ public class SubComponenteController implements ActionListener {
         viewSubcomponente.txtDescripcion.setText("");
         viewSubcomponente.cbAcabado.setSelectedIndex(0);
         viewSubcomponente.cbUnidadCalculada.setSelectedIndex(0);
+    }
+
+    @Override
+    public void focusGained(FocusEvent e) {
+    }
+
+    @Override
+    public void focusLost(FocusEvent e) {
+        if (e.getSource() == viewSubcomponente.txtCodigo) {
+            if (eSubcomponente.existsSubcomponente(viewSubcomponente.txtCodigo.getText())
+                    && viewSubcomponente.btnSave.isEnabled()) {
+                JOptionPane.showMessageDialog(viewSubcomponente, "¡ Codigo ya Existente en la base de datos !");
+                viewSubcomponente.txtCodigo.setText("");
+            }
+        }
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        if (e.getSource() == viewSubcomponente.txtCodigo) {
+            ValidEnterCaracter.validMaxCaracter(viewSubcomponente.txtCodigo, e, 20, viewSubcomponente);
+        }
+        if (e.getSource() == viewSubcomponente.txtDescripcion) {
+            ValidEnterCaracter.validMaxCaracter(viewSubcomponente.txtDescripcion, e, 200, viewSubcomponente);
+        }
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
     }
 
 }

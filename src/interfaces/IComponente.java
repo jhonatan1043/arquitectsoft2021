@@ -29,4 +29,6 @@ public interface IComponente {
     public ArrayList<ArrayList<Object[]>> getSubComponenteCalc(TableModel modelo);
 
     public Object[] getSubComponente(int idSubComponente);
+    
+     public boolean existsComponente(String codigo);
 }

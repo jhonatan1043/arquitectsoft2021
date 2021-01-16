@@ -21,6 +21,8 @@ public class Contans {
 
     public static String QUERY_INSERT_UNIDAD_MEDIDA = "INSERT unidades_medidas (Descripcion,Convencion)VALUES(?,?);";
     //--------------------------------------------------------------------------------------------------------------------------------
+    public static String QUERY_EXITS_COMPONENTES = "SELECT true AS status FROM componentes where Codigo = ?;";
+     
     public static String QUERY_COMPONENTES = "SELECT Id_Componente,Codigo,Descripcion FROM arquitectdb.componentes;";
 
     public static String QUERY_COMPONENTES_LISTAR = "CALL componentesConsultar('";
@@ -47,12 +49,17 @@ public class Contans {
     public static String QUERY_CATEGORIAS = "SELECT Id_categoria,Descripcion,Tipo_Formula FROM arquitectdb.categorias;";
     //--------------------------------------------------------------------------------------------------------------------------------
     // querys subComponentes
+    public static String QUERY_EXITS_SUBCOMPONENTES = "SELECT true AS status FROM subcomponentes where Codigo_Homologacion = ?;";
+      
     public static String QUERY_SUBCOMPONENTES = "CALL spSubComponenteConsultar('";
 
     public static String QUERY_SUBCOMPONENTES_CALC_CARGAR = "CALL spComponenteCargar(";
 
-    public static String QUERY_SUBCOMPONENTES_CARGAR = "SELECT Codigo_Homologacion Codigo,Descripcion "
-            + "                                         FROM arquitectdb.subcomponentes WHERE Id_subcomponente= ";
+    public static String QUERY_SUBCOMPONENTES_CARGAR = "SELECT CONCAT(subcomponentes.Codigo_Homologacion,'-',acabados.Codigo_Homologacion) Codigo,"
+                                                        + "subcomponentes.Descripcion "
+                                                        + "FROM arquitectdb.subcomponentes "
+                                                        + "JOIN acabados ON acabados.Id_acabado = subcomponentes.Id_acabado"
+                                                        + " WHERE Id_subcomponente= ";
 
     public static String QUERY_INSERT_SUBCOMPONENTES = "CALL spSubComponenteRegistrar(?,?,?,?);";
 

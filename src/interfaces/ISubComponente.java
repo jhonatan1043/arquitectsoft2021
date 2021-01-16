@@ -20,4 +20,5 @@ public interface ISubComponente {
     public boolean delete(SubComponente idSubcomponente);
     public List<SubComponente> listar();
     public SubComponente getSubcomponente(int idSubcomponente);
+    public boolean existsSubcomponente(String codigo);
 }

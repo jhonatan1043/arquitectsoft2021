@@ -153,4 +153,23 @@ public class DaoSubComponente implements ISubComponente {
         return subComponente;
     }
 
+    @Override
+    public boolean existsSubcomponente(String codigo) {
+        Conexion cnx = new Conexion();
+        boolean result = false;
+        ResultSet resultSet;
+        try (PreparedStatement preparedStatement = cnx.getConnection().prepareStatement(Contans.QUERY_EXITS_SUBCOMPONENTES)) {
+            preparedStatement.setString(1, codigo);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                result = resultSet.getBoolean(1);
+            }
+            resultSet.close();
+            cnx.getConnection().close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoComponente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+
 }

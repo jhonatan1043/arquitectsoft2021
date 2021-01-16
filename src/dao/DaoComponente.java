@@ -288,4 +288,21 @@ public class DaoComponente implements IComponente {
         return list;
     }
 
+    @Override
+    public boolean existsComponente(String codigo) {
+        boolean result = false;
+        ResultSet resultSet;
+        try (PreparedStatement preparedStatement = cnx.getConnection().prepareStatement(Contans.QUERY_EXITS_COMPONENTES)) {
+            preparedStatement.setString(1, codigo);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                result = resultSet.getBoolean(1);
+            }
+            resultSet.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoComponente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+
 }

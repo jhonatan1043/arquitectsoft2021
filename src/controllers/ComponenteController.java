@@ -13,6 +13,8 @@ import generals.ValidEnterCaracter;
 import generals.ValidTable;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -27,7 +29,7 @@ import views.VPrincipal;
  *
  * @author Programador 1
  */
-public class ComponenteController implements ActionListener, KeyListener {
+public class ComponenteController implements ActionListener, KeyListener, FocusListener {
 
     DefaultTableModel modelo;
     VComponente viewComponente;
@@ -63,6 +65,7 @@ public class ComponenteController implements ActionListener, KeyListener {
         viewComponente.btnEdit.addActionListener(this);
         viewComponente.txtCodigo.addKeyListener(this);
         viewComponente.txtDescripcion.addKeyListener(this);
+        viewComponente.txtCodigo.addFocusListener(this);
     }
 
     private void hideColumns() {
@@ -189,6 +192,7 @@ public class ComponenteController implements ActionListener, KeyListener {
             if (resp != 1) {
                 ValidControlsSystem.enabledControls(viewComponente.jLayeredPane1);
                 ValidButtonSystem.disableButton(viewComponente.pnlButton);
+                viewComponente.txtCodigo.setEnabled(false);
                 viewComponente.btnSave.setEnabled(true);
                 viewComponente.btnCancel.setEnabled(true);
             }
@@ -234,6 +238,21 @@ public class ComponenteController implements ActionListener, KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
+    }
+
+    @Override
+    public void focusGained(FocusEvent e) {
+    }
+
+    @Override
+    public void focusLost(FocusEvent e) {
+        if (e.getSource() == viewComponente.txtCodigo) {
+            if (daoComponente.existsComponente(viewComponente.txtCodigo.getText())
+                    && viewComponente.btnSave.isEnabled()) {
+                JOptionPane.showMessageDialog(viewComponente, "¡ Codigo ya Existente en la base de datos !");
+                viewComponente.txtCodigo.setText("");
+            }
+        }
     }
 
 }
