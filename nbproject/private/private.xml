@@ -2,6 +2,11 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/Poseidon/Desktop/proyecto/arquitectsoft2021/src/generals/Contans.java</file>
+            <file>file:/C:/Users/Poseidon/Desktop/proyecto/arquitectsoft2021/src/dao/DaoComponente.java</file>
+            <file>file:/C:/Users/Poseidon/Desktop/proyecto/arquitectsoft2021/src/views/VComponente.java</file>
+            <file>file:/C:/Users/Poseidon/Desktop/proyecto/arquitectsoft2021/src/controllers/ComponenteController.java</file>
+        </group>
     </open-files>
 </project-private>

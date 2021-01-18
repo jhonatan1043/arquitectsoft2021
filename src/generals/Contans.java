@@ -55,8 +55,10 @@ public class Contans {
 
     public static String QUERY_SUBCOMPONENTES_CALC_CARGAR = "CALL spComponenteCargar(";
 
-    public static String QUERY_SUBCOMPONENTES_CARGAR = "SELECT CONCAT(subcomponentes.Codigo_Homologacion,'-',acabados.Codigo_Homologacion) Codigo,"
-                                                        + "subcomponentes.Descripcion "
+    public static String QUERY_SUBCOMPONENTES_CARGAR = "SELECT CONCAT(subcomponentes.Codigo_Homologacion,'-',acabados.Codigo_Homologacion) Codigo, "
+                                                        + "subcomponentes.Descripcion, " 
+                                                        + "subcomponentes.Id_Unidad_Calculada, " 
+                                                        + "fnUnidadCalculada(subcomponentes.Id_Unidad_Calculada) unidad "
                                                         + "FROM arquitectdb.subcomponentes "
                                                         + "JOIN acabados ON acabados.Id_acabado = subcomponentes.Id_acabado"
                                                         + " WHERE Id_subcomponente= ";

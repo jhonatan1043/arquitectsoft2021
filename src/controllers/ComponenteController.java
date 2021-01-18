@@ -69,7 +69,7 @@ public class ComponenteController implements ActionListener, KeyListener, FocusL
     }
 
     private void hideColumns() {
-        int[] list = {0};
+        int[] list = {0, 3};
         ValidTable.hideColumnsTable(viewComponente.tbComponente, list);
     }
 
@@ -78,6 +78,7 @@ public class ComponenteController implements ActionListener, KeyListener, FocusL
             Object[] list = daoComponente.getSubComponente(id);
             modelo.addRow(list);
             System.setProperty("id", "");
+            ValidTable.enableColumnsTableComponente(viewComponente.tbComponente);
         }
     }
 
@@ -98,8 +99,8 @@ public class ComponenteController implements ActionListener, KeyListener, FocusL
             });
 
             System.setProperty("id", "");
-
             ValidButtonSystem.enabledButton(viewComponente.pnlButton);
+            ValidTable.enableColumnsTableComponente(viewComponente.tbComponente);
             viewComponente.btnSave.setEnabled(false);
             viewComponente.btnCancel.setEnabled(false);
         }

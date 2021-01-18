@@ -84,7 +84,7 @@ public class VSubComponente extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Unidad Calculada:");
 
-        cbUnidadCalculada.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Seleccionar --", "Logitud", "Unidad", "Volumen", "Ancho y Largo" }));
+        cbUnidadCalculada.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Seleccionar --", "Logitud", "Unidad", "cantidad", "Volumen", "Ancho y Largo" }));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
