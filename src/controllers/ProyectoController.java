@@ -7,6 +7,7 @@ package controllers;
 
 import dao.DaoComponente;
 import generals.FileTxt;
+import generals.GeneralExcel;
 import generals.ValidTable;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -41,6 +42,8 @@ public class ProyectoController implements ActionListener {
     private void initEvent() {
         viewComponente.btnOpenTxt.addActionListener(this);
         viewComponente.btnCalcular.addActionListener(this);
+        viewComponente.btnGenerar.addActionListener(this);
+
     }
 
     @Override
@@ -58,6 +61,11 @@ public class ProyectoController implements ActionListener {
         }
         if (e.getSource() == this.viewComponente.btnCalcular) {
             loadSubcomponente();
+        }
+        if (e.getSource() == this.viewComponente.btnGenerar) {
+
+            GeneralExcel.GeneraExcel(System.getProperty("java.io.tmpdir"), viewComponente.tbComponente, "perfil");
+
         }
     }
 
@@ -109,7 +117,11 @@ public class ProyectoController implements ActionListener {
                 modelo.addRow(data);
             });
         });
-        viewComponente.btnGenerar.setEnabled(true);
+
+        if (viewComponente.tbComponente.getRowCount() > 0) {
+            viewComponente.btnGenerar.setEnabled(true);
+        }
+
     }
 
 }
