@@ -5,12 +5,9 @@
  */
 package views;
 
-import controllers.AcabadoController;
 import controllers.ComponenteController;
 import controllers.ProyectoController;
-import controllers.CorteController;
 import controllers.SubComponenteController;
-import controllers.UnidadMedidaController;
 import generals.ValidForm;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -52,7 +49,6 @@ public class VPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ArquitectSoft");
-        setAlwaysOnTop(true);
 
         javax.swing.GroupLayout DesktopLayout = new javax.swing.GroupLayout(Desktop);
         Desktop.setLayout(DesktopLayout);
@@ -71,11 +67,11 @@ public class VPrincipal extends javax.swing.JFrame {
         jLayeredPane1.setLayout(jLayeredPane1Layout);
         jLayeredPane1Layout.setHorizontalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Desktop)
+            .addComponent(Desktop, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Desktop, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(Desktop)
         );
 
         jMenu1.setText("Opciones");
@@ -117,11 +113,11 @@ public class VPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLayeredPane1)
+            .addComponent(jLayeredPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLayeredPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jLayeredPane1)
         );
 
         pack();
