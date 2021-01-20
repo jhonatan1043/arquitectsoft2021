@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import views.VProyecto;
 import views.VPrincipal;
@@ -98,14 +97,14 @@ public class ProyectoController implements ActionListener {
     }
 
     private void dataClear() {
-        viewComponente.tbPerfilMetalico.removeAll();
-        viewComponente.tbVidrioPanele.removeAll();
-        viewComponente.tbUnionVidrio.removeAll();
-        viewComponente.tbUnionPaneles.removeAll();
-        viewComponente.tbPuerta.removeAll();
-        viewComponente.tbTuboMetalico.removeAll();
-        viewComponente.tbMampara.removeAll();
-        viewComponente.tbComponente.removeAll();
+        ValidTable.clearTable(viewComponente.tbComponente);
+        ValidTable.clearTable(viewComponente.tbPerfilMetalico);
+        ValidTable.clearTable(viewComponente.tbVidrioPanele);
+        ValidTable.clearTable(viewComponente.tbUnionVidrio);
+        ValidTable.clearTable(viewComponente.tbUnionPaneles);
+        ValidTable.clearTable(viewComponente.tbPuerta);
+        ValidTable.clearTable(viewComponente.tbTuboMetalico);
+        ValidTable.clearTable(viewComponente.tbMampara);
     }
 
     private void loadSubcomponente() {
@@ -121,7 +120,6 @@ public class ProyectoController implements ActionListener {
         if (viewComponente.tbComponente.getRowCount() > 0) {
             viewComponente.btnGenerar.setEnabled(true);
         }
-
     }
 
 }

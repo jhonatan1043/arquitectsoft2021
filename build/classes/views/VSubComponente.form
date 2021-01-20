@@ -226,7 +226,7 @@
                     <StringItem index="1" value="Logitud"/>
                     <StringItem index="2" value="Unidad"/>
                     <StringItem index="3" value="cantidad"/>
-                    <StringItem index="4" value="Volumen"/>
+                    <StringItem index="4" value="por su cantidad"/>
                     <StringItem index="5" value="Ancho y Largo"/>
                   </StringArray>
                 </Property>

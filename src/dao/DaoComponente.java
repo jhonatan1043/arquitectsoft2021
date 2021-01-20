@@ -254,28 +254,29 @@ public class DaoComponente implements IComponente {
             ResultSet result;
             String codigo = modelo.getValueAt(i, 0).toString().trim().replace("\"", "").replace("�", "");
             String auxLongitud = modelo.getValueAt(i, 2).toString().trim().replace("\"", "");
-            String ubicacion = modelo.getValueAt(i, 3).toString().trim();
-            int longitud = Integer.parseInt(auxLongitud.trim().replace(" ", "").replace("\"", ""));
+            float longitud = Float.parseFloat(auxLongitud.trim().replace(" ", "").replace("\"", ""));
+            
             try {
+                
+//                System.out.println(longitud);
+//                System.out.println(longitud * 2);
 
-                String query = "call spComponentePerfilesCargar(?,?,?);";
+                String query = "call spComponentePerfilesCargar(?,?);";
 
                 try (PreparedStatement preparedStatement = cnx.getConnection().prepareStatement(query)) {
                     preparedStatement.setString(1, codigo);
-                    preparedStatement.setInt(2, longitud);
-                    preparedStatement.setString(3, ubicacion);
+                    preparedStatement.setFloat(2, longitud);
                     result = preparedStatement.executeQuery();
 
                     listDta = new ArrayList<>();
 
                     while (result.next()) {
-                        data = new Object[6];
+                        data = new Object[5];
                         data[0] = result.getInt(1);
                         data[1] = result.getString(2);
                         data[2] = result.getString(3);
                         data[3] = result.getInt(4);
                         data[4] = result.getInt(5);
-                        data[5] = result.getString(6);
                         listDta.add(data);
                     }
 
@@ -287,7 +288,6 @@ public class DaoComponente implements IComponente {
             } catch (SQLException ex) {
                 Logger.getLogger(DaoComponente.class.getName()).log(Level.SEVERE, null, ex);
             }
-
         }
         return list;
     }
