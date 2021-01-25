@@ -6,6 +6,7 @@
 package controllers;
 
 import dao.DaoComponente;
+import dao.DaoProyecto;
 import generals.FileTxt;
 import generals.GeneralExcel;
 import generals.ValidTable;
@@ -109,17 +110,35 @@ public class ProyectoController implements ActionListener {
 
     private void loadSubcomponente() {
         ArrayList<ArrayList<Object[]>> list;
+        DefaultTableModel modeloAux = modelo;
         list = daoComponente.getSubComponenteCalc(viewComponente.tbPerfilMetalico.getModel());
 
         list.forEach((list1) -> {
             list1.forEach((data) -> {
-                modelo.addRow(data);
+                modeloAux.addRow(data);
             });
         });
 
         if (viewComponente.tbComponente.getRowCount() > 0) {
+            groupList(modeloAux);
             viewComponente.btnGenerar.setEnabled(true);
+            viewComponente.btnCalcular.setEnabled(false);
         }
+    }
+
+    private void groupList(DefaultTableModel modeloAux) {
+        DaoProyecto daoProyecto = new DaoProyecto();
+        ArrayList<Object[]> list;
+
+        list = daoProyecto.getComponenteCalc(modeloAux);
+
+        modeloAux.setRowCount(0);
+        modelo.setRowCount(0);
+
+        list.forEach((list1) -> {
+            modelo.addRow(list1);
+        });
+     
     }
 
 }

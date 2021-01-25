@@ -14,6 +14,6 @@ import javax.swing.table.TableModel;
  */
 public interface IProyecto {
     
-    public ArrayList<ArrayList<Object[]>> getComponenteCalc(TableModel modelo);
+    public ArrayList<Object[]> getComponenteCalc(TableModel modelo);
     
 }
