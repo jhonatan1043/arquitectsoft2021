@@ -30,6 +30,9 @@ public class DaoComponente implements IComponente {
     public boolean save(Componente componente) {
         try {
             cnx.getConnection().setAutoCommit(false);
+
+            int unidadCalculada;
+
             PreparedStatement insertComponente = cnx.getConnection().prepareStatement(Contans.QUERY_INSERT_COMPONENTES, Statement.RETURN_GENERATED_KEYS);
             insertComponente.setString(1, componente.getCodigo());
             insertComponente.setString(2, componente.getDescripcion());
@@ -42,11 +45,13 @@ public class DaoComponente implements IComponente {
 
                 try (PreparedStatement insertComponenteDetalle = cnx.getConnection().prepareStatement(Contans.QUERY_INSERT_COMPONENTE_DETALLE)) {
                     for (int i = 0; i < componente.getModelo().getRowCount(); i++) {
+                        unidadCalculada = Integer.parseInt(componente.getModelo().getValueAt(i, 3).toString().split("|")[0]);
                         insertComponenteDetalle.setInt(1, idComponente);
                         insertComponenteDetalle.setInt(2, Integer.parseInt(componente.getModelo().getValueAt(i, 0).toString()));
-                        insertComponenteDetalle.setInt(3, Integer.parseInt(componente.getModelo().getValueAt(i, 5).toString()));
-                        insertComponenteDetalle.setInt(4, Integer.parseInt(componente.getModelo().getValueAt(i, 6).toString()));
-                        insertComponenteDetalle.setBoolean(5, Boolean.parseBoolean(componente.getModelo().getValueAt(i, 7).toString()));
+                        insertComponenteDetalle.setInt(3, unidadCalculada);
+                        insertComponenteDetalle.setInt(4, Integer.parseInt(componente.getModelo().getValueAt(i, 4).toString()));
+                        insertComponenteDetalle.setInt(5, Integer.parseInt(componente.getModelo().getValueAt(i, 5).toString()));
+                        insertComponenteDetalle.setBoolean(6, Boolean.parseBoolean(componente.getModelo().getValueAt(i, 6).toString()));
                         insertComponenteDetalle.executeUpdate();
                     }
 
@@ -76,6 +81,9 @@ public class DaoComponente implements IComponente {
     public boolean update(Componente componente) {
         try {
             cnx.getConnection().setAutoCommit(false);
+
+            int unidadCalculada;
+
             try (PreparedStatement insertComponente = cnx.getConnection().prepareStatement(Contans.QUERY_UPDATE_COMPONENTES)) {
                 insertComponente.setString(1, componente.getCodigo());
                 insertComponente.setString(2, componente.getDescripcion());
@@ -94,11 +102,13 @@ public class DaoComponente implements IComponente {
 
                 try (PreparedStatement insertComponenteDetalle = cnx.getConnection().prepareStatement(Contans.QUERY_INSERT_COMPONENTE_DETALLE)) {
                     for (int i = 0; i < componente.getModelo().getRowCount(); i++) {
+                        unidadCalculada = Integer.parseInt(componente.getModelo().getValueAt(i, 3).toString().split("|")[0]);
                         insertComponenteDetalle.setInt(1, componente.getIdComponente());
                         insertComponenteDetalle.setInt(2, Integer.parseInt(componente.getModelo().getValueAt(i, 0).toString()));
-                        insertComponenteDetalle.setInt(3, Integer.parseInt(componente.getModelo().getValueAt(i, 5).toString()));
-                        insertComponenteDetalle.setInt(4, Integer.parseInt(componente.getModelo().getValueAt(i, 6).toString()));
-                        insertComponenteDetalle.setBoolean(5, Boolean.parseBoolean(componente.getModelo().getValueAt(i, 7).toString()));
+                        insertComponenteDetalle.setInt(3, unidadCalculada);
+                        insertComponenteDetalle.setInt(4, Integer.parseInt(componente.getModelo().getValueAt(i, 4).toString()));
+                        insertComponenteDetalle.setInt(5, Integer.parseInt(componente.getModelo().getValueAt(i, 5).toString()));
+                        insertComponenteDetalle.setBoolean(6, Boolean.parseBoolean(componente.getModelo().getValueAt(i, 6).toString()));
                         insertComponenteDetalle.executeUpdate();
 
                     }
@@ -196,15 +206,14 @@ public class DaoComponente implements IComponente {
             result = preparedStatement.executeQuery();
 
             while (result.next()) {
-                Object[] lists = new Object[8];
+                Object[] lists = new Object[7];
                 lists[0] = result.getInt(1);
                 lists[1] = result.getString(2);
-                lists[2] = result.getString(3);
-                lists[3] = result.getInt(4);
-                lists[4] = result.getString(5);
+                lists[2] = result.getString(2);
+                lists[3] = result.getString(4);
+                lists[4] = result.getInt(5);
                 lists[5] = result.getInt(6);
-                lists[6] = result.getInt(7);
-                lists[7] = result.getBoolean(8);
+                lists[6] = result.getBoolean(7);
                 list.add(lists);
             }
 
@@ -218,7 +227,7 @@ public class DaoComponente implements IComponente {
 
     @Override
     public Object[] getSubComponente(int idSubComponente) {
-        Object[] list = new Object[8];
+        Object[] list = new Object[7];
 
         ResultSet result;
 
@@ -229,11 +238,10 @@ public class DaoComponente implements IComponente {
                 list[0] = idSubComponente;
                 list[1] = result.getObject(1);
                 list[2] = result.getObject(2);
-                list[3] = result.getObject(3);
-                list[4] = result.getObject(4);
-                list[5] = 1;
-                list[6] = 30;
-                list[7] = false;
+                list[3] = "Seleccione";
+                list[4] = 1;
+                list[5] = 30;
+                list[6] = false;
 
             }
 
@@ -255,11 +263,8 @@ public class DaoComponente implements IComponente {
             String codigo = modelo.getValueAt(i, 0).toString().trim().replace("\"", "").replace("�", "");
             String auxLongitud = modelo.getValueAt(i, 2).toString().trim().replace("\"", "");
             float longitud = Float.parseFloat(auxLongitud.trim().replace(" ", "").replace("\"", ""));
-            
+
             try {
-                
-//                System.out.println(longitud);
-//                System.out.println(longitud * 2);
 
                 String query = "call spComponentePerfilesCargar(?,?);";
 
@@ -271,12 +276,13 @@ public class DaoComponente implements IComponente {
                     listDta = new ArrayList<>();
 
                     while (result.next()) {
-                        data = new Object[5];
+                        data = new Object[6];
                         data[0] = result.getInt(1);
                         data[1] = result.getString(2);
                         data[2] = result.getString(3);
                         data[3] = result.getInt(4);
-                        data[4] = result.getInt(5);
+                        data[4] = result.getString(5);
+                        data[5] = result.getInt(6);
                         listDta.add(data);
                     }
 

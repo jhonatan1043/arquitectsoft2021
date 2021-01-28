@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -53,15 +54,23 @@ public class FileTxt {
     private void showTab(int index,
             VProyecto viewProyecto, ArrayList<Object[]> listData) {
         ArrayList<String> listColumns = GenerarColumns.setCreateColumns(index);
-        DefaultTableModel modelo = new DefaultTableModel();
 
-        listColumns.forEach((listColumns1) -> {
-            modelo.addColumn(listColumns1);
-        });
+        DefaultTableModel modelo = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return true;
+            }
+        };
 
-        listData.forEach((listData1) -> {
-            modelo.addRow(listData1);
-        });
+        listColumns.forEach(
+                (listColumns1) -> {
+                    modelo.addColumn(listColumns1);
+                });
+
+        listData.forEach(
+                (listData1) -> {
+                    modelo.addRow(listData1);
+                });
 
         switch (index) {
 
@@ -99,10 +108,10 @@ public class FileTxt {
     public ArrayList<Object[]> readFileTxt(File file) throws IOException {
         ArrayList<Object[]> list = new ArrayList<>();
 
-        FileReader fr = null;
-        BufferedReader br = null;
+        FileReader fr;
+        BufferedReader br;
         String line;
-        Object[] array = null;
+        Object[] array;
         try {
 
             fr = new FileReader(file);
@@ -113,9 +122,7 @@ public class FileTxt {
                     String[] separado = line.split(",");
                     array = new String[separado.length];
                     System.arraycopy(separado, 0, array, 0, separado.length);
-                    br.readLine();
                     list.add(array);
-
                 }
 
             } catch (IOException ex) {

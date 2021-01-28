@@ -38,8 +38,6 @@ public class VSubComponente extends javax.swing.JInternalFrame {
         txtCodigo = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtDescripcion = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        cbUnidadCalculada = new javax.swing.JComboBox<>();
         pnlButton = new javax.swing.JPanel();
         btnNew = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
@@ -82,10 +80,6 @@ public class VSubComponente extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Descripción:");
 
-        jLabel6.setText("Unidad Calculada:");
-
-        cbUnidadCalculada.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Seleccionar --", "Logitud", "Unidad", "cantidad", "por su cantidad", "Ancho y Largo" }));
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -93,20 +87,17 @@ public class VSubComponente extends javax.swing.JInternalFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbUnidadCalculada, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
+                    .addComponent(jLabel4)
                     .addComponent(jLabel2))
+                .addGap(50, 50, 50)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(145, 145, 145)
+                        .addComponent(jLabel5))
+                    .addComponent(cbAcabado, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtDescripcion)
-                    .addComponent(cbAcabado, 0, 281, Short.MAX_VALUE))
+                .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -120,8 +111,6 @@ public class VSubComponente extends javax.swing.JInternalFrame {
                     .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(cbUnidadCalculada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbAcabado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -234,12 +223,10 @@ public class VSubComponente extends javax.swing.JInternalFrame {
     public javax.swing.JButton btnNew;
     public javax.swing.JButton btnSave;
     public javax.swing.JComboBox<String> cbAcabado;
-    public javax.swing.JComboBox<String> cbUnidadCalculada;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     public javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;

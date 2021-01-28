@@ -37,7 +37,6 @@ public class DaoSubComponente implements ISubComponente {
                 psmt.setInt(1, subcomponente.getIdAcabado());
                 psmt.setString(2, subcomponente.getCodigo());
                 psmt.setString(3, subcomponente.getDescripcion());
-                psmt.setInt(4, subcomponente.getIdUnidadCalculada());
                 int affectedRows = psmt.executeUpdate();
 
                 if (affectedRows == 0) {
@@ -67,10 +66,9 @@ public class DaoSubComponente implements ISubComponente {
         try {
             try (PreparedStatement psmt = cnx.getConnection().prepareStatement(Contans.QUERY_UPDATE_SUBCOMPONENTES)) {
                 psmt.setInt(1, subcomponente.getIdAcabado());
-                psmt.setInt(2, subcomponente.getIdUnidadCalculada());
-                psmt.setString(3, subcomponente.getCodigo());
-                psmt.setString(4, subcomponente.getDescripcion());
-                psmt.setInt(5, subcomponente.getIdSubcomponente());
+                psmt.setString(2, subcomponente.getCodigo());
+                psmt.setString(3, subcomponente.getDescripcion());
+                psmt.setInt(4, subcomponente.getIdSubcomponente());
                 int affectedRows = psmt.executeUpdate();
 
                 if (affectedRows == 0) {
@@ -141,9 +139,8 @@ public class DaoSubComponente implements ISubComponente {
             while (result.next()) {
                 subComponente.setIdSubcomponente(idSubcomponente);
                 subComponente.setIdAcabado(result.getInt(1));
-                subComponente.setIdUnidadCalculada(result.getInt(2));
-                subComponente.setCodigo(result.getString(3));
-                subComponente.setDescripcion(result.getString(4));
+                subComponente.setCodigo(result.getString(2));
+                subComponente.setDescripcion(result.getString(3));
             }
             result.close();
             cnx.getConnection().close();

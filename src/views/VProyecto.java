@@ -68,14 +68,14 @@ public class VProyecto extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "IdComponente", "Codigo", "Descripción", "Cantidad", "Medida"
+                "IdComponente", "Codigo", "Descripción", "Cantidad", "Medida", "Medida Calculada"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Float.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Float.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -87,6 +87,7 @@ public class VProyecto extends javax.swing.JInternalFrame {
             }
         });
         tbComponente.setEnabled(false);
+        tbComponente.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tbComponente);
         if (tbComponente.getColumnModel().getColumnCount() > 0) {
             tbComponente.getColumnModel().getColumn(0).setResizable(false);
@@ -95,6 +96,7 @@ public class VProyecto extends javax.swing.JInternalFrame {
             tbComponente.getColumnModel().getColumn(2).setPreferredWidth(300);
             tbComponente.getColumnModel().getColumn(3).setResizable(false);
             tbComponente.getColumnModel().getColumn(4).setResizable(false);
+            tbComponente.getColumnModel().getColumn(5).setResizable(false);
         }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -192,7 +194,7 @@ public class VProyecto extends javax.swing.JInternalFrame {
 
             }
         ));
-        tbPerfilMetalico.setEnabled(false);
+        tbPerfilMetalico.getTableHeader().setReorderingAllowed(false);
         jScrollPane9.setViewportView(tbPerfilMetalico);
 
         javax.swing.GroupLayout jPnPerfilMetalicoLayout = new javax.swing.GroupLayout(jPnPerfilMetalico);
@@ -217,7 +219,6 @@ public class VProyecto extends javax.swing.JInternalFrame {
 
             }
         ));
-        tbVidrioPanele.setEnabled(false);
         jScrollPane3.setViewportView(tbVidrioPanele);
 
         javax.swing.GroupLayout jPnVidrioPanelLayout = new javax.swing.GroupLayout(jPnVidrioPanel);
@@ -242,7 +243,6 @@ public class VProyecto extends javax.swing.JInternalFrame {
 
             }
         ));
-        tbUnionVidrio.setEnabled(false);
         jScrollPane4.setViewportView(tbUnionVidrio);
 
         javax.swing.GroupLayout jPnUnionVidrioLayout = new javax.swing.GroupLayout(jPnUnionVidrio);
@@ -271,7 +271,6 @@ public class VProyecto extends javax.swing.JInternalFrame {
 
             }
         ));
-        tbPuerta.setEnabled(false);
         jScrollPane5.setViewportView(tbPuerta);
 
         javax.swing.GroupLayout jPnPuertaLayout = new javax.swing.GroupLayout(jPnPuerta);
@@ -300,7 +299,6 @@ public class VProyecto extends javax.swing.JInternalFrame {
 
             }
         ));
-        tbUnionPaneles.setEnabled(false);
         jScrollPane6.setViewportView(tbUnionPaneles);
 
         javax.swing.GroupLayout jPnUnionPaneleLayout = new javax.swing.GroupLayout(jPnUnionPanele);
@@ -329,7 +327,6 @@ public class VProyecto extends javax.swing.JInternalFrame {
 
             }
         ));
-        tbTuboMetalico.setEnabled(false);
         jScrollPane7.setViewportView(tbTuboMetalico);
 
         javax.swing.GroupLayout jPnTuboMetalicoLayout = new javax.swing.GroupLayout(jPnTuboMetalico);
@@ -358,7 +355,6 @@ public class VProyecto extends javax.swing.JInternalFrame {
 
             }
         ));
-        tbMampara.setEnabled(false);
         jScrollPane8.setViewportView(tbMampara);
 
         javax.swing.GroupLayout jPnMamparasLayout = new javax.swing.GroupLayout(jPnMamparas);

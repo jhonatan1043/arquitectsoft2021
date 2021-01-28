@@ -35,9 +35,10 @@ public class Contans {
 
     public static String QUERY_INSERT_COMPONENTE_DETALLE = "INSERT arquitectdb.componentes_detalle (Id_Componente,"
             + " Id_Subcomponente,"
+            + " Id_Unidad_Calculada,"
             + " Cantidad_Default,"
             + " Cantidad_Adicional,"
-            + " Aplica_Decremento) VALUES (?,?,?,?,?);";
+            + " Aplica_Decremento) VALUES (?,?,?,?,?,?);";
 
     public static String QUERY_UPDATE_COMPONENTES = "CALL spComponenteActualizar(?,?,?);";
 
@@ -56,16 +57,14 @@ public class Contans {
     public static String QUERY_SUBCOMPONENTES_CALC_CARGAR = "CALL spComponenteCargar(";
 
     public static String QUERY_SUBCOMPONENTES_CARGAR = "SELECT CONCAT(subcomponentes.Codigo_Homologacion,'-',acabados.Codigo_Homologacion) Codigo, "
-            + "subcomponentes.Descripcion, "
-            + "subcomponentes.Id_Unidad_Calculada, "
-            + "fnUnidadCalculada(subcomponentes.Id_Unidad_Calculada) unidad "
+            + "subcomponentes.Descripcion "
             + "FROM arquitectdb.subcomponentes "
             + "JOIN acabados ON acabados.Id_acabado = subcomponentes.Id_acabado"
             + " WHERE Id_subcomponente= ";
 
-    public static String QUERY_INSERT_SUBCOMPONENTES = "CALL spSubComponenteRegistrar(?,?,?,?);";
+    public static String QUERY_INSERT_SUBCOMPONENTES = "CALL spSubComponenteRegistrar(?,?,?);";
 
-    public static String QUERY_UPDATE_SUBCOMPONENTES = "CALL spSubcomponenteUpdate(?,?,?,?,?);";
+    public static String QUERY_UPDATE_SUBCOMPONENTES = "CALL spSubcomponenteUpdate(?,?,?,?);";
 
     public static String QUERY_DELETE_SUBCOMPONENTES = "DELETE FROM arquitectdb.subcomponentes WHERE Id_subcomponente = ?";
     //--------------------------------------------------------------------------------------------------------------------------------

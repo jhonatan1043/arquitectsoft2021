@@ -6,6 +6,7 @@
 package controllers;
 
 import dao.DaoComponente;
+import generals.CellRenderer;
 import generals.Contans;
 import generals.ValidButtonSystem;
 import generals.ValidControlsSystem;
@@ -24,7 +25,8 @@ import models.Componente;
 import views.VBusqueda;
 import views.VComponente;
 import views.VPrincipal;
-
+import javax.swing.DefaultCellEditor;
+import javax.swing.JComboBox;
 /**
  *
  * @author Programador 1
@@ -49,9 +51,11 @@ public class ComponenteController implements ActionListener, KeyListener, FocusL
         ValidButtonSystem.disableButton(viewComponente.pnlButton);
         initEvent();
         hideColumns();
+        crearTablaCombo();
         modelo = (DefaultTableModel) viewComponente.tbComponente.getModel();
+        viewComponente.tbComponente.setEnabled(false);
         viewComponente.btnNew.setEnabled(true);
-        viewComponente.btnBuscar.setEnabled(true);
+        viewComponente.btnBuscar.setEnabled(true);  
     }
 
     private void initEvent() {
@@ -69,7 +73,7 @@ public class ComponenteController implements ActionListener, KeyListener, FocusL
     }
 
     private void hideColumns() {
-        int[] list = {0, 3};
+        int[] list = {0};
         ValidTable.hideColumnsTable(viewComponente.tbComponente, list);
     }
 
@@ -78,7 +82,6 @@ public class ComponenteController implements ActionListener, KeyListener, FocusL
             Object[] list = daoComponente.getSubComponente(id);
             modelo.addRow(list);
             System.setProperty("id", "");
-            ValidTable.enableColumnsTableComponente(viewComponente.tbComponente);
         }
     }
 
@@ -100,7 +103,7 @@ public class ComponenteController implements ActionListener, KeyListener, FocusL
 
             System.setProperty("id", "");
             ValidButtonSystem.enabledButton(viewComponente.pnlButton);
-            ValidTable.enableColumnsTableComponente(viewComponente.tbComponente);
+           // ValidTable.enableColumnsTableComponente(viewComponente.tbComponente);
             viewComponente.btnSave.setEnabled(false);
             viewComponente.btnCancel.setEnabled(false);
         }
@@ -134,6 +137,7 @@ public class ComponenteController implements ActionListener, KeyListener, FocusL
             ValidControlsSystem.enabledControls(viewComponente.jLayeredPane1);
             ValidButtonSystem.disableButton(viewComponente.pnlButton);
             controlsClear();
+            viewComponente.tbComponente.setEnabled(true);
             viewComponente.btnSave.setEnabled(true);
             viewComponente.btnCancel.setEnabled(true);
         }
@@ -142,6 +146,7 @@ public class ComponenteController implements ActionListener, KeyListener, FocusL
             ValidControlsSystem.disableControls(viewComponente.jLayeredPane1);
             controlsClear();
             ValidButtonSystem.disableButton(viewComponente.pnlButton);
+            viewComponente.tbComponente.setEnabled(false);
             viewComponente.btnNew.setEnabled(true);
             viewComponente.btnBuscar.setEnabled(true);
         }
@@ -181,6 +186,7 @@ public class ComponenteController implements ActionListener, KeyListener, FocusL
                 if (resultado) {
                     ValidControlsSystem.disableControls(viewComponente.jLayeredPane1);
                     ValidButtonSystem.enabledButton(viewComponente.pnlButton);
+                    viewComponente.tbComponente.setEnabled(false);
                     viewComponente.btnSave.setEnabled(false);
                     viewComponente.btnCancel.setEnabled(false);
                     JOptionPane.showMessageDialog(viewComponente, "¡ Registrado con exito !");
@@ -193,6 +199,7 @@ public class ComponenteController implements ActionListener, KeyListener, FocusL
             if (resp != 1) {
                 ValidControlsSystem.enabledControls(viewComponente.jLayeredPane1);
                 ValidButtonSystem.disableButton(viewComponente.pnlButton);
+                viewComponente.tbComponente.setEnabled(true);
                 viewComponente.txtCodigo.setEnabled(false);
                 viewComponente.btnSave.setEnabled(true);
                 viewComponente.btnCancel.setEnabled(true);
@@ -221,6 +228,18 @@ public class ComponenteController implements ActionListener, KeyListener, FocusL
                 }
             }
         }
+    }
+    
+       private void crearTablaCombo() {
+        //Combo y valores
+        JComboBox comboBox = new JComboBox();
+        comboBox.addItem("1|Longitud");
+        comboBox.addItem("2|Unidad");
+        comboBox.addItem("3|Cantidad");
+        comboBox.addItem("4|Por su cantidad");
+        //se indica que columna tendra el JComboBox
+        viewComponente.tbComponente.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(comboBox));        
+        viewComponente.tbComponente.setDefaultRenderer(Object.class, new CellRenderer(3));
     }
 
     @Override

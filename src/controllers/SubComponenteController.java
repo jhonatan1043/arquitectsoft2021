@@ -130,8 +130,7 @@ public class SubComponenteController implements ActionListener, FocusListener, K
         boolean result = false;
         if ("".equals(viewSubcomponente.txtDescripcion.getText())
                 || viewSubcomponente.cbAcabado.getSelectedIndex() == 0
-                || "".equals(viewSubcomponente.txtCodigo.getText())
-                || viewSubcomponente.cbUnidadCalculada.getSelectedIndex() == 0) {
+                || "".equals(viewSubcomponente.txtCodigo.getText())) {
             JOptionPane.showMessageDialog(viewSubcomponente, "¡ hay Datos sin realizar !");
         } else {
             result = true;
@@ -144,7 +143,6 @@ public class SubComponenteController implements ActionListener, FocusListener, K
         subcomponente.setCodigo(viewSubcomponente.txtCodigo.getText());
         subcomponente.setDescripcion(viewSubcomponente.txtDescripcion.getText());
         subcomponente.setIdAcabado(idAcabado);
-        subcomponente.setIdUnidadCalculada(viewSubcomponente.cbUnidadCalculada.getSelectedIndex());
 
     }
 
@@ -154,7 +152,6 @@ public class SubComponenteController implements ActionListener, FocusListener, K
             viewSubcomponente.txtCodigo.setText(subcomponente.getCodigo());
             viewSubcomponente.txtDescripcion.setText(subcomponente.getDescripcion());
             viewSubcomponente.cbAcabado.setSelectedIndex(subcomponente.getIdAcabado());
-            viewSubcomponente.cbUnidadCalculada.setSelectedIndex(subcomponente.getIdUnidadCalculada());
             System.setProperty("id", "");
             ValidButtonSystem.enabledButton(viewSubcomponente.pnlButton);
             viewSubcomponente.btnSave.setEnabled(false);
@@ -199,7 +196,6 @@ public class SubComponenteController implements ActionListener, FocusListener, K
         viewSubcomponente.txtCodigo.setText("");
         viewSubcomponente.txtDescripcion.setText("");
         viewSubcomponente.cbAcabado.setSelectedIndex(0);
-        viewSubcomponente.cbUnidadCalculada.setSelectedIndex(0);
     }
 
     @Override
