@@ -74,9 +74,10 @@ public class Contans {
     //---------------------------------------------------------------------------------------------------------------------------------
     public static String QUERY_INSERT_PROYECTO = "INSERT INTO proyecto "
             + "(Id_Subcomponente, "
+            + " Id_Unidad_Medida, "
             + " cantidad, "
             + " medida) "
-            + "VALUES (?,?,?)";
+            + "VALUES (?,?,?,?)";
     public static String QUERY_GET_PROYECTO = "CALL spSubComponenteAgrupar();";
 
 // static of system 

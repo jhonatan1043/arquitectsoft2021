@@ -276,13 +276,15 @@ public class DaoComponente implements IComponente {
                     listDta = new ArrayList<>();
 
                     while (result.next()) {
-                        data = new Object[6];
+                        data = new Object[8];
                         data[0] = result.getInt(1);
-                        data[1] = result.getString(2);
+                        data[1] = result.getInt(2);
                         data[2] = result.getString(3);
-                        data[3] = result.getInt(4);
-                        data[4] = result.getString(5);
-                        data[5] = result.getInt(6);
+                        data[3] = result.getString(4);
+                        data[4] = result.getInt(5);
+                        data[5] = result.getString(6);
+                        data[6] = result.getInt(7);
+                        data[7] = "";
                         listDta.add(data);
                     }
 
