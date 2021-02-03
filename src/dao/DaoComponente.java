@@ -209,7 +209,7 @@ public class DaoComponente implements IComponente {
                 Object[] lists = new Object[7];
                 lists[0] = result.getInt(1);
                 lists[1] = result.getString(2);
-                lists[2] = result.getString(2);
+                lists[2] = result.getString(3);
                 lists[3] = result.getString(4);
                 lists[4] = result.getInt(5);
                 lists[5] = result.getInt(6);
@@ -238,7 +238,7 @@ public class DaoComponente implements IComponente {
                 list[0] = idSubComponente;
                 list[1] = result.getObject(1);
                 list[2] = result.getObject(2);
-                list[3] = "Seleccione";
+                list[3] = "1|Longitud";
                 list[4] = 1;
                 list[5] = 30;
                 list[6] = false;
