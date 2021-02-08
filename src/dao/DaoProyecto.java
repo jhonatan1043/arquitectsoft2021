@@ -37,7 +37,8 @@ public class DaoProyecto implements IProyecto {
                 insertComponenteDetalle.setInt(1, Integer.parseInt(modelo.getValueAt(i, 0).toString()));
                 insertComponenteDetalle.setInt(2, Integer.parseInt(modelo.getValueAt(i, 1).toString()));
                 insertComponenteDetalle.setInt(3, Integer.parseInt(modelo.getValueAt(i, 4).toString()));
-                insertComponenteDetalle.setInt(4, Integer.parseInt(modelo.getValueAt(i, 6).toString()));
+                insertComponenteDetalle.setInt(4, Integer.parseInt(modelo.getValueAt(i, 5).toString()));
+                insertComponenteDetalle.setInt(5, Integer.parseInt(modelo.getValueAt(i, 6).toString()));
                 insertComponenteDetalle.executeUpdate();
             }
             insertComponenteDetalle.close();
@@ -51,9 +52,9 @@ public class DaoProyecto implements IProyecto {
                 lists[1] = result.getString(2);
                 lists[2] = result.getString(3);
                 lists[3] = result.getInt(4);
-                lists[4] = "3000 MM";
-                lists[5] = result.getInt(5);
-                lists[6] = result.getString(6);
+                lists[4] = result.getInt(5);
+                lists[5] = result.getInt(6);
+                lists[6] = result.getString(7);
                 list.add(lists);
             }
 

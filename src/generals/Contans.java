@@ -76,8 +76,9 @@ public class Contans {
             + "(Id_Subcomponente, "
             + " Id_Unidad_Medida, "
             + " cantidad, "
+            + " medidaAdicional,"
             + " medida) "
-            + "VALUES (?,?,?,?)";
+            + "VALUES (?,?,?,?,?)";
     public static String QUERY_GET_PROYECTO = "CALL spSubComponenteAgrupar();";
 
 // static of system 

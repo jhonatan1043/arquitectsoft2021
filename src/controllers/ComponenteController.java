@@ -236,7 +236,7 @@ public class ComponenteController implements ActionListener, KeyListener, FocusL
         comboBox.addItem("1|Longitud");
         comboBox.addItem("2|Unidad");
         comboBox.addItem("3|Cantidad");
-        comboBox.addItem("4|Por su cantidad");
+        comboBox.addItem("4|Medida Exacta");
         //se indica que columna tendra el JComboBox
         viewComponente.tbComponente.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(comboBox));        
         viewComponente.tbComponente.setDefaultRenderer(Object.class, new CellRenderer(3));
