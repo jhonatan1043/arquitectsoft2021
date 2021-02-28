@@ -37,6 +37,7 @@ public class DaoSubComponente implements ISubComponente {
                 psmt.setInt(1, subcomponente.getIdAcabado());
                 psmt.setString(2, subcomponente.getCodigo());
                 psmt.setString(3, subcomponente.getDescripcion());
+                psmt.setBoolean(4, subcomponente.isEspecial());
                 int affectedRows = psmt.executeUpdate();
 
                 if (affectedRows == 0) {
@@ -69,6 +70,7 @@ public class DaoSubComponente implements ISubComponente {
                 psmt.setString(2, subcomponente.getCodigo());
                 psmt.setString(3, subcomponente.getDescripcion());
                 psmt.setInt(4, subcomponente.getIdSubcomponente());
+                psmt.setBoolean(5, subcomponente.isEspecial());
                 int affectedRows = psmt.executeUpdate();
 
                 if (affectedRows == 0) {
@@ -141,6 +143,7 @@ public class DaoSubComponente implements ISubComponente {
                 subComponente.setIdAcabado(result.getInt(1));
                 subComponente.setCodigo(result.getString(2));
                 subComponente.setDescripcion(result.getString(3));
+                subComponente.setEspecial(result.getBoolean(4));
             }
             result.close();
             cnx.getConnection().close();

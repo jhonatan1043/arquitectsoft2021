@@ -62,9 +62,9 @@ public class Contans {
             + "JOIN acabados ON acabados.Id_acabado = subcomponentes.Id_acabado"
             + " WHERE Id_subcomponente= ";
 
-    public static String QUERY_INSERT_SUBCOMPONENTES = "CALL spSubComponenteRegistrar(?,?,?);";
+    public static String QUERY_INSERT_SUBCOMPONENTES = "CALL spSubComponenteRegistrar(?,?,?,?);";
 
-    public static String QUERY_UPDATE_SUBCOMPONENTES = "CALL spSubcomponenteUpdate(?,?,?,?);";
+    public static String QUERY_UPDATE_SUBCOMPONENTES = "CALL spSubcomponenteUpdate(?,?,?,?,?);";
 
     public static String QUERY_DELETE_SUBCOMPONENTES = "DELETE FROM arquitectdb.subcomponentes WHERE Id_subcomponente = ?";
     //--------------------------------------------------------------------------------------------------------------------------------

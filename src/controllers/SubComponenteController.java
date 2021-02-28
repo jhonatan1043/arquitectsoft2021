@@ -143,7 +143,7 @@ public class SubComponenteController implements ActionListener, FocusListener, K
         subcomponente.setCodigo(viewSubcomponente.txtCodigo.getText());
         subcomponente.setDescripcion(viewSubcomponente.txtDescripcion.getText());
         subcomponente.setIdAcabado(idAcabado);
-
+        subcomponente.setEspecial(viewSubcomponente.ckComponenteEspecial.isSelected());
     }
 
     private void loadSubComponente(Object id) {
@@ -152,6 +152,7 @@ public class SubComponenteController implements ActionListener, FocusListener, K
             viewSubcomponente.txtCodigo.setText(subcomponente.getCodigo());
             viewSubcomponente.txtDescripcion.setText(subcomponente.getDescripcion());
             viewSubcomponente.cbAcabado.setSelectedIndex(subcomponente.getIdAcabado());
+             viewSubcomponente.ckComponenteEspecial.setSelected(subcomponente.isEspecial());
             System.setProperty("id", "");
             ValidButtonSystem.enabledButton(viewSubcomponente.pnlButton);
             viewSubcomponente.btnSave.setEnabled(false);

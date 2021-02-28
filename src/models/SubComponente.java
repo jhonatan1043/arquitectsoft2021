@@ -16,7 +16,16 @@ public class SubComponente {
     private String Acabado;
     private String codigo;
     private String descripcion;
+    private boolean especial;
 
+    public boolean isEspecial() {
+        return especial;
+    }
+
+    public void setEspecial(boolean especial) {
+        this.especial = especial;
+    }
+    
     public SubComponente() {
     }
 
