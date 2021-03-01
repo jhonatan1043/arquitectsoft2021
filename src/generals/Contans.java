@@ -46,6 +46,32 @@ public class Contans {
 
     public static String QUERY_DELETE_COMPONENTE_DETALLE = "DELETE FROM arquitectdb.componentes_detalle WHERE Id_Componente = ?;";
 
+    //-----------------------------------------------------------------------------------------------------------------------------
+    public static String QUERY_COMPONENTES_ESPECIAL = "SELECT Id_Componente_Especial,Codigo,Descripcion FROM arquitectdb.componentes_especial;";
+
+    public static String QUERY_COMPONENTES_ESPECIAL_LISTAR = "CALL componentesEspecialConsultar('";
+
+    public static String QUERY_EXITS_COMPONENTES_ESPECIAL = "SELECT true AS status FROM componentes_Especial where Codigo = ?;";
+
+    public static String QUERY_COMPONENTES_ESPECIAL_CARGAR = "SELECT Codigo,Descripcion FROM arquitectdb.componentes_Especial WHERE Id_Componente_especial = ?;";
+
+    public static String QUERY_UPDATE_COMPONENTES_ESPECIAL = "CALL spComponenteEspecialActualizar(?,?,?);";
+
+    public static String QUERY_COMPONENTES_ESPECIAL_DETALLE_CARGAR = "CALL componenteEspecialDetalleCargar(?);";
+
+    public static String QUERY_INSERT_COMPONENTES_ESPECIAL = "INSERT arquitectdb.componentes_especial(codigo, descripcion) VALUES (?,?);";
+
+    public static String QUERY_INSERT_COMPONENTE_ESPECIAL_DETALLE = "INSERT arquitectdb.componentes_especial_detalle (Id_Componente_especial,"
+            + " Id_Subcomponente,"
+            + " columna_1,"
+            + " columna_2,"
+            + " columna_3,"
+            + " columna_4,"
+            + " columna_5) VALUES (?,?,?,?,?,?,?);";
+
+    public static String QUERY_DELETE_COMPONENTE_ESPECIAL = "DELETE FROM arquitectdb.componentes_especial WHERE Id_Componente_especial = ?;";
+
+    public static String QUERY_DELETE_COMPONENTE_ESPECIAL_DETALLE = "DELETE FROM arquitectdb.componentes_especial_detalle WHERE Id_Componente_Especial = ?;";
     //--------------------------------------------------------------------------------------------------------------------------------
     public static String QUERY_CATEGORIAS = "SELECT Id_categoria,Descripcion,Tipo_Formula FROM arquitectdb.categorias;";
     //--------------------------------------------------------------------------------------------------------------------------------
@@ -53,6 +79,8 @@ public class Contans {
     public static String QUERY_EXITS_SUBCOMPONENTES = "SELECT true AS status FROM subcomponentes where Codigo_Homologacion = ?;";
 
     public static String QUERY_SUBCOMPONENTES = "CALL spSubComponenteConsultar('";
+
+    public static String QUERY_SUBCOMPONENTES_ESPECIAL = "CALL spSubComponenteEspecialConsultar('";
 
     public static String QUERY_SUBCOMPONENTES_CALC_CARGAR = "CALL spComponenteCargar(";
 

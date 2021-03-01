@@ -143,8 +143,8 @@ public class DaoSubComponente implements ISubComponente {
                 subComponente.setIdAcabado(result.getInt(1));
                 subComponente.setCodigo(result.getString(2));
                 subComponente.setDescripcion(result.getString(3));
-                subComponente.setEspecial(result.getBoolean(4));
-            }
+                subComponente.setEspecial(result.getBoolean(5));
+            }  
             result.close();
             cnx.getConnection().close();
         } catch (SQLException ex) {

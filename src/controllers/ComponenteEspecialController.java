@@ -6,7 +6,6 @@
 package controllers;
 
 import dao.DaoComponenteEspecial;
-import generals.CellRenderer;
 import generals.Contans;
 import generals.ValidButtonSystem;
 import generals.ValidControlsSystem;
@@ -25,8 +24,6 @@ import models.ComponenteEspecial;
 import views.VBusqueda;
 import views.VComponenteEspecial;
 import views.VPrincipal;
-import javax.swing.DefaultCellEditor;
-import javax.swing.JComboBox;
 /**
  *
  * @author Programador 1
@@ -51,7 +48,6 @@ public class ComponenteEspecialController implements ActionListener, KeyListener
         ValidButtonSystem.disableButton(viewSubComponenteEspecial.pnlButton);
         initEvent();
         hideColumns();
-        crearTablaCombo();
         modelo = (DefaultTableModel) viewSubComponenteEspecial.tbComponente.getModel();
         viewSubComponenteEspecial.tbComponente.setEnabled(false);
         viewSubComponenteEspecial.btnNew.setEnabled(true);
@@ -155,7 +151,7 @@ public class ComponenteEspecialController implements ActionListener, KeyListener
             VBusqueda viewBusqueda = new VBusqueda(viewPrincipal, true);
             BusquedaController busquedaC = new BusquedaController(viewBusqueda,
                     viewSubComponenteEspecial,
-                    Contans.QUERY_SUBCOMPONENTES,
+                    Contans.QUERY_SUBCOMPONENTES_ESPECIAL,
                     createColumns());
             viewBusqueda.setVisible(true);
 
@@ -210,7 +206,7 @@ public class ComponenteEspecialController implements ActionListener, KeyListener
             VBusqueda viewBusqueda = new VBusqueda(viewPrincipal, true);
             BusquedaController busquedaC = new BusquedaController(viewBusqueda,
                     viewSubComponenteEspecial,
-                    Contans.QUERY_COMPONENTES_LISTAR,
+                    Contans.QUERY_COMPONENTES_ESPECIAL_LISTAR,
                     createColumns());
             viewBusqueda.setVisible(true);
             loadComponente(Integer.parseInt(System.getProperty("id")));
@@ -230,18 +226,6 @@ public class ComponenteEspecialController implements ActionListener, KeyListener
         }
     }
     
-       private void crearTablaCombo() {
-        //Combo y valores
-        JComboBox comboBox = new JComboBox();
-        comboBox.addItem("1|Longitud");
-        comboBox.addItem("2|Unidad");
-        comboBox.addItem("3|Cantidad");
-        comboBox.addItem("4|Por su cantidad");
-        //se indica que columna tendra el JComboBox
-        viewSubComponenteEspecial.tbComponente.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(comboBox));        
-        viewSubComponenteEspecial.tbComponente.setDefaultRenderer(Object.class, new CellRenderer(3));
-    }
-
     @Override
     public void keyTyped(KeyEvent e) {
         if (e.getSource() == viewSubComponenteEspecial.txtCodigo) {
