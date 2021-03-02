@@ -88,7 +88,7 @@ public class VPrincipal extends javax.swing.JFrame {
         jMenu1.add(itemComponente);
         jMenu1.add(jSeparator1);
 
-        jMenuItem1.setText("Nuevo Componente Especial");
+        jMenuItem1.setText("Nuevo Componente Vidrios/Paneles");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);

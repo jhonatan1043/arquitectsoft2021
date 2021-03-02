@@ -213,7 +213,7 @@
             </Component>
             <Component class="javax.swing.JCheckBox" name="ckComponenteEspecial">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Especial"/>
+                <Property name="text" type="java.lang.String" value="Vidrios/Paneles"/>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

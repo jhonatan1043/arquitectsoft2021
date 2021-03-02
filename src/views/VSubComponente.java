@@ -81,7 +81,7 @@ public class VSubComponente extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Descripción:");
 
-        ckComponenteEspecial.setText("Especial");
+        ckComponenteEspecial.setText("Vidrios/Paneles");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
