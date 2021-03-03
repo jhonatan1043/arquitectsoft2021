@@ -243,9 +243,8 @@ public class DaoComponenteEspecial implements IComponenteEspecial {
     }
 
     @Override
-    public ArrayList<ArrayList<Object[]>> getSubComponenteEspecialCalc(TableModel modelo) {
-        ArrayList<ArrayList<Object[]>> list = new ArrayList<>();
-        ArrayList<Object[]> listDta;
+    public ArrayList<Object[]> getSubComponenteEspecialCalc(TableModel modelo) {
+        ArrayList<Object[]> list = new ArrayList<>();
         Object[] data;
         for (int i = 0; i < modelo.getRowCount(); i++) {
 
@@ -263,8 +262,6 @@ public class DaoComponenteEspecial implements IComponenteEspecial {
                     preparedStatement.setFloat(2, longitud);
                     result = preparedStatement.executeQuery();
 
-                    listDta = new ArrayList<>();
-
                     while (result.next()) {
                         data = new Object[8];
                         data[0] = result.getInt(1);
@@ -275,11 +272,8 @@ public class DaoComponenteEspecial implements IComponenteEspecial {
                         data[5] = result.getString(6);
                         data[6] = result.getInt(7);
                         data[7] = "";
-                        listDta.add(data);
+                        list.add(data);
                     }
-
-                    list.add(listDta);
-
                     result.close();
                 }
 

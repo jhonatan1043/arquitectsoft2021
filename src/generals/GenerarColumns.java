@@ -19,7 +19,7 @@ public class GenerarColumns {
         switch (index) {
 
             case 1:
-                //-----------------
+                //-----------------perfil 
                 listColumns.add("Codigo");
                 listColumns.add("ComponenteMayor");
                 listColumns.add("Logitud");
@@ -28,22 +28,24 @@ public class GenerarColumns {
                 //-----------------
                 break;
             case 2:
-                //-----------------
+                //-----------------vidrios y paneles
                 listColumns.add("Codigo");
                 listColumns.add("Altura");
                 listColumns.add("Anchura");
                 listColumns.add("Anchura2");
-                listColumns.add("Cantidad");
+                listColumns.add("Anchura3");
+                listColumns.add("Anchura4");
+                listColumns.add("Anchura5");
                 listColumns.add("Ubicación");
                 //-----------------
                 break;
             case 3:
-                //-----------------
+                //-----------------Union de Vidrios
 
                 //-----------------
                 break;
             case 4:
-                //-----------------
+                //-----------------Puertas
                 listColumns.add("Codigo");
                 listColumns.add("Apertura de Puerta");
                 listColumns.add("Codigo Acabado Perfileria Puerta");
@@ -59,7 +61,7 @@ public class GenerarColumns {
                 //-----------------
                 break;
             case 5:
-                //-----------------
+                //-----------------Union de Paneles
                 listColumns.add("Codigo");
                 listColumns.add("item");
                 listColumns.add("Ubicacion");
@@ -68,7 +70,7 @@ public class GenerarColumns {
                 //-----------------
                 break;
             case 6:
-                //-----------------
+                //-----------------Tubos Metalicos
                 listColumns.add("Codigo");
                 listColumns.add("Tipo");
                 listColumns.add("Altura");
@@ -78,7 +80,7 @@ public class GenerarColumns {
                 //-----------------
                 break;
             case 7:
-                //-----------------
+                //-----------------Mamparas
                 listColumns.add("Codigo");
                 listColumns.add("Tipo");
                 listColumns.add("Area");

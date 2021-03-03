@@ -6,6 +6,7 @@
 package controllers;
 
 import dao.DaoComponente;
+import dao.DaoComponenteEspecial;
 import dao.DaoProyecto;
 import generals.FileTxt;
 import generals.GeneralExcel;
@@ -27,11 +28,18 @@ import views.VPrincipal;
  */
 public class ProyectoController implements ActionListener {
 
-    DefaultTableModel modelo;
+    DefaultTableModel modelo,
+            modeloVidrioPanel,
+            modeloUnionVidrio,
+            modeloPuerta,
+            modeloUnionPanel,
+            modeloTuboMetalico,
+            modeloMampara;
     VProyecto viewComponente;
     VPrincipal viewPrincipal;
     BusquedaController busquedaC;
     DaoComponente daoComponente = new DaoComponente();
+    DaoComponenteEspecial daoComponenteEspecial = new DaoComponenteEspecial();
 
     public ProyectoController(VProyecto viewComponente, VPrincipal viewPrincipal) {
         this.viewComponente = viewComponente;
@@ -76,6 +84,12 @@ public class ProyectoController implements ActionListener {
         viewComponente.btnCalcular.setEnabled(false);
         viewComponente.btnGenerar.setEnabled(false);
         modelo = (DefaultTableModel) viewComponente.tbComponente.getModel();
+        modeloVidrioPanel = (DefaultTableModel) viewComponente.tbComponenteVidrioPanel.getModel();
+//        modeloVidrioPanel = (DefaultTableModel) viewComponente.tbVidrioPanele.getModel();
+//        modeloPuerta = (DefaultTableModel) viewComponente.tbPuerta.getModel();
+//        modeloUnionPanel = (DefaultTableModel) viewComponente.tbUnionPaneles.getModel();
+//        modeloTuboMetalico = (DefaultTableModel) viewComponente.tbTuboMetalico.getModel();
+//        modeloMampara = (DefaultTableModel) viewComponente.tbMampara.getModel();
     }
 
     private void hideColumns() {
@@ -109,21 +123,43 @@ public class ProyectoController implements ActionListener {
     }
 
     private void loadSubcomponente() {
-        ArrayList<ArrayList<Object[]>> list;
         DefaultTableModel modeloAux = modelo;
-        list = daoComponente.getSubComponenteCalc(viewComponente.tbPerfilMetalico.getModel());
 
+        calcularPerfilMetalico(modeloAux);
+        calcularVidrioPanel();
+
+        if (viewComponente.tbComponente.getRowCount() > 0) {
+            groupList(modeloAux);
+        }
+
+        if (viewComponente.tbComponente.getRowCount() > 0
+                || viewComponente.tbComponenteVidrioPanel.getRowCount() > 0) {
+            viewComponente.btnGenerar.setEnabled(true);
+            viewComponente.btnCalcular.setEnabled(false);
+        }
+    }
+
+    private void calcularPerfilMetalico(DefaultTableModel modeloAux) {
+        ArrayList<ArrayList<Object[]>> list;
+        list = daoComponente.getSubComponenteCalc(viewComponente.tbPerfilMetalico.getModel());
         list.forEach((list1) -> {
             list1.forEach((data) -> {
                 modeloAux.addRow(data);
             });
         });
+    }
 
-        if (viewComponente.tbComponente.getRowCount() > 0) {
-            groupList(modeloAux);
-            viewComponente.btnGenerar.setEnabled(true);
-            viewComponente.btnCalcular.setEnabled(false);
-        }
+    private void calcularVidrioPanel() {
+        ArrayList<Object[]> list;
+
+        list = daoComponenteEspecial.getSubComponenteEspecialCalc(viewComponente.tbVidrioPanele.getModel());
+
+        modeloVidrioPanel.setRowCount(0);
+
+        list.forEach((list1) -> {
+            modeloVidrioPanel.addRow(list1);
+        });
+
     }
 
     private void groupList(DefaultTableModel modeloAux) {
@@ -138,7 +174,7 @@ public class ProyectoController implements ActionListener {
         list.forEach((list1) -> {
             modelo.addRow(list1);
         });
-     
+
     }
 
 }
