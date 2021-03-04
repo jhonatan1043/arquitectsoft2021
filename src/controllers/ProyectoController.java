@@ -95,6 +95,7 @@ public class ProyectoController implements ActionListener {
     private void hideColumns() {
         int[] list = {0};
         ValidTable.hideColumnsTable(viewComponente.tbComponente, list);
+        ValidTable.hideColumnsTable(viewComponente.tbComponenteVidrioPanel, list);
     }
 
     private void hideTab() {
