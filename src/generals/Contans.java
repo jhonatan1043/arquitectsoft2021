@@ -63,11 +63,8 @@ public class Contans {
 
     public static String QUERY_INSERT_COMPONENTE_ESPECIAL_DETALLE = "INSERT arquitectdb.componentes_especial_detalle (Id_Componente_especial,"
             + " Id_Subcomponente,"
-            + " columna_1,"
-            + " columna_2,"
-            + " columna_3,"
-            + " columna_4,"
-            + " columna_5) VALUES (?,?,?,?,?,?,?);";
+            + " select_Columna) "
+            + " VALUES (?,?,?);";
 
     public static String QUERY_DELETE_COMPONENTE_ESPECIAL = "DELETE FROM arquitectdb.componentes_especial WHERE Id_Componente_especial = ?;";
 
