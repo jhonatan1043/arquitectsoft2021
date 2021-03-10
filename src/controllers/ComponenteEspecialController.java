@@ -6,6 +6,7 @@
 package controllers;
 
 import dao.DaoComponenteEspecial;
+import generals.CellRenderer;
 import generals.Contans;
 import generals.ValidButtonSystem;
 import generals.ValidControlsSystem;
@@ -18,12 +19,15 @@ import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import models.ComponenteEspecial;
 import views.VBusqueda;
 import views.VComponenteEspecial;
 import views.VPrincipal;
+
 /**
  *
  * @author Programador 1
@@ -46,12 +50,13 @@ public class ComponenteEspecialController implements ActionListener, KeyListener
     private void start() {
         ValidControlsSystem.disableControls(viewSubComponenteEspecial.jLayeredPane1);
         ValidButtonSystem.disableButton(viewSubComponenteEspecial.pnlButton);
+        crearTablaCombo();
         initEvent();
         hideColumns();
         modelo = (DefaultTableModel) viewSubComponenteEspecial.tbComponente.getModel();
         viewSubComponenteEspecial.tbComponente.setEnabled(false);
         viewSubComponenteEspecial.btnNew.setEnabled(true);
-        viewSubComponenteEspecial.btnBuscar.setEnabled(true);  
+        viewSubComponenteEspecial.btnBuscar.setEnabled(true);
     }
 
     private void initEvent() {
@@ -99,7 +104,7 @@ public class ComponenteEspecialController implements ActionListener, KeyListener
 
             System.setProperty("id", "");
             ValidButtonSystem.enabledButton(viewSubComponenteEspecial.pnlButton);
-           // ValidTable.enableColumnsTableComponente(viewComponente.tbComponente);
+            // ValidTable.enableColumnsTableComponente(viewComponente.tbComponente);
             viewSubComponenteEspecial.btnSave.setEnabled(false);
             viewSubComponenteEspecial.btnCancel.setEnabled(false);
         }
@@ -225,7 +230,20 @@ public class ComponenteEspecialController implements ActionListener, KeyListener
             }
         }
     }
-    
+
+    private void crearTablaCombo() {
+        //Combo y valores
+        JComboBox comboBox = new JComboBox();
+        comboBox.addItem("1|Columna primera");
+        comboBox.addItem("2|Columna segunda");
+        comboBox.addItem("3|Columna tercera");
+        comboBox.addItem("4|Columna cuarta");
+        comboBox.addItem("5|Columna quinta");
+        //se indica que columna tendra el JComboBox
+        viewSubComponenteEspecial.tbComponente.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(comboBox));
+        viewSubComponenteEspecial.tbComponente.setDefaultRenderer(Object.class, new CellRenderer(3));
+    }
+
     @Override
     public void keyTyped(KeyEvent e) {
         if (e.getSource() == viewSubComponenteEspecial.txtCodigo) {

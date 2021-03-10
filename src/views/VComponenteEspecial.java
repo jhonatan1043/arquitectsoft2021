@@ -121,14 +121,14 @@ public class VComponenteEspecial extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "IdComponente", "Codigo", "Descripción", "S.Columna 1", "S.Columna 2", "S.Columna 3", "S.Columna 4", "S.Columna 5"
+                "IdComponente", "Codigo", "Descripción", "Sel. Cplumnas "
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, true, true, true, true
+                false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
