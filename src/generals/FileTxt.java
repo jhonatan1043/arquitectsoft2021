@@ -10,6 +10,7 @@
  */
 package generals;
 
+import dao.DaoComponenteEspecial;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -30,7 +31,7 @@ import views.VProyecto;
  * @author Programador 1
  */
 public class FileTxt {
-
+   DaoComponenteEspecial daoComponenteEspecial = new DaoComponenteEspecial();
     public void openFile(VPrincipal viewPrincipal,
             VProyecto viewProyecto) throws IOException {
         ArrayList<Object[]> listData;
@@ -80,6 +81,7 @@ public class FileTxt {
             case 2:
                 viewProyecto.jTabComponentes.add(viewProyecto.jPnVidrioPanel, "VIDRIOS Y PANELES");
                 viewProyecto.tbVidrioPanele.setModel(modelo);
+                daoComponenteEspecial.saveAuxAnchura(modelo);
                 break;
             case 3:
                 viewProyecto.jTabComponentes.add(viewProyecto.jPnUnionVidrio, "UNION DE VIDRIOS");

@@ -51,7 +51,6 @@ public class ProyectoController implements ActionListener {
         viewComponente.btnOpenTxt.addActionListener(this);
         viewComponente.btnCalcular.addActionListener(this);
         viewComponente.btnGenerar.addActionListener(this);
-
     }
 
     @Override

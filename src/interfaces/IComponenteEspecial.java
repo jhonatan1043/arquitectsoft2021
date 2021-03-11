@@ -28,6 +28,8 @@ public interface IComponenteEspecial {
     public ArrayList<Object[]> getSubComponenteEspecialCalc(TableModel modelo);
 
     public Object[] getSubComponenteEspecial(int idSubComponente);
+
+    public boolean existsComponenteEspecial(String codigo);
     
-     public boolean existsComponenteEspecial(String codigo);
+    public boolean saveAuxAnchura(TableModel modelo);
 }

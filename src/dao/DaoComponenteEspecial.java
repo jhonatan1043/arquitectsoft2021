@@ -94,7 +94,7 @@ public class DaoComponenteEspecial implements IComponenteEspecial {
                 try (PreparedStatement insertComponenteDetalle = cnx.getConnection().prepareStatement(Contans.QUERY_INSERT_COMPONENTE_ESPECIAL_DETALLE)) {
                     for (int i = 0; i < componenteEspecial.getModelo().getRowCount(); i++) {
                         insertComponenteDetalle.setInt(1, componenteEspecial.getIdComponente());
-                        insertComponenteDetalle.setInt(2, Integer.parseInt(componenteEspecial.getModelo().getValueAt(i, 0).toString()));      
+                        insertComponenteDetalle.setInt(2, Integer.parseInt(componenteEspecial.getModelo().getValueAt(i, 0).toString()));
                         insertComponenteDetalle.setObject(3, componenteEspecial.getModelo().getValueAt(i, 3) == null ? 0 : componenteEspecial.getModelo().getValueAt(i, 3).toString().split("|")[0]);
                         insertComponenteDetalle.executeUpdate();
                     }
@@ -272,6 +272,42 @@ public class DaoComponenteEspecial implements IComponenteEspecial {
             resultSet.close();
         } catch (SQLException ex) {
             Logger.getLogger(DaoComponenteEspecial.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+
+    @Override
+    public boolean saveAuxAnchura(TableModel modelo) {
+        boolean result = false;
+        
+        try { 
+            PreparedStatement preparedStatement;
+            preparedStatement = cnx.getConnection().prepareStatement("DELETE FROM tbauxanchura"); 
+            preparedStatement.executeQuery();
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoComponenteEspecial.class.getName()).log(Level.SEVERE, null, ex);
+        }
+           
+        for (int i = 0; i < modelo.getRowCount(); i++) {
+
+            for (int j = 2; j < modelo.getColumnCount() - 1; j++) {
+                try {
+                    
+                    if (modelo.getValueAt(i, j) != "" || Integer.parseInt((String) modelo.getValueAt(i, j)) != 0) {
+                        
+                        PreparedStatement preparedStatement = cnx.getConnection().prepareStatement("");
+                        preparedStatement.setString(1, modelo.getValueAt(i, 2).toString().trim().replace("\"", "0"));
+                        preparedStatement.setString(2, modelo.getValueAt(i, 3).toString().trim().replace("\"", "0"));
+                        preparedStatement.setString(3, modelo.getValueAt(i, 4).toString().trim().replace("\"", "0"));
+                        preparedStatement.setString(4, modelo.getValueAt(i, 5).toString().trim().replace("\"", "0"));
+                        preparedStatement.setString(5, modelo.getValueAt(i, 6).toString().trim().replace("\"", "0"));
+                        preparedStatement.execute();
+                    }
+
+                } catch (SQLException ex) {
+                    Logger.getLogger(DaoComponenteEspecial.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
         return result;
     }
