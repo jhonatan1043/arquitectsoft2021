@@ -231,9 +231,12 @@ public class DaoComponenteEspecial implements IComponenteEspecial {
     }
 
     @Override
-    public ArrayList<Object[]> getSubComponenteEspecialCalc(TableModel modelo) {
-        ArrayList<Object[]> list = new ArrayList<>();
+    public ArrayList<ArrayList<Object[]>> getSubComponenteEspecialCalc(TableModel modelo) {
+        ArrayList<ArrayList<Object[]>> list = new ArrayList<>();
+        ArrayList<Object[]> listDta;
+        
         Object[] data;
+        
         String codigo;
         String auxAltura;
 
@@ -243,18 +246,32 @@ public class DaoComponenteEspecial implements IComponenteEspecial {
             codigo = modelo.getValueAt(i, 0).toString().trim().replace("\"", "").replace("�", "");
             auxAltura = modelo.getValueAt(i, 1).toString().trim().replace("\"", "");
 
-            for (int j = 2; j < modelo.getColumnCount() - 1; j++) {
                 try {
-                    if (modelo.getValueAt(i, j) != "" || Integer.parseInt((String) modelo.getValueAt(i, j)) != 0) {
-                        PreparedStatement preparedStatement = cnx.getConnection().prepareStatement("");
+                        PreparedStatement preparedStatement = cnx.getConnection().prepareStatement("Call spComponenteVidrioPanel(?,?)");
                         preparedStatement.setString(1, codigo);
-                        preparedStatement.execute();
-                    }
+                        preparedStatement.setString(2, auxAltura);
+                        result = preparedStatement.executeQuery();
+
+                        listDta = new ArrayList<>();
+
+                        while (result.next()) {
+                            data = new Object[6];
+                            data[0] = result.getInt(1);
+                            data[1] = result.getString(2);
+                            data[2] = result.getString(3);
+                            data[3] = result.getString(4);   
+                            data[4] = result.getString(5);
+                            data[5] = result.getInt(6); 
+                            listDta.add(data);
+                        }
+
+                        list.add(listDta);
+                        
+                        result.close();
 
                 } catch (SQLException ex) {
                     Logger.getLogger(DaoComponenteEspecial.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }
         }
         return list;
     }
@@ -279,34 +296,32 @@ public class DaoComponenteEspecial implements IComponenteEspecial {
     @Override
     public boolean saveAuxAnchura(TableModel modelo) {
         boolean result = false;
-        
-        try { 
-            PreparedStatement preparedStatement;
-            preparedStatement = cnx.getConnection().prepareStatement("DELETE FROM tbauxanchura"); 
+
+        try {
+            PreparedStatement preparedStatement = cnx.getConnection().prepareStatement("DELETE FROM tbauxanchura;");
             preparedStatement.executeQuery();
         } catch (SQLException ex) {
             Logger.getLogger(DaoComponenteEspecial.class.getName()).log(Level.SEVERE, null, ex);
         }
-           
+
         for (int i = 0; i < modelo.getRowCount(); i++) {
 
-            for (int j = 2; j < modelo.getColumnCount() - 1; j++) {
-                try {
-                    
-                    if (modelo.getValueAt(i, j) != "" || Integer.parseInt((String) modelo.getValueAt(i, j)) != 0) {
-                        
-                        PreparedStatement preparedStatement = cnx.getConnection().prepareStatement("");
-                        preparedStatement.setString(1, modelo.getValueAt(i, 2).toString().trim().replace("\"", "0"));
-                        preparedStatement.setString(2, modelo.getValueAt(i, 3).toString().trim().replace("\"", "0"));
-                        preparedStatement.setString(3, modelo.getValueAt(i, 4).toString().trim().replace("\"", "0"));
-                        preparedStatement.setString(4, modelo.getValueAt(i, 5).toString().trim().replace("\"", "0"));
-                        preparedStatement.setString(5, modelo.getValueAt(i, 6).toString().trim().replace("\"", "0"));
-                        preparedStatement.execute();
-                    }
+            try {
+                PreparedStatement preparedStatement = cnx.getConnection().prepareStatement("INSERT tbauxanchura(Altura,Columna1,"
+                        + "Columna2,"
+                        + "Columna3,"
+                        + "Columna4,"
+                        + "Columna5)VALUES(?,?,?,?,?,?);");
+                preparedStatement.setString(1, modelo.getValueAt(i, 1).toString().trim().replace("\"", ""));
+                preparedStatement.setString(2, modelo.getValueAt(i, 2).toString().trim().replace("\"", ""));
+                preparedStatement.setString(3, modelo.getValueAt(i, 3).toString().trim().replace("\"", ""));
+                preparedStatement.setString(4, modelo.getValueAt(i, 4).toString().trim().replace("\"", ""));
+                preparedStatement.setString(5, modelo.getValueAt(i, 5).toString().trim().replace("\"", ""));
+                preparedStatement.setString(6, modelo.getValueAt(i, 6).toString().trim().replace("\"", ""));
+                preparedStatement.execute();
 
-                } catch (SQLException ex) {
-                    Logger.getLogger(DaoComponenteEspecial.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            } catch (SQLException ex) {
+                Logger.getLogger(DaoComponenteEspecial.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return result;

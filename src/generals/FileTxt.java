@@ -32,6 +32,7 @@ import views.VProyecto;
  */
 public class FileTxt {
    DaoComponenteEspecial daoComponenteEspecial = new DaoComponenteEspecial();
+   
     public void openFile(VPrincipal viewPrincipal,
             VProyecto viewProyecto) throws IOException {
         ArrayList<Object[]> listData;

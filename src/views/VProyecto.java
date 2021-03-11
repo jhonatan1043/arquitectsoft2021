@@ -215,14 +215,14 @@ public class VProyecto extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "IdComponente", "Codigo", "Descripción", "Medida", "Cantidad"
+                "IdComponente", "Codigo", "Descripción", "Altura", "Anchura", "Cantidad"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -243,6 +243,7 @@ public class VProyecto extends javax.swing.JInternalFrame {
             tbComponenteVidrioPanel.getColumnModel().getColumn(2).setPreferredWidth(300);
             tbComponenteVidrioPanel.getColumnModel().getColumn(3).setResizable(false);
             tbComponenteVidrioPanel.getColumnModel().getColumn(4).setResizable(false);
+            tbComponenteVidrioPanel.getColumnModel().getColumn(5).setResizable(false);
         }
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);

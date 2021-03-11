@@ -150,14 +150,15 @@ public class ProyectoController implements ActionListener {
     }
 
     private void calcularVidrioPanel() {
-        ArrayList<Object[]> list;
 
+        ArrayList<ArrayList<Object[]>> list;
+        
         list = daoComponenteEspecial.getSubComponenteEspecialCalc(viewComponente.tbVidrioPanele.getModel());
-
-        modeloVidrioPanel.setRowCount(0);
-
+        
         list.forEach((list1) -> {
-            modeloVidrioPanel.addRow(list1);
+            list1.forEach((data) -> {
+                modeloVidrioPanel.addRow(data);
+            });
         });
 
     }
