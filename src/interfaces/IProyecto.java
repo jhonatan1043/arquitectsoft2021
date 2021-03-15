@@ -16,4 +16,6 @@ public interface IProyecto {
     
     public ArrayList<Object[]> getComponenteCalc(TableModel modelo);
     
+    public ArrayList<Object[]> getComponenteVidrioPanelCalc(TableModel modelo);
+    
 }

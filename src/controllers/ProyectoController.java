@@ -123,13 +123,20 @@ public class ProyectoController implements ActionListener {
     }
 
     private void loadSubcomponente() {
+        DaoProyecto daoProyecto = new DaoProyecto();
+
         DefaultTableModel modeloAux = modelo;
+        DefaultTableModel modeloVidrioPanelAux = modeloVidrioPanel;
 
         calcularPerfilMetalico(modeloAux);
-        calcularVidrioPanel();
+        calcularVidrioPanel(modeloVidrioPanelAux);
 
         if (viewComponente.tbComponente.getRowCount() > 0) {
-            groupList(modeloAux);
+            groupList(modeloAux, daoProyecto.getComponenteCalc(modeloAux),1);
+        }
+
+        if (viewComponente.tbComponenteVidrioPanel.getRowCount() > 0) {
+            groupList(modeloVidrioPanelAux, daoProyecto.getComponenteVidrioPanelCalc(modeloVidrioPanelAux),2);
         }
 
         if (viewComponente.tbComponente.getRowCount() > 0
@@ -149,32 +156,31 @@ public class ProyectoController implements ActionListener {
         });
     }
 
-    private void calcularVidrioPanel() {
+    private void calcularVidrioPanel(DefaultTableModel modeloAux) {
 
         ArrayList<ArrayList<Object[]>> list;
-        
+
         list = daoComponenteEspecial.getSubComponenteEspecialCalc(viewComponente.tbVidrioPanele.getModel());
-        
+
         list.forEach((list1) -> {
             list1.forEach((data) -> {
-                modeloVidrioPanel.addRow(data);
+                modeloAux.addRow(data);
             });
         });
 
     }
 
-    private void groupList(DefaultTableModel modeloAux) {
-        DaoProyecto daoProyecto = new DaoProyecto();
-        ArrayList<Object[]> list;
-
-        list = daoProyecto.getComponenteCalc(modeloAux);
-
+    private void groupList(DefaultTableModel modeloAux, ArrayList<Object[]> list, int bdra) {
         modeloAux.setRowCount(0);
-        modelo.setRowCount(0);
-
-        list.forEach((list1) -> {
-            modelo.addRow(list1);
-        });
+        if (bdra == 1) {
+            list.forEach((list1) -> {
+                modelo.addRow(list1);
+            });
+        } else if (bdra == 2) {
+            list.forEach((list1) -> {
+                modeloVidrioPanel.addRow(list1);
+            });
+        }
 
     }
 

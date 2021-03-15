@@ -69,4 +69,46 @@ public class DaoProyecto implements IProyecto {
 
     }
 
+    @Override
+    public ArrayList<Object[]> getComponenteVidrioPanelCalc(TableModel modelo) {
+           ResultSet result;
+        ArrayList<Object[]> list = new ArrayList<>();
+
+        try {
+            PreparedStatement insertComponenteDetalle;
+            insertComponenteDetalle = cnx.getConnection().prepareStatement(Contans.QUERY_INSERT_PROYECTO_VIDRIO_PANEL);
+
+            for (int i = 0; i < modelo.getRowCount(); i++) {
+                insertComponenteDetalle.setInt(1, Integer.parseInt(modelo.getValueAt(i, 0).toString()));
+                insertComponenteDetalle.setInt(2, Integer.parseInt(modelo.getValueAt(i, 3).toString()));
+                insertComponenteDetalle.setInt(3, Integer.parseInt(modelo.getValueAt(i, 4).toString()));
+                insertComponenteDetalle.setInt(4, Integer.parseInt(modelo.getValueAt(i, 5).toString()));
+                insertComponenteDetalle.executeUpdate();
+            }
+            insertComponenteDetalle.close();
+            
+            PreparedStatement preparedStatement = cnx.getConnection().prepareStatement(Contans.QUERY_GET_PROYECTO_VIDRIO_PANEL);
+            result = preparedStatement.executeQuery();
+
+            while (result.next()) {
+                Object[] lists = new Object[6];
+                lists[0] = result.getInt(1);
+                lists[1] = result.getString(2);
+                lists[2] = result.getString(3);
+                lists[3] = result.getInt(4);
+                lists[4] = result.getInt(5);
+                lists[5] = result.getInt(6);
+                list.add(lists);
+            }
+
+            result.close();
+            cnx.getConnection().close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoProyecto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return list;
+    }
+
 }

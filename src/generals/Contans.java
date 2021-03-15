@@ -104,7 +104,17 @@ public class Contans {
             + " medidaAdicional,"
             + " medida) "
             + "VALUES (?,?,?,?,?)";
+
+    public static String QUERY_INSERT_PROYECTO_VIDRIO_PANEL = "INSERT INTO proyecto_vp "
+            + "(Id_Subcomponente, "
+            + " Altura, "
+            + " Anchura,"
+            + " Cantidad) "
+            + "VALUES (?,?,?,?)";
+
     public static String QUERY_GET_PROYECTO = "CALL spSubComponenteAgrupar();";
+
+    public static String QUERY_GET_PROYECTO_VIDRIO_PANEL = "CALL spSubComponenteVidrioPanelAgrupar();";
 
 // static of system 
     public static String SELECTING = "-- Seleccionar --";
