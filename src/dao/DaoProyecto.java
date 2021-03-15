@@ -22,10 +22,9 @@ import javax.swing.table.TableModel;
  */
 public class DaoProyecto implements IProyecto {
 
-    Conexion cnx = new Conexion();
-
     @Override
     public ArrayList<Object[]> getComponenteCalc(TableModel modelo) {
+        Conexion cnx = new Conexion();
         ResultSet result;
         ArrayList<Object[]> list = new ArrayList<>();
 
@@ -42,7 +41,7 @@ public class DaoProyecto implements IProyecto {
                 insertComponenteDetalle.executeUpdate();
             }
             insertComponenteDetalle.close();
-            
+
             PreparedStatement preparedStatement = cnx.getConnection().prepareStatement(Contans.QUERY_GET_PROYECTO);
             result = preparedStatement.executeQuery();
 
@@ -71,7 +70,8 @@ public class DaoProyecto implements IProyecto {
 
     @Override
     public ArrayList<Object[]> getComponenteVidrioPanelCalc(TableModel modelo) {
-           ResultSet result;
+        Conexion cnx = new Conexion();
+        ResultSet result;
         ArrayList<Object[]> list = new ArrayList<>();
 
         try {
@@ -86,7 +86,7 @@ public class DaoProyecto implements IProyecto {
                 insertComponenteDetalle.executeUpdate();
             }
             insertComponenteDetalle.close();
-            
+
             PreparedStatement preparedStatement = cnx.getConnection().prepareStatement(Contans.QUERY_GET_PROYECTO_VIDRIO_PANEL);
             result = preparedStatement.executeQuery();
 

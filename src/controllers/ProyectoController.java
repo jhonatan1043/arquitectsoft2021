@@ -28,6 +28,7 @@ import views.VPrincipal;
  */
 public class ProyectoController implements ActionListener {
 
+    DaoProyecto daoProyecto = new DaoProyecto();
     DefaultTableModel modelo,
             modeloVidrioPanel,
             modeloUnionVidrio,
@@ -123,21 +124,12 @@ public class ProyectoController implements ActionListener {
     }
 
     private void loadSubcomponente() {
-        DaoProyecto daoProyecto = new DaoProyecto();
 
         DefaultTableModel modeloAux = modelo;
         DefaultTableModel modeloVidrioPanelAux = modeloVidrioPanel;
 
         calcularPerfilMetalico(modeloAux);
         calcularVidrioPanel(modeloVidrioPanelAux);
-
-        if (viewComponente.tbComponente.getRowCount() > 0) {
-            groupList(modeloAux, daoProyecto.getComponenteCalc(modeloAux),1);
-        }
-
-        if (viewComponente.tbComponenteVidrioPanel.getRowCount() > 0) {
-            groupList(modeloVidrioPanelAux, daoProyecto.getComponenteVidrioPanelCalc(modeloVidrioPanelAux),2);
-        }
 
         if (viewComponente.tbComponente.getRowCount() > 0
                 || viewComponente.tbComponenteVidrioPanel.getRowCount() > 0) {
@@ -154,6 +146,7 @@ public class ProyectoController implements ActionListener {
                 modeloAux.addRow(data);
             });
         });
+        groupList(modeloAux, daoProyecto.getComponenteCalc(modeloAux), 1);
     }
 
     private void calcularVidrioPanel(DefaultTableModel modeloAux) {
@@ -167,16 +160,21 @@ public class ProyectoController implements ActionListener {
                 modeloAux.addRow(data);
             });
         });
-
+        
+        groupList(modeloAux, daoProyecto.getComponenteVidrioPanelCalc(modeloAux), 2);
     }
 
     private void groupList(DefaultTableModel modeloAux, ArrayList<Object[]> list, int bdra) {
         modeloAux.setRowCount(0);
         if (bdra == 1) {
+            modelo.setRowCount(0);
+            System.out.print(bdra);
             list.forEach((list1) -> {
                 modelo.addRow(list1);
             });
         } else if (bdra == 2) {
+            System.out.print(bdra);
+            modeloVidrioPanel.setRowCount(0);
             list.forEach((list1) -> {
                 modeloVidrioPanel.addRow(list1);
             });
