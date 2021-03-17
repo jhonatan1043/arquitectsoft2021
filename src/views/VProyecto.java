@@ -52,6 +52,9 @@ public class VProyecto extends javax.swing.JInternalFrame {
         jPnTuboMetalico = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
         tbTuboMetalico = new javax.swing.JTable();
+        jPanel6 = new javax.swing.JPanel();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        tbComponenteTuboMetalico = new javax.swing.JTable();
         jPnMamparas = new javax.swing.JPanel();
         jScrollPane8 = new javax.swing.JScrollPane();
         tbMampara = new javax.swing.JTable();
@@ -174,7 +177,7 @@ public class VProyecto extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -188,9 +191,10 @@ public class VProyecto extends javax.swing.JInternalFrame {
         jPnPerfilMetalicoLayout.setVerticalGroup(
             jPnPerfilMetalicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPnPerfilMetalicoLayout.createSequentialGroup()
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabComponentes.addTab("PERFIL METALICO", jPnPerfilMetalico);
@@ -259,7 +263,7 @@ public class VProyecto extends javax.swing.JInternalFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -304,9 +308,9 @@ public class VProyecto extends javax.swing.JInternalFrame {
         );
         jPnUnionVidrioLayout.setVerticalGroup(
             jPnUnionVidrioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 455, Short.MAX_VALUE)
+            .addGap(0, 443, Short.MAX_VALUE)
             .addGroup(jPnUnionVidrioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE))
         );
 
         jTabComponentes.addTab("UNION DE VIDRIOS", jPnUnionVidrio);
@@ -332,9 +336,9 @@ public class VProyecto extends javax.swing.JInternalFrame {
         );
         jPnPuertaLayout.setVerticalGroup(
             jPnPuertaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 455, Short.MAX_VALUE)
+            .addGap(0, 443, Short.MAX_VALUE)
             .addGroup(jPnPuertaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE))
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE))
         );
 
         jTabComponentes.addTab("PUERTAS", jPnPuerta);
@@ -360,9 +364,9 @@ public class VProyecto extends javax.swing.JInternalFrame {
         );
         jPnUnionPaneleLayout.setVerticalGroup(
             jPnUnionPaneleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 455, Short.MAX_VALUE)
+            .addGap(0, 443, Short.MAX_VALUE)
             .addGroup(jPnUnionPaneleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE))
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE))
         );
 
         jTabComponentes.addTab("UNION DE PANELES", jPnUnionPanele);
@@ -378,19 +382,84 @@ public class VProyecto extends javax.swing.JInternalFrame {
         ));
         jScrollPane7.setViewportView(tbTuboMetalico);
 
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        tbComponenteTuboMetalico.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        tbComponenteTuboMetalico.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "IdComponente", "Codigo", "Descripción", "Cantidad", "Medida", "Medida Calculada", "Se Calcula por."
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Float.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tbComponenteTuboMetalico.setEnabled(false);
+        tbComponenteTuboMetalico.getTableHeader().setReorderingAllowed(false);
+        jScrollPane10.setViewportView(tbComponenteTuboMetalico);
+        if (tbComponenteTuboMetalico.getColumnModel().getColumnCount() > 0) {
+            tbComponenteTuboMetalico.getColumnModel().getColumn(0).setResizable(false);
+            tbComponenteTuboMetalico.getColumnModel().getColumn(1).setResizable(false);
+            tbComponenteTuboMetalico.getColumnModel().getColumn(2).setResizable(false);
+            tbComponenteTuboMetalico.getColumnModel().getColumn(2).setPreferredWidth(300);
+            tbComponenteTuboMetalico.getColumnModel().getColumn(3).setResizable(false);
+            tbComponenteTuboMetalico.getColumnModel().getColumn(4).setResizable(false);
+            tbComponenteTuboMetalico.getColumnModel().getColumn(5).setResizable(false);
+            tbComponenteTuboMetalico.getColumnModel().getColumn(5).setHeaderValue("Medida Calculada");
+            tbComponenteTuboMetalico.getColumnModel().getColumn(6).setResizable(false);
+            tbComponenteTuboMetalico.getColumnModel().getColumn(6).setHeaderValue("Se Calcula por.");
+        }
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 1018, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout jPnTuboMetalicoLayout = new javax.swing.GroupLayout(jPnTuboMetalico);
         jPnTuboMetalico.setLayout(jPnTuboMetalicoLayout);
         jPnTuboMetalicoLayout.setHorizontalGroup(
             jPnTuboMetalicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1042, Short.MAX_VALUE)
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPnTuboMetalicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 1042, Short.MAX_VALUE))
         );
         jPnTuboMetalicoLayout.setVerticalGroup(
             jPnTuboMetalicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 455, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPnTuboMetalicoLayout.createSequentialGroup()
+                .addContainerGap(213, Short.MAX_VALUE)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addGroup(jPnTuboMetalicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE))
+                .addGroup(jPnTuboMetalicoLayout.createSequentialGroup()
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 231, Short.MAX_VALUE)))
         );
 
         jTabComponentes.addTab("TUBOS METALICOS", jPnTuboMetalico);
@@ -416,9 +485,9 @@ public class VProyecto extends javax.swing.JInternalFrame {
         );
         jPnMamparasLayout.setVerticalGroup(
             jPnMamparasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 455, Short.MAX_VALUE)
+            .addGap(0, 443, Short.MAX_VALUE)
             .addGroup(jPnMamparasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE))
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE))
         );
 
         jTabComponentes.addTab("MAMPARAS", jPnMamparas);
@@ -442,9 +511,10 @@ public class VProyecto extends javax.swing.JInternalFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabComponentes, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnCalcular))
+                .addComponent(jTabComponentes, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCalcular)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pnlButton.setBackground(new java.awt.Color(51, 255, 51));
@@ -490,7 +560,7 @@ public class VProyecto extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(pnlButton, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(465, 465, 465))
+                .addGap(466, 466, 466))
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -501,9 +571,9 @@ public class VProyecto extends javax.swing.JInternalFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnlButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51))
+                .addGap(63, 63, 63))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -515,9 +585,8 @@ public class VProyecto extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 738, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 733, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -535,6 +604,7 @@ public class VProyecto extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     public javax.swing.JPanel jPnMamparas;
     public javax.swing.JPanel jPnPerfilMetalico;
     public javax.swing.JPanel jPnPuerta;
@@ -543,6 +613,7 @@ public class VProyecto extends javax.swing.JInternalFrame {
     public javax.swing.JPanel jPnUnionVidrio;
     public javax.swing.JPanel jPnVidrioPanel;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -554,6 +625,7 @@ public class VProyecto extends javax.swing.JInternalFrame {
     public javax.swing.JTabbedPane jTabComponentes;
     public javax.swing.JPanel pnlButton;
     public javax.swing.JTable tbComponente;
+    public javax.swing.JTable tbComponenteTuboMetalico;
     public javax.swing.JTable tbComponenteVidrioPanel;
     public javax.swing.JTable tbMampara;
     public javax.swing.JTable tbPerfilMetalico;

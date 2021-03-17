@@ -88,7 +88,7 @@ public class ProyectoController implements ActionListener {
 //        modeloVidrioPanel = (DefaultTableModel) viewComponente.tbVidrioPanele.getModel();
 //        modeloPuerta = (DefaultTableModel) viewComponente.tbPuerta.getModel();
 //        modeloUnionPanel = (DefaultTableModel) viewComponente.tbUnionPaneles.getModel();
-//        modeloTuboMetalico = (DefaultTableModel) viewComponente.tbTuboMetalico.getModel();
+        modeloTuboMetalico = (DefaultTableModel) viewComponente.tbComponenteTuboMetalico.getModel();
 //        modeloMampara = (DefaultTableModel) viewComponente.tbMampara.getModel();
     }
 
@@ -127,10 +127,12 @@ public class ProyectoController implements ActionListener {
 
         DefaultTableModel modeloAux = modelo;
         DefaultTableModel modeloVidrioPanelAux = modeloVidrioPanel;
+        DefaultTableModel modeloTuboMetalicoAux = modeloTuboMetalico;
 
         calcularPerfilMetalico(modeloAux);
         calcularVidrioPanel(modeloVidrioPanelAux);
-
+        calcularTuboMetalicos(modeloTuboMetalicoAux);
+        
         if (viewComponente.tbComponente.getRowCount() > 0
                 || viewComponente.tbComponenteVidrioPanel.getRowCount() > 0) {
             viewComponente.btnGenerar.setEnabled(true);
@@ -141,6 +143,17 @@ public class ProyectoController implements ActionListener {
     private void calcularPerfilMetalico(DefaultTableModel modeloAux) {
         ArrayList<ArrayList<Object[]>> list;
         list = daoComponente.getSubComponenteCalc(viewComponente.tbPerfilMetalico.getModel());
+        list.forEach((list1) -> {
+            list1.forEach((data) -> {
+                modeloAux.addRow(data);
+            });
+        });
+        groupList(modeloAux, daoProyecto.getComponenteCalc(modeloAux), 1);
+    }
+
+    private void calcularTuboMetalicos(DefaultTableModel modeloAux) {
+        ArrayList<ArrayList<Object[]>> list;
+        list = daoComponente.getSubComponenteCalc(viewComponente.tbTuboMetalico.getModel());
         list.forEach((list1) -> {
             list1.forEach((data) -> {
                 modeloAux.addRow(data);
@@ -160,24 +173,33 @@ public class ProyectoController implements ActionListener {
                 modeloAux.addRow(data);
             });
         });
-        
+
         groupList(modeloAux, daoProyecto.getComponenteVidrioPanelCalc(modeloAux), 2);
     }
 
     private void groupList(DefaultTableModel modeloAux, ArrayList<Object[]> list, int bdra) {
         modeloAux.setRowCount(0);
-        if (bdra == 1) {
-            modelo.setRowCount(0);
-            System.out.print(bdra);
-            list.forEach((list1) -> {
-                modelo.addRow(list1);
-            });
-        } else if (bdra == 2) {
-            System.out.print(bdra);
-            modeloVidrioPanel.setRowCount(0);
-            list.forEach((list1) -> {
-                modeloVidrioPanel.addRow(list1);
-            });
+        switch (bdra) {
+            case 1:
+                modelo.setRowCount(0);
+                list.forEach((list1) -> {
+                    modelo.addRow(list1);
+                });
+                break;
+            case 2:
+                modeloVidrioPanel.setRowCount(0);
+                list.forEach((list1) -> {
+                    modeloVidrioPanel.addRow(list1);
+                });
+                break;
+            case 3:
+                modeloTuboMetalico.setRowCount(0);
+                list.forEach((list1) -> {
+                    modeloTuboMetalico.addRow(list1);
+                });
+                break;
+            default:
+                break;
         }
 
     }
