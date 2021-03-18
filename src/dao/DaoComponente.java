@@ -257,12 +257,15 @@ public class DaoComponente implements IComponente {
         ArrayList<ArrayList<Object[]>> list = new ArrayList<>();
         ArrayList<Object[]> listDta;
         Object[] data;
-        for (int i = 0; i < modelo.getRowCount(); i++) {
 
+        for (int i = 0; i < modelo.getRowCount(); i++) {
+            float longitud = 0;
             ResultSet result;
             String codigo = modelo.getValueAt(i, 0).toString().trim().replace("\"", "").replace("�", "");
             String auxLongitud = modelo.getValueAt(i, 2).toString().trim().replace("\"", "");
-            float longitud = Float.parseFloat(auxLongitud.trim().replace(" ", "").replace("\"", ""));
+            if (!"".equals(auxLongitud)) {
+                longitud = Float.parseFloat(auxLongitud.trim().replace(" ", "").replace("\"", ""));
+            }
 
             try {
 

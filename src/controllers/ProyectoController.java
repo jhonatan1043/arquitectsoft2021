@@ -96,6 +96,7 @@ public class ProyectoController implements ActionListener {
         int[] list = {0};
         ValidTable.hideColumnsTable(viewComponente.tbComponente, list);
         ValidTable.hideColumnsTable(viewComponente.tbComponenteVidrioPanel, list);
+        ValidTable.hideColumnsTable(viewComponente.tbComponenteTuboMetalico, list);
     }
 
     private void hideTab() {
@@ -159,7 +160,7 @@ public class ProyectoController implements ActionListener {
                 modeloAux.addRow(data);
             });
         });
-        groupList(modeloAux, daoProyecto.getComponenteCalc(modeloAux), 1);
+        groupList(modeloAux, daoProyecto.getComponenteCalc(modeloAux), 3);
     }
 
     private void calcularVidrioPanel(DefaultTableModel modeloAux) {
