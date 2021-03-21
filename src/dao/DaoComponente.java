@@ -36,6 +36,7 @@ public class DaoComponente implements IComponente {
             PreparedStatement insertComponente = cnx.getConnection().prepareStatement(Contans.QUERY_INSERT_COMPONENTES, Statement.RETURN_GENERATED_KEYS);
             insertComponente.setString(1, componente.getCodigo());
             insertComponente.setString(2, componente.getDescripcion());
+            insertComponente.setBoolean(3, componente.isNoSubComponente());
             insertComponente.executeUpdate();
             try (ResultSet idGenerador = insertComponente.getGeneratedKeys()) {
                 idGenerador.next();
@@ -43,20 +44,22 @@ public class DaoComponente implements IComponente {
                 idGenerador.close();
                 insertComponente.close();
 
-                try (PreparedStatement insertComponenteDetalle = cnx.getConnection().prepareStatement(Contans.QUERY_INSERT_COMPONENTE_DETALLE)) {
-                    for (int i = 0; i < componente.getModelo().getRowCount(); i++) {
-                        unidadCalculada = Integer.parseInt(componente.getModelo().getValueAt(i, 3).toString().split("|")[0]);
-                        insertComponenteDetalle.setInt(1, idComponente);
-                        insertComponenteDetalle.setInt(2, Integer.parseInt(componente.getModelo().getValueAt(i, 0).toString()));
-                        insertComponenteDetalle.setInt(3, unidadCalculada);
-                        insertComponenteDetalle.setInt(4, Integer.parseInt(componente.getModelo().getValueAt(i, 4).toString()));
-                        insertComponenteDetalle.setInt(5, Integer.parseInt(componente.getModelo().getValueAt(i, 5).toString()));
-                        insertComponenteDetalle.setBoolean(6, Boolean.parseBoolean(componente.getModelo().getValueAt(i, 6).toString()));
-                        insertComponenteDetalle.executeUpdate();
+                if (componente.isNoSubComponente() != true) {
+                    try (PreparedStatement insertComponenteDetalle = cnx.getConnection().prepareStatement(Contans.QUERY_INSERT_COMPONENTE_DETALLE)) {
+                        for (int i = 0; i < componente.getModelo().getRowCount(); i++) {
+                            unidadCalculada = Integer.parseInt(componente.getModelo().getValueAt(i, 3).toString().split("|")[0]);
+                            insertComponenteDetalle.setInt(1, idComponente);
+                            insertComponenteDetalle.setInt(2, Integer.parseInt(componente.getModelo().getValueAt(i, 0).toString()));
+                            insertComponenteDetalle.setInt(3, unidadCalculada);
+                            insertComponenteDetalle.setInt(4, Integer.parseInt(componente.getModelo().getValueAt(i, 4).toString()));
+                            insertComponenteDetalle.setInt(5, Integer.parseInt(componente.getModelo().getValueAt(i, 5).toString()));
+                            insertComponenteDetalle.setBoolean(6, Boolean.parseBoolean(componente.getModelo().getValueAt(i, 6).toString()));
+                            insertComponenteDetalle.executeUpdate();
+                        }
                     }
-
-                    cnx.getConnection().commit();
                 }
+
+                cnx.getConnection().commit();
                 componente.setIdComponente(idComponente);
             }
         } catch (SQLException ex) {
@@ -87,38 +90,42 @@ public class DaoComponente implements IComponente {
             try (PreparedStatement insertComponente = cnx.getConnection().prepareStatement(Contans.QUERY_UPDATE_COMPONENTES)) {
                 insertComponente.setString(1, componente.getCodigo());
                 insertComponente.setString(2, componente.getDescripcion());
-                insertComponente.setInt(3, componente.getIdComponente());
+                insertComponente.setBoolean(3, componente.isNoSubComponente());
+                insertComponente.setInt(4, componente.getIdComponente());
                 insertComponente.executeUpdate();
 
                 insertComponente.close();
             }
+            if (componente.isNoSubComponente() != true) {
+                try (PreparedStatement deleteComponenteDetalle = cnx.getConnection().prepareStatement(Contans.QUERY_DELETE_COMPONENTE_DETALLE)) {
 
-            try (PreparedStatement deleteComponenteDetalle = cnx.getConnection().prepareStatement(Contans.QUERY_DELETE_COMPONENTE_DETALLE)) {
+                    deleteComponenteDetalle.setInt(1, componente.getIdComponente());
+                    deleteComponenteDetalle.executeUpdate();
 
-                deleteComponenteDetalle.setInt(1, componente.getIdComponente());
-                deleteComponenteDetalle.executeUpdate();
+                    deleteComponenteDetalle.close();
 
-                deleteComponenteDetalle.close();
+                    try (PreparedStatement insertComponenteDetalle = cnx.getConnection().prepareStatement(Contans.QUERY_INSERT_COMPONENTE_DETALLE)) {
+                        for (int i = 0; i < componente.getModelo().getRowCount(); i++) {
+                            unidadCalculada = Integer.parseInt(componente.getModelo().getValueAt(i, 3).toString().split("|")[0]);
+                            insertComponenteDetalle.setInt(1, componente.getIdComponente());
+                            insertComponenteDetalle.setInt(2, Integer.parseInt(componente.getModelo().getValueAt(i, 0).toString()));
+                            insertComponenteDetalle.setInt(3, unidadCalculada);
+                            insertComponenteDetalle.setInt(4, Integer.parseInt(componente.getModelo().getValueAt(i, 4).toString()));
+                            insertComponenteDetalle.setInt(5, Integer.parseInt(componente.getModelo().getValueAt(i, 5).toString()));
+                            insertComponenteDetalle.setBoolean(6, Boolean.parseBoolean(componente.getModelo().getValueAt(i, 6).toString()));
+                            insertComponenteDetalle.executeUpdate();
 
-                try (PreparedStatement insertComponenteDetalle = cnx.getConnection().prepareStatement(Contans.QUERY_INSERT_COMPONENTE_DETALLE)) {
-                    for (int i = 0; i < componente.getModelo().getRowCount(); i++) {
-                        unidadCalculada = Integer.parseInt(componente.getModelo().getValueAt(i, 3).toString().split("|")[0]);
-                        insertComponenteDetalle.setInt(1, componente.getIdComponente());
-                        insertComponenteDetalle.setInt(2, Integer.parseInt(componente.getModelo().getValueAt(i, 0).toString()));
-                        insertComponenteDetalle.setInt(3, unidadCalculada);
-                        insertComponenteDetalle.setInt(4, Integer.parseInt(componente.getModelo().getValueAt(i, 4).toString()));
-                        insertComponenteDetalle.setInt(5, Integer.parseInt(componente.getModelo().getValueAt(i, 5).toString()));
-                        insertComponenteDetalle.setBoolean(6, Boolean.parseBoolean(componente.getModelo().getValueAt(i, 6).toString()));
-                        insertComponenteDetalle.executeUpdate();
+                        }
+
+                        insertComponenteDetalle.close();
 
                     }
 
-                    insertComponenteDetalle.close();
-
-                    cnx.getConnection().commit();
                 }
-
             }
+
+            cnx.getConnection().commit();
+
         } catch (SQLException ex) {
             try {
                 Logger.getLogger(DaoComponente.class.getName()).log(Level.SEVERE, null, ex);
@@ -186,6 +193,7 @@ public class DaoComponente implements IComponente {
                 componente.setIdComponente(idComponente);
                 componente.setCodigo(result.getString(1));
                 componente.setDescripcion(result.getString(2));
+                componente.setNoSubComponente(result.getBoolean(3));
             }
 
             result.close();

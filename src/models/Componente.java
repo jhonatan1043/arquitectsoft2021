@@ -16,11 +16,21 @@ public class Componente {
     private int idComponente;
     private String codigo;
     private String descripcion;
+    private boolean noSubComponente;
     private DefaultTableModel modelo;
 
     public Componente() {
     }
 
+    
+    public boolean isNoSubComponente() {
+        return noSubComponente;
+    }
+
+    public void setNoSubComponente(boolean noSubComponente) {
+        this.noSubComponente = noSubComponente;
+    }
+    
     public int getIdComponente() {
         return idComponente;
     }

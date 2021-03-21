@@ -11,7 +11,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="itemComponente">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Nuevo Componente "/>
+                <Property name="text" type="java.lang.String" value="Componente "/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemComponenteActionPerformed"/>
@@ -21,7 +21,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Nuevo Componente Vidrios/Paneles"/>
+                <Property name="text" type="java.lang.String" value="Componente Vidrios/Paneles"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>
@@ -31,7 +31,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="itemSubComponente">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Nuevo Subcomponentes"/>
+                <Property name="text" type="java.lang.String" value="Subcomponentes"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemSubComponenteActionPerformed"/>
@@ -49,7 +49,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="itemIniciar">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Nuevo Proyecto"/>
+                <Property name="text" type="java.lang.String" value="Proyecto"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemIniciarActionPerformed"/>

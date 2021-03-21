@@ -23,15 +23,15 @@ public class Contans {
     //--------------------------------------------------------------------------------------------------------------------------------
     public static String QUERY_EXITS_COMPONENTES = "SELECT true AS status FROM componentes where Codigo = ?;";
 
-    public static String QUERY_COMPONENTES = "SELECT Id_Componente,Codigo,Descripcion FROM arquitectdb.componentes;";
+    public static String QUERY_COMPONENTES = "SELECT Id_Componente,Codigo,Descripcion,NoSubcomponente FROM arquitectdb.componentes;";
 
     public static String QUERY_COMPONENTES_LISTAR = "CALL componentesConsultar('";
 
-    public static String QUERY_COMPONENTES_CARGAR = "SELECT Codigo,Descripcion FROM arquitectdb.componentes WHERE Id_Componente = ?;";
+    public static String QUERY_COMPONENTES_CARGAR = "SELECT Codigo,Descripcion,NoSubcomponente FROM arquitectdb.componentes WHERE Id_Componente = ?;";
 
     public static String QUERY_COMPONENTES_DETALLE_CARGAR = "CALL componenteDetalleCargar(?);";
 
-    public static String QUERY_INSERT_COMPONENTES = "INSERT arquitectdb.componentes(codigo, descripcion) VALUES (?,?);";
+    public static String QUERY_INSERT_COMPONENTES = "INSERT arquitectdb.componentes(codigo, descripcion, NoSubcomponente) VALUES (?,?,?);";
 
     public static String QUERY_INSERT_COMPONENTE_DETALLE = "INSERT arquitectdb.componentes_detalle (Id_Componente,"
             + " Id_Subcomponente,"
@@ -40,7 +40,7 @@ public class Contans {
             + " Cantidad_Adicional,"
             + " Aplica_Decremento) VALUES (?,?,?,?,?,?);";
 
-    public static String QUERY_UPDATE_COMPONENTES = "CALL spComponenteActualizar(?,?,?);";
+    public static String QUERY_UPDATE_COMPONENTES = "CALL spComponenteActualizar(?,?,?,?);";
 
     public static String QUERY_DELETE_COMPONENTE = "DELETE FROM arquitectdb.componentes WHERE Id_Componente = ?;";
 

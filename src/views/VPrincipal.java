@@ -79,7 +79,7 @@ public class VPrincipal extends javax.swing.JFrame {
 
         jMenu1.setText("Opciones");
 
-        itemComponente.setText("Nuevo Componente ");
+        itemComponente.setText("Componente ");
         itemComponente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 itemComponenteActionPerformed(evt);
@@ -88,7 +88,7 @@ public class VPrincipal extends javax.swing.JFrame {
         jMenu1.add(itemComponente);
         jMenu1.add(jSeparator1);
 
-        jMenuItem1.setText("Nuevo Componente Vidrios/Paneles");
+        jMenuItem1.setText("Componente Vidrios/Paneles");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -97,7 +97,7 @@ public class VPrincipal extends javax.swing.JFrame {
         jMenu1.add(jMenuItem1);
         jMenu1.add(jSeparator4);
 
-        itemSubComponente.setText("Nuevo Subcomponentes");
+        itemSubComponente.setText("Subcomponentes");
         itemSubComponente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 itemSubComponenteActionPerformed(evt);
@@ -109,7 +109,7 @@ public class VPrincipal extends javax.swing.JFrame {
 
         jMenu4.setText("Proyecto");
 
-        itemIniciar.setText("Nuevo Proyecto");
+        itemIniciar.setText("Proyecto");
         itemIniciar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 itemIniciarActionPerformed(evt);

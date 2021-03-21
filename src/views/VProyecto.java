@@ -58,6 +58,9 @@ public class VProyecto extends javax.swing.JInternalFrame {
         jPnMamparas = new javax.swing.JPanel();
         jScrollPane8 = new javax.swing.JScrollPane();
         tbMampara = new javax.swing.JTable();
+        jPanel7 = new javax.swing.JPanel();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        tbComponenteMampara = new javax.swing.JTable();
         btnCalcular = new javax.swing.JButton();
         pnlButton = new javax.swing.JPanel();
         btnGenerar = new javax.swing.JButton();
@@ -414,13 +417,15 @@ public class VProyecto extends javax.swing.JInternalFrame {
         jScrollPane10.setViewportView(tbComponenteTuboMetalico);
         if (tbComponenteTuboMetalico.getColumnModel().getColumnCount() > 0) {
             tbComponenteTuboMetalico.getColumnModel().getColumn(0).setResizable(false);
+            tbComponenteTuboMetalico.getColumnModel().getColumn(0).setHeaderValue("IdComponente");
             tbComponenteTuboMetalico.getColumnModel().getColumn(1).setResizable(false);
             tbComponenteTuboMetalico.getColumnModel().getColumn(2).setResizable(false);
             tbComponenteTuboMetalico.getColumnModel().getColumn(2).setPreferredWidth(300);
             tbComponenteTuboMetalico.getColumnModel().getColumn(3).setResizable(false);
+            tbComponenteTuboMetalico.getColumnModel().getColumn(3).setHeaderValue("Cantidad");
             tbComponenteTuboMetalico.getColumnModel().getColumn(4).setResizable(false);
+            tbComponenteTuboMetalico.getColumnModel().getColumn(4).setHeaderValue("Medida");
             tbComponenteTuboMetalico.getColumnModel().getColumn(5).setResizable(false);
-            tbComponenteTuboMetalico.getColumnModel().getColumn(5).setHeaderValue("Medida Calculada");
             tbComponenteTuboMetalico.getColumnModel().getColumn(6).setResizable(false);
             tbComponenteTuboMetalico.getColumnModel().getColumn(6).setHeaderValue("Se Calcula por.");
         }
@@ -475,19 +480,75 @@ public class VProyecto extends javax.swing.JInternalFrame {
         ));
         jScrollPane8.setViewportView(tbMampara);
 
+        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        tbComponenteMampara.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        tbComponenteMampara.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Codigo", "Descripción", "Medida Calculada", "Ubicación"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tbComponenteMampara.setEnabled(false);
+        tbComponenteMampara.getTableHeader().setReorderingAllowed(false);
+        jScrollPane11.setViewportView(tbComponenteMampara);
+        if (tbComponenteMampara.getColumnModel().getColumnCount() > 0) {
+            tbComponenteMampara.getColumnModel().getColumn(0).setResizable(false);
+            tbComponenteMampara.getColumnModel().getColumn(1).setResizable(false);
+            tbComponenteMampara.getColumnModel().getColumn(1).setPreferredWidth(300);
+            tbComponenteMampara.getColumnModel().getColumn(2).setResizable(false);
+            tbComponenteMampara.getColumnModel().getColumn(3).setResizable(false);
+        }
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 1018, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout jPnMamparasLayout = new javax.swing.GroupLayout(jPnMamparas);
         jPnMamparas.setLayout(jPnMamparasLayout);
         jPnMamparasLayout.setHorizontalGroup(
             jPnMamparasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1042, Short.MAX_VALUE)
-            .addGroup(jPnMamparasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 1042, Short.MAX_VALUE))
+            .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 1042, Short.MAX_VALUE)
+            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPnMamparasLayout.setVerticalGroup(
             jPnMamparasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 443, Short.MAX_VALUE)
-            .addGroup(jPnMamparasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE))
+            .addGroup(jPnMamparasLayout.createSequentialGroup()
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 9, Short.MAX_VALUE))
         );
 
         jTabComponentes.addTab("MAMPARAS", jPnMamparas);
@@ -518,7 +579,7 @@ public class VProyecto extends javax.swing.JInternalFrame {
         );
 
         pnlButton.setBackground(new java.awt.Color(51, 255, 51));
-        pnlButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pnlButton.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
 
         btnGenerar.setBackground(new java.awt.Color(255, 255, 255));
         btnGenerar.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
@@ -605,6 +666,7 @@ public class VProyecto extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     public javax.swing.JPanel jPnMamparas;
     public javax.swing.JPanel jPnPerfilMetalico;
     public javax.swing.JPanel jPnPuerta;
@@ -614,6 +676,7 @@ public class VProyecto extends javax.swing.JInternalFrame {
     public javax.swing.JPanel jPnVidrioPanel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -625,6 +688,7 @@ public class VProyecto extends javax.swing.JInternalFrame {
     public javax.swing.JTabbedPane jTabComponentes;
     public javax.swing.JPanel pnlButton;
     public javax.swing.JTable tbComponente;
+    public javax.swing.JTable tbComponenteMampara;
     public javax.swing.JTable tbComponenteTuboMetalico;
     public javax.swing.JTable tbComponenteVidrioPanel;
     public javax.swing.JTable tbMampara;

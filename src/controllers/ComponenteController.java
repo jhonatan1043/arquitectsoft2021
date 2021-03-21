@@ -27,6 +27,7 @@ import views.VComponente;
 import views.VPrincipal;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
+
 /**
  *
  * @author Programador 1
@@ -55,7 +56,7 @@ public class ComponenteController implements ActionListener, KeyListener, FocusL
         modelo = (DefaultTableModel) viewComponente.tbComponente.getModel();
         viewComponente.tbComponente.setEnabled(false);
         viewComponente.btnNew.setEnabled(true);
-        viewComponente.btnBuscar.setEnabled(true);  
+        viewComponente.btnBuscar.setEnabled(true);
     }
 
     private void initEvent() {
@@ -70,6 +71,7 @@ public class ComponenteController implements ActionListener, KeyListener, FocusL
         viewComponente.txtCodigo.addKeyListener(this);
         viewComponente.txtDescripcion.addKeyListener(this);
         viewComponente.txtCodigo.addFocusListener(this);
+        viewComponente.checkNoComponente.addFocusListener(this);
     }
 
     private void hideColumns() {
@@ -94,6 +96,7 @@ public class ComponenteController implements ActionListener, KeyListener, FocusL
 
             viewComponente.txtCodigo.setText(componente.getCodigo());
             viewComponente.txtDescripcion.setText(componente.getDescripcion());
+            viewComponente.checkNoComponente.setSelected(componente.isNoSubComponente());
 
             ArrayList<Object[]> list = daoComponente.getComponenteDetalle(id);
 
@@ -103,7 +106,7 @@ public class ComponenteController implements ActionListener, KeyListener, FocusL
 
             System.setProperty("id", "");
             ValidButtonSystem.enabledButton(viewComponente.pnlButton);
-           // ValidTable.enableColumnsTableComponente(viewComponente.tbComponente);
+            // ValidTable.enableColumnsTableComponente(viewComponente.tbComponente);
             viewComponente.btnSave.setEnabled(false);
             viewComponente.btnCancel.setEnabled(false);
         }
@@ -119,7 +122,8 @@ public class ComponenteController implements ActionListener, KeyListener, FocusL
 
     private void loadComponente() {
         componente.setCodigo(viewComponente.txtCodigo.getText());
-        componente.setDescripcion(viewComponente.txtDescripcion.getText());;
+        componente.setDescripcion(viewComponente.txtDescripcion.getText());
+        componente.setNoSubComponente(viewComponente.checkNoComponente.isSelected());
         componente.setModelo((DefaultTableModel) viewComponente.tbComponente.getModel());
     }
 
@@ -172,7 +176,8 @@ public class ComponenteController implements ActionListener, KeyListener, FocusL
 
             if ("".equals(viewComponente.txtCodigo.getText())
                     || "".equals(viewComponente.txtDescripcion.getText())
-                    || viewComponente.tbComponente.getRowCount() == 0) {
+                    || (viewComponente.tbComponente.getRowCount() == 0
+                    && viewComponente.checkNoComponente.isSelected() == false)) {
                 JOptionPane.showMessageDialog(viewComponente, "¡ hay Datos sin realizar !");
             } else {
                 loadComponente();
@@ -229,16 +234,17 @@ public class ComponenteController implements ActionListener, KeyListener, FocusL
             }
         }
     }
-    
-       private void crearTablaCombo() {
+
+    private void crearTablaCombo() {
         //Combo y valores
         JComboBox comboBox = new JComboBox();
-        comboBox.addItem("1|Longitud");
+        comboBox.addItem("1|Longitud Recopilatoria");
         comboBox.addItem("2|Unidad");
         comboBox.addItem("3|Cantidad");
         comboBox.addItem("4|Medida Exacta");
+        comboBox.addItem("5|Longitud sin Recopilar");
         //se indica que columna tendra el JComboBox
-        viewComponente.tbComponente.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(comboBox));        
+        viewComponente.tbComponente.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(comboBox));
         viewComponente.tbComponente.setDefaultRenderer(Object.class, new CellRenderer(3));
     }
 
@@ -274,5 +280,4 @@ public class ComponenteController implements ActionListener, KeyListener, FocusL
             }
         }
     }
-
 }

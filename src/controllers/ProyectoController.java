@@ -85,11 +85,9 @@ public class ProyectoController implements ActionListener {
         viewComponente.btnGenerar.setEnabled(false);
         modelo = (DefaultTableModel) viewComponente.tbComponente.getModel();
         modeloVidrioPanel = (DefaultTableModel) viewComponente.tbComponenteVidrioPanel.getModel();
-//        modeloVidrioPanel = (DefaultTableModel) viewComponente.tbVidrioPanele.getModel();
-//        modeloPuerta = (DefaultTableModel) viewComponente.tbPuerta.getModel();
-//        modeloUnionPanel = (DefaultTableModel) viewComponente.tbUnionPaneles.getModel();
+        modeloPuerta = (DefaultTableModel) viewComponente.tbPuerta.getModel();
         modeloTuboMetalico = (DefaultTableModel) viewComponente.tbComponenteTuboMetalico.getModel();
-//        modeloMampara = (DefaultTableModel) viewComponente.tbMampara.getModel();
+        modeloMampara = (DefaultTableModel) viewComponente.tbComponenteMampara.getModel();
     }
 
     private void hideColumns() {
@@ -133,7 +131,8 @@ public class ProyectoController implements ActionListener {
         calcularPerfilMetalico(modeloAux);
         calcularVidrioPanel(modeloVidrioPanelAux);
         calcularTuboMetalicos(modeloTuboMetalicoAux);
-        
+        calcularMampara((DefaultTableModel) viewComponente.tbMampara.getModel(), (DefaultTableModel) viewComponente.tbPuerta.getModel());
+
         if (viewComponente.tbComponente.getRowCount() > 0
                 || viewComponente.tbComponenteVidrioPanel.getRowCount() > 0) {
             viewComponente.btnGenerar.setEnabled(true);
@@ -176,6 +175,45 @@ public class ProyectoController implements ActionListener {
         });
 
         groupList(modeloAux, daoProyecto.getComponenteVidrioPanelCalc(modeloAux), 2);
+    }
+
+    private void calcularMampara(DefaultTableModel modeloMamparaAux, DefaultTableModel modeloPuertaAux) {
+        ArrayList<Object[]> listDta = new ArrayList<>();
+        Object[] list;
+
+        float areaMampara, areaPuerta;
+        String UbicacionMampara, UbicacionPuerta;
+
+        
+        
+        
+        for (int m = 0; m < modeloMamparaAux.getRowCount(); m++) {
+            UbicacionMampara = modeloMamparaAux.getValueAt(m, 3).toString().replace("\"", "");
+            
+            if (!"".equals(UbicacionMampara)) {
+                areaMampara = Float.parseFloat(modeloMamparaAux.getValueAt(m, 2).toString().replace("\"", ""));
+                
+                for (int p = 0; p < modeloPuertaAux.getRowCount(); p++) {
+                    UbicacionPuerta = modeloPuertaAux.getValueAt(p, 9).toString().replace("\"", "");
+                    
+                    if (!"".equals(UbicacionPuerta)) {
+                        areaPuerta = Float.parseFloat(modeloPuertaAux.getValueAt(p, 10).toString().replace("\"", ""));
+                        if (UbicacionMampara == null ? UbicacionPuerta == null : UbicacionMampara.equals(UbicacionPuerta)) {
+                            list = new Object[4];
+                            list[0] = modeloMamparaAux.getValueAt(m, 0).toString();
+                            list[1] = modeloMamparaAux.getValueAt(m, 1).toString();
+                            list[2] = areaMampara - areaPuerta;
+                            list[3] = UbicacionMampara;
+                            listDta.add(list);
+                        }
+                    }
+                }
+            }
+        }
+        listDta.forEach((list1) -> {
+            System.out.println(list1);
+            modeloMampara.addRow(list1);
+        });
     }
 
     private void groupList(DefaultTableModel modeloAux, ArrayList<Object[]> list, int bdra) {

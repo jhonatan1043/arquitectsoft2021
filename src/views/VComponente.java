@@ -35,6 +35,7 @@ public class VComponente extends javax.swing.JInternalFrame {
         txtCodigo = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtDescripcion = new javax.swing.JTextField();
+        checkNoComponente = new javax.swing.JCheckBox();
         pnlButton = new javax.swing.JPanel();
         btnNew = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
@@ -42,7 +43,7 @@ public class VComponente extends javax.swing.JInternalFrame {
         btnEdit = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
+        jpContenedor = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbComponente = new javax.swing.JTable();
         btnAgregar = new javax.swing.JButton();
@@ -75,6 +76,8 @@ public class VComponente extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Descripción:");
 
+        checkNoComponente.setText("No subcomponente");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -88,6 +91,8 @@ public class VComponente extends javax.swing.JInternalFrame {
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
                 .addComponent(txtDescripcion)
+                .addGap(18, 18, 18)
+                .addComponent(checkNoComponente)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -98,11 +103,12 @@ public class VComponente extends javax.swing.JInternalFrame {
                     .addComponent(jLabel6)
                     .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
+                    .addComponent(jLabel7)
+                    .addComponent(checkNoComponente))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pnlButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pnlButton.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
 
         btnNew.setBackground(new java.awt.Color(255, 255, 255));
         btnNew.setText("Nuevo");
@@ -154,7 +160,7 @@ public class VComponente extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jpContenedor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         tbComponente.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         tbComponente.setModel(new javax.swing.table.DefaultTableModel(
@@ -203,26 +209,26 @@ public class VComponente extends javax.swing.JInternalFrame {
 
         btnQuitar.setText("-");
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout jpContenedorLayout = new javax.swing.GroupLayout(jpContenedor);
+        jpContenedor.setLayout(jpContenedorLayout);
+        jpContenedorLayout.setHorizontalGroup(
+            jpContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpContenedorLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jpContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 853, Short.MAX_VALUE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGroup(jpContenedorLayout.createSequentialGroup()
                         .addComponent(btnAgregar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnQuitar)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+        jpContenedorLayout.setVerticalGroup(
+            jpContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpContenedorLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jpContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAgregar)
                     .addComponent(btnQuitar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -233,7 +239,7 @@ public class VComponente extends javax.swing.JInternalFrame {
         jLayeredPane1.setLayer(jPanel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(pnlButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jPanel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jpContenedor, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
@@ -244,7 +250,7 @@ public class VComponente extends javax.swing.JInternalFrame {
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jpContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                 .addGap(109, 109, 109)
@@ -259,7 +265,7 @@ public class VComponente extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jpContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(pnlButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -289,14 +295,15 @@ public class VComponente extends javax.swing.JInternalFrame {
     public javax.swing.JButton btnNew;
     public javax.swing.JButton btnQuitar;
     public javax.swing.JButton btnSave;
+    public javax.swing.JCheckBox checkNoComponente;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     public javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    public javax.swing.JPanel jpContenedor;
     public javax.swing.JPanel pnlButton;
     public javax.swing.JTable tbComponente;
     public javax.swing.JTextField txtCodigo;
