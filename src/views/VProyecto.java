@@ -493,7 +493,7 @@ public class VProyecto extends javax.swing.JInternalFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
@@ -512,9 +512,11 @@ public class VProyecto extends javax.swing.JInternalFrame {
         jScrollPane11.setViewportView(tbComponenteMampara);
         if (tbComponenteMampara.getColumnModel().getColumnCount() > 0) {
             tbComponenteMampara.getColumnModel().getColumn(0).setResizable(false);
+            tbComponenteMampara.getColumnModel().getColumn(0).setPreferredWidth(20);
             tbComponenteMampara.getColumnModel().getColumn(1).setResizable(false);
-            tbComponenteMampara.getColumnModel().getColumn(1).setPreferredWidth(300);
+            tbComponenteMampara.getColumnModel().getColumn(1).setPreferredWidth(500);
             tbComponenteMampara.getColumnModel().getColumn(2).setResizable(false);
+            tbComponenteMampara.getColumnModel().getColumn(2).setPreferredWidth(20);
             tbComponenteMampara.getColumnModel().getColumn(3).setResizable(false);
         }
 
@@ -579,7 +581,7 @@ public class VProyecto extends javax.swing.JInternalFrame {
         );
 
         pnlButton.setBackground(new java.awt.Color(51, 255, 51));
-        pnlButton.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        pnlButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         btnGenerar.setBackground(new java.awt.Color(255, 255, 255));
         btnGenerar.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N

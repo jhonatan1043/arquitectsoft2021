@@ -111,4 +111,43 @@ public class DaoProyecto implements IProyecto {
         return list;
     }
 
+    @Override
+    public ArrayList<Object[]> getComponenteMamparaCalc(TableModel modelo) {
+        Conexion cnx = new Conexion();
+        ResultSet result;
+        ArrayList<Object[]> list = new ArrayList<>();
+
+        try {
+            PreparedStatement insertComponenteDetalle;
+            insertComponenteDetalle = cnx.getConnection().prepareStatement(Contans.QUERY_INSERT_PROYECT_MAMPARA);
+
+            for (int i = 0; i < modelo.getRowCount(); i++) {
+                insertComponenteDetalle.setString(1, modelo.getValueAt(i, 0).toString().replace("\"", ""));
+                insertComponenteDetalle.setString(2, modelo.getValueAt(i, 1).toString().replace("\"", ""));
+                insertComponenteDetalle.setDouble(3, Double.parseDouble(modelo.getValueAt(i, 2).toString()));
+                insertComponenteDetalle.executeUpdate();
+            }
+            insertComponenteDetalle.close();
+
+            PreparedStatement preparedStatement = cnx.getConnection().prepareStatement(Contans.QUERY_GET_PROYECTO_MAMPARA);
+            result = preparedStatement.executeQuery();
+
+            while (result.next()) {
+                Object[] lists = new Object[3];
+                lists[0] = result.getString(1);
+                lists[1] = result.getString(2);
+                lists[2] = Math.round(result.getDouble(3)*100.0/100.0);
+                list.add(lists);
+            }
+
+            result.close();
+            cnx.getConnection().close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoProyecto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return list;
+    }
+
 }

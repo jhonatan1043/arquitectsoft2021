@@ -18,4 +18,6 @@ public interface IProyecto {
     
     public ArrayList<Object[]> getComponenteVidrioPanelCalc(TableModel modelo);
     
+    public ArrayList<Object[]> getComponenteMamparaCalc(TableModel modelo);
+    
 }

@@ -111,10 +111,14 @@ public class Contans {
             + " Anchura,"
             + " Cantidad) "
             + "VALUES (?,?,?,?)";
+    
+    public static String QUERY_INSERT_PROYECT_MAMPARA = "INSERT proyecto_mp(codigo,descripcion,medida)Values(?,?,?)";
 
     public static String QUERY_GET_PROYECTO = "CALL spSubComponenteAgrupar();";
 
     public static String QUERY_GET_PROYECTO_VIDRIO_PANEL = "CALL spSubComponenteVidrioPanelAgrupar();";
+    
+    public static String QUERY_GET_PROYECTO_MAMPARA = "CALL spSubComponenteMamparaAgrupar();";
 
 // static of system 
     public static String SELECTING = "-- Seleccionar --";

@@ -1027,23 +1027,23 @@
                                   <Table columnCount="4" rowCount="0">
                                     <Column editable="false" title="Codigo" type="java.lang.String"/>
                                     <Column editable="false" title="Descripci&#xf3;n" type="java.lang.String"/>
-                                    <Column editable="false" title="Medida Calculada" type="java.lang.String"/>
+                                    <Column editable="false" title="Medida Calculada" type="java.lang.Double"/>
                                     <Column editable="false" title="Ubicaci&#xf3;n" type="java.lang.String"/>
                                   </Table>
                                 </Property>
                                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                                   <TableColumnModel selectionModel="0">
-                                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                                    <Column maxWidth="-1" minWidth="-1" prefWidth="20" resizable="false">
                                       <Title/>
                                       <Editor/>
                                       <Renderer/>
                                     </Column>
-                                    <Column maxWidth="-1" minWidth="-1" prefWidth="300" resizable="false">
+                                    <Column maxWidth="-1" minWidth="-1" prefWidth="500" resizable="false">
                                       <Title/>
                                       <Editor/>
                                       <Renderer/>
                                     </Column>
-                                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                                    <Column maxWidth="-1" minWidth="-1" prefWidth="20" resizable="false">
                                       <Title/>
                                       <Editor/>
                                       <Renderer/>
