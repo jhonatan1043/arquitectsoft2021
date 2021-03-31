@@ -63,8 +63,11 @@ public class Contans {
 
     public static String QUERY_INSERT_COMPONENTE_ESPECIAL_DETALLE = "INSERT arquitectdb.componentes_especial_detalle (Id_Componente_especial,"
             + " Id_Subcomponente,"
-            + " select_Columna) "
-            + " VALUES (?,?,?);";
+            + " select_Columna"
+            + " Cantidad_Default,"
+            + " Cantidad_Adicional,"
+            + " Aplica_Decremento)"
+            + " VALUES (?,?,?,?,?,?);";
 
     public static String QUERY_DELETE_COMPONENTE_ESPECIAL = "DELETE FROM arquitectdb.componentes_especial WHERE Id_Componente_especial = ?;";
 
@@ -111,13 +114,13 @@ public class Contans {
             + " Anchura,"
             + " Cantidad) "
             + "VALUES (?,?,?,?)";
-    
+
     public static String QUERY_INSERT_PROYECT_MAMPARA = "INSERT proyecto_mp(codigo,descripcion,medida)Values(?,?,?)";
 
     public static String QUERY_GET_PROYECTO = "CALL spSubComponenteAgrupar();";
 
     public static String QUERY_GET_PROYECTO_VIDRIO_PANEL = "CALL spSubComponenteVidrioPanelAgrupar();";
-    
+
     public static String QUERY_GET_PROYECTO_MAMPARA = "CALL spSubComponenteMamparaAgrupar();";
 
 // static of system 

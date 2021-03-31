@@ -239,6 +239,7 @@ public class ComponenteEspecialController implements ActionListener, KeyListener
         comboBox.addItem("3|Columna tercera");
         comboBox.addItem("4|Columna cuarta");
         comboBox.addItem("5|Columna quinta");
+        comboBox.addItem("6|Longitud");
         //se indica que columna tendra el JComboBox
         viewSubComponenteEspecial.tbComponente.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(comboBox));
         viewSubComponenteEspecial.tbComponente.setDefaultRenderer(Object.class, new CellRenderer(3));
