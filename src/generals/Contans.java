@@ -63,7 +63,7 @@ public class Contans {
 
     public static String QUERY_INSERT_COMPONENTE_ESPECIAL_DETALLE = "INSERT arquitectdb.componentes_especial_detalle (Id_Componente_especial,"
             + " Id_Subcomponente,"
-            + " select_Columna"
+            + " select_Columna, "
             + " Cantidad_Default,"
             + " Cantidad_Adicional,"
             + " Aplica_Decremento)"

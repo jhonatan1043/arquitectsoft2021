@@ -108,7 +108,7 @@ public class VComponente extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pnlButton.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        pnlButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         btnNew.setBackground(new java.awt.Color(255, 255, 255));
         btnNew.setText("Nuevo");

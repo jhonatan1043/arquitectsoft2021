@@ -171,17 +171,11 @@ public class VProyecto extends javax.swing.JInternalFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1018, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1038, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPnPerfilMetalicoLayout = new javax.swing.GroupLayout(jPnPerfilMetalico);
@@ -196,8 +190,7 @@ public class VProyecto extends javax.swing.JInternalFrame {
             .addGroup(jPnPerfilMetalicoLayout.createSequentialGroup()
                 .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(7, 7, 7)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabComponentes.addTab("PERFIL METALICO", jPnPerfilMetalico);
@@ -222,14 +215,14 @@ public class VProyecto extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "IdComponente", "Codigo", "Descripción", "Altura", "Anchura", "Cantidad"
+                "IdComponente", "Codigo", "Descripción", "Altura", "Anchura", "Cantidad", "Medida", "Medida Calculada", "Se Calcula Por"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, true, true, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -251,23 +244,20 @@ public class VProyecto extends javax.swing.JInternalFrame {
             tbComponenteVidrioPanel.getColumnModel().getColumn(3).setResizable(false);
             tbComponenteVidrioPanel.getColumnModel().getColumn(4).setResizable(false);
             tbComponenteVidrioPanel.getColumnModel().getColumn(5).setResizable(false);
+            tbComponenteVidrioPanel.getColumnModel().getColumn(6).setResizable(false);
+            tbComponenteVidrioPanel.getColumnModel().getColumn(7).setResizable(false);
+            tbComponenteVidrioPanel.getColumnModel().getColumn(8).setResizable(false);
         }
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1018, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1038, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPnVidrioPanelLayout = new javax.swing.GroupLayout(jPnVidrioPanel);
@@ -524,17 +514,11 @@ public class VProyecto extends javax.swing.JInternalFrame {
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 1018, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jScrollPane11, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jScrollPane11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPnMamparasLayout = new javax.swing.GroupLayout(jPnMamparas);
@@ -549,8 +533,7 @@ public class VProyecto extends javax.swing.JInternalFrame {
             .addGroup(jPnMamparasLayout.createSequentialGroup()
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 9, Short.MAX_VALUE))
+                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabComponentes.addTab("MAMPARAS", jPnMamparas);

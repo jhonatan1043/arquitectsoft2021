@@ -142,6 +142,15 @@ public class VComponenteEspecial extends javax.swing.JInternalFrame {
         tbComponente.setRowSelectionAllowed(false);
         tbComponente.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tbComponente);
+        if (tbComponente.getColumnModel().getColumnCount() > 0) {
+            tbComponente.getColumnModel().getColumn(0).setResizable(false);
+            tbComponente.getColumnModel().getColumn(1).setResizable(false);
+            tbComponente.getColumnModel().getColumn(2).setResizable(false);
+            tbComponente.getColumnModel().getColumn(3).setResizable(false);
+            tbComponente.getColumnModel().getColumn(4).setResizable(false);
+            tbComponente.getColumnModel().getColumn(5).setResizable(false);
+            tbComponente.getColumnModel().getColumn(6).setResizable(false);
+        }
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
