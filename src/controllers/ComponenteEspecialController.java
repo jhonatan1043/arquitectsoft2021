@@ -7,6 +7,7 @@ package controllers;
 
 import dao.DaoComponenteEspecial;
 import generals.CellRenderer;
+import generals.Combos;
 import generals.Contans;
 import generals.ValidButtonSystem;
 import generals.ValidControlsSystem;
@@ -19,6 +20,8 @@ import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -51,6 +54,7 @@ public class ComponenteEspecialController implements ActionListener, KeyListener
         ValidControlsSystem.disableControls(viewSubComponenteEspecial.jLayeredPane1);
         ValidButtonSystem.disableButton(viewSubComponenteEspecial.pnlButton);
         crearTablaCombo();
+        comboCorte();
         initEvent();
         hideColumns();
         modelo = (DefaultTableModel) viewSubComponenteEspecial.tbComponente.getModel();
@@ -244,6 +248,19 @@ public class ComponenteEspecialController implements ActionListener, KeyListener
         //se indica que columna tendra el JComboBox
         viewSubComponenteEspecial.tbComponente.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(comboBox));
         viewSubComponenteEspecial.tbComponente.setDefaultRenderer(Object.class, new CellRenderer(3));
+    }
+
+    private void comboCorte() {
+        JComboBox comboBox = new JComboBox();
+        Combos combo = new Combos();
+        combo.setSqlConsult(Contans.QUERY_CORTE);
+        try {
+            combo.setCombo(comboBox);
+            viewSubComponenteEspecial.tbComponente.getColumnModel().getColumn(8).setCellEditor(new DefaultCellEditor(comboBox));
+            viewSubComponenteEspecial.tbComponente.setDefaultRenderer(Object.class, new CellRenderer(8));
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ProyectoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override

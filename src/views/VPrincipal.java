@@ -5,8 +5,10 @@
  */
 package views;
 
+import controllers.AcabadoController;
 import controllers.ComponenteController;
 import controllers.ComponenteEspecialController;
+import controllers.CorteController;
 import controllers.ProyectoController;
 import controllers.SubComponenteController;
 import generals.ValidForm;
@@ -47,6 +49,11 @@ public class VPrincipal extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jSeparator4 = new javax.swing.JPopupMenu.Separator();
         itemSubComponente = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        jMenu2 = new javax.swing.JMenu();
+        itemAcabados = new javax.swing.JMenuItem();
+        jSeparator3 = new javax.swing.JPopupMenu.Separator();
+        itemCortes = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         itemIniciar = new javax.swing.JMenuItem();
 
@@ -104,6 +111,28 @@ public class VPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu1.add(itemSubComponente);
+        jMenu1.add(jSeparator2);
+
+        jMenu2.setText("Configuración");
+
+        itemAcabados.setText("Acabados");
+        itemAcabados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemAcabadosActionPerformed(evt);
+            }
+        });
+        jMenu2.add(itemAcabados);
+        jMenu2.add(jSeparator3);
+
+        itemCortes.setText("Cortes");
+        itemCortes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemCortesActionPerformed(evt);
+            }
+        });
+        jMenu2.add(itemCortes);
+
+        jMenu1.add(jMenu2);
 
         jMenuBar2.add(jMenu1);
 
@@ -167,6 +196,22 @@ public class VPrincipal extends javax.swing.JFrame {
         viewcomponenteEspecial.show();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void itemAcabadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAcabadosActionPerformed
+        VAcabado viewAcabado = new VAcabado();
+        AcabadoController acabadoCont = new AcabadoController(viewAcabado);
+        this.Desktop.add(viewAcabado);
+        ValidForm.centeForm(viewAcabado, Desktop);
+        viewAcabado.show();
+    }//GEN-LAST:event_itemAcabadosActionPerformed
+
+    private void itemCortesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCortesActionPerformed
+        VCorte viewCorte = new VCorte();
+        CorteController ComponenteCont = new CorteController(viewCorte);
+        this.Desktop.add(viewCorte);
+        ValidForm.centeForm(viewCorte, Desktop);
+        viewCorte.show();
+    }//GEN-LAST:event_itemCortesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -205,15 +250,20 @@ public class VPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JDesktopPane Desktop;
+    private javax.swing.JMenuItem itemAcabados;
     private javax.swing.JMenuItem itemComponente;
+    private javax.swing.JMenuItem itemCortes;
     public javax.swing.JMenuItem itemIniciar;
     public javax.swing.JMenuItem itemSubComponente;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
     // End of variables declaration//GEN-END:variables
 }

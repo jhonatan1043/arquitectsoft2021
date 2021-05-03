@@ -10,9 +10,11 @@ package generals;
  * @author Programador 1
  */
 public class Contans {
-    // query of system 
-    //--------------------------------------------------------------------------------------------------------------------------------
 
+    // query of system 
+    // -----------------------------------------------------------------------------------------------------------------------------
+    public static String QUERY_CORTE = "SELECT Id_Corte codigo, Descripcion FROM cortes;";
+    //--------------------------------------------------------------------------------------------------------------------------------
     public static String QUERY_ACABADO = "SELECT Codigo_Homologacion codigo, Descripcion FROM Acabados;";
 
     public static String QUERY_INSERT_ACABADOS = "INSERT acabados (Codigo_Homologacion, descripcion)VALUES(?,?)";
@@ -66,8 +68,10 @@ public class Contans {
             + " select_Columna, "
             + " Cantidad_Default,"
             + " Cantidad_Adicional,"
-            + " Aplica_Decremento)"
-            + " VALUES (?,?,?,?,?,?);";
+            + " Aplica_Decremento,"
+            + " elevado,"
+            + " idCorte)"
+            + " VALUES (?,?,?,?,?,?,?,?);";
 
     public static String QUERY_DELETE_COMPONENTE_ESPECIAL = "DELETE FROM arquitectdb.componentes_especial WHERE Id_Componente_especial = ?;";
 
