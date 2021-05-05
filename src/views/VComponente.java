@@ -50,20 +50,22 @@ public class VComponente extends javax.swing.JInternalFrame {
         btnQuitar = new javax.swing.JButton();
 
         setClosable(true);
+        setPreferredSize(new java.awt.Dimension(935, 549));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Componente");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(350, 350, 350))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,14 +170,14 @@ public class VComponente extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "IdComponente", "Codigo", "Descripción", "Unidad Calculada", "C.x defecto", "C. Adicional", "A. Decremeto"
+                "IdComponente", "Codigo", "Descripción", "Unidad Calculada", "C.x defecto", "C. Adicional", "A. Decremeto", "Elevado", "Corte"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Boolean.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Boolean.class, java.lang.Integer.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, true, true, true
+                false, false, false, true, true, true, true, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -194,15 +196,16 @@ public class VComponente extends javax.swing.JInternalFrame {
             tbComponente.getColumnModel().getColumn(1).setResizable(false);
             tbComponente.getColumnModel().getColumn(1).setPreferredWidth(100);
             tbComponente.getColumnModel().getColumn(2).setResizable(false);
-            tbComponente.getColumnModel().getColumn(2).setPreferredWidth(400);
+            tbComponente.getColumnModel().getColumn(2).setPreferredWidth(300);
             tbComponente.getColumnModel().getColumn(3).setResizable(false);
-            tbComponente.getColumnModel().getColumn(3).setPreferredWidth(200);
+            tbComponente.getColumnModel().getColumn(3).setPreferredWidth(150);
             tbComponente.getColumnModel().getColumn(4).setResizable(false);
             tbComponente.getColumnModel().getColumn(4).setPreferredWidth(100);
             tbComponente.getColumnModel().getColumn(5).setResizable(false);
             tbComponente.getColumnModel().getColumn(5).setPreferredWidth(100);
             tbComponente.getColumnModel().getColumn(6).setResizable(false);
             tbComponente.getColumnModel().getColumn(6).setPreferredWidth(100);
+            tbComponente.getColumnModel().getColumn(8).setResizable(false);
         }
 
         btnAgregar.setText("+");
@@ -216,7 +219,7 @@ public class VComponente extends javax.swing.JInternalFrame {
             .addGroup(jpContenedorLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 853, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 877, Short.MAX_VALUE)
                     .addGroup(jpContenedorLayout.createSequentialGroup()
                         .addComponent(btnAgregar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -227,12 +230,12 @@ public class VComponente extends javax.swing.JInternalFrame {
         jpContenedorLayout.setVerticalGroup(
             jpContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpContenedorLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jpContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAgregar)
                     .addComponent(btnQuitar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
                 .addContainerGap())
         );
 

@@ -7,6 +7,7 @@ package controllers;
 
 import dao.DaoComponente;
 import generals.CellRenderer;
+import generals.Combos;
 import generals.Contans;
 import generals.ValidButtonSystem;
 import generals.ValidControlsSystem;
@@ -19,6 +20,8 @@ import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import models.Componente;
@@ -53,6 +56,7 @@ public class ComponenteController implements ActionListener, KeyListener, FocusL
         initEvent();
         hideColumns();
         crearTablaCombo();
+        comboCorte();
         modelo = (DefaultTableModel) viewComponente.tbComponente.getModel();
         viewComponente.tbComponente.setEnabled(false);
         viewComponente.btnNew.setEnabled(true);
@@ -243,11 +247,27 @@ public class ComponenteController implements ActionListener, KeyListener, FocusL
         comboBox.addItem("3|Cantidad");
         comboBox.addItem("4|Medida Exacta");
         comboBox.addItem("5|Longitud sin Recopilar");
+        comboBox.addItem("6|Columna primera");
+        comboBox.addItem("7|Columna segunda");
+        comboBox.addItem("8|Columna tercera");
+        comboBox.addItem("9|Columna cuarta");
+        comboBox.addItem("10|Columna quinta");
         //se indica que columna tendra el JComboBox
         viewComponente.tbComponente.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(comboBox));
         viewComponente.tbComponente.setDefaultRenderer(Object.class, new CellRenderer(3));
     }
-
+    private void comboCorte() {
+        JComboBox comboBox = new JComboBox();
+        Combos combo = new Combos();
+        combo.setSqlConsult(Contans.QUERY_CORTE);
+        try {
+            combo.setCombo(comboBox);
+            viewComponente.tbComponente.getColumnModel().getColumn(8).setCellEditor(new DefaultCellEditor(comboBox));
+            viewComponente.tbComponente.setDefaultRenderer(Object.class, new CellRenderer(8));
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ProyectoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     @Override
     public void keyTyped(KeyEvent e) {
         if (e.getSource() == viewComponente.txtCodigo) {

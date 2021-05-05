@@ -48,6 +48,7 @@ public class GenerarColumns {
                 //-----------------Puertas
                 listColumns.add("Codigo");
                 listColumns.add("Apertura de Puerta");
+                listColumns.add("Acabado");
                 listColumns.add("Family");
                 listColumns.add("Item");
                 listColumns.add("Altura");

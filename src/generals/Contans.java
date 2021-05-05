@@ -40,7 +40,9 @@ public class Contans {
             + " Id_Unidad_Calculada,"
             + " Cantidad_Default,"
             + " Cantidad_Adicional,"
-            + " Aplica_Decremento) VALUES (?,?,?,?,?,?);";
+            + " Aplica_Decremento, "
+            + " elevado," 
+            + " idCorte )VALUES(?,?,?,?,?,?,?,?);";
 
     public static String QUERY_UPDATE_COMPONENTES = "CALL spComponenteActualizar(?,?,?,?);";
 

@@ -95,6 +95,7 @@ public class ProyectoController implements ActionListener {
         ValidTable.hideColumnsTable(viewComponente.tbComponente, list);
         ValidTable.hideColumnsTable(viewComponente.tbComponenteVidrioPanel, list);
         ValidTable.hideColumnsTable(viewComponente.tbComponenteTuboMetalico, list);
+        ValidTable.hideColumnsTable(viewComponente.tbComponentePuerta, list);
     }
 
     private void hideTab() {
@@ -186,47 +187,48 @@ public class ProyectoController implements ActionListener {
         double areaMampara, areaPuerta, areaCalculada;
         String UbicacionMampara, UbicacionPuerta;
         DefaultTableModel modeloAux;
+        if (modeloMamparaAux.getRowCount() > 0) {
 
-        for (int m = 0; m < modeloMamparaAux.getRowCount(); m++) {
-            UbicacionMampara = modeloMamparaAux.getValueAt(m, 3).toString().replace("\"", "");
-            if (!"".equals(UbicacionMampara)) {
-                areaMampara = Double.parseDouble(modeloMamparaAux.getValueAt(m, 2).toString().replace("\"", ""));
-                list = new Object[4];
-                list[0] = modeloMamparaAux.getValueAt(m, 0).toString();
-                list[1] = modeloMamparaAux.getValueAt(m, 1).toString();
-                list[2] = areaMampara;
-                list[3] = UbicacionMampara;
-                listDta.add(list);
+            for (int m = 0; m < modeloMamparaAux.getRowCount(); m++) {
+                UbicacionMampara = modeloMamparaAux.getValueAt(m, 3).toString().replace("\"", "");
+                if (!"".equals(UbicacionMampara)) {
+                    areaMampara = Double.parseDouble(modeloMamparaAux.getValueAt(m, 2).toString().replace("\"", ""));
+                    list = new Object[4];
+                    list[0] = modeloMamparaAux.getValueAt(m, 0).toString();
+                    list[1] = modeloMamparaAux.getValueAt(m, 1).toString();
+                    list[2] = areaMampara;
+                    list[3] = UbicacionMampara;
+                    listDta.add(list);
+                }
             }
-        }
 
-        listDta.forEach((list1) -> {
-            modeloMampara.addRow(list1);
-        });
+            listDta.forEach((list1) -> {
+                modeloMampara.addRow(list1);
+            });
 
-        for (int p = 0; p < modeloPuertaAux.getRowCount(); p++) {
-            UbicacionPuerta = modeloPuertaAux.getValueAt(p, 9).toString().replace("\"", "");
+            for (int p = 0; p < modeloPuertaAux.getRowCount(); p++) {
+                UbicacionPuerta = modeloPuertaAux.getValueAt(p, 9).toString().replace("\"", "");
 
-            if (!"".equals(UbicacionPuerta)) {
-                areaPuerta = Double.parseDouble(modeloPuertaAux.getValueAt(p, 10).toString().replace("\"", ""));
+                if (!"".equals(UbicacionPuerta)) {
+                    areaPuerta = Double.parseDouble(modeloPuertaAux.getValueAt(p, 10).toString().replace("\"", ""));
 
-                if (modeloMampara.getRowCount() > 0) {
-                    for (int m = 0; m < modeloMampara.getRowCount(); m++) {
-                        UbicacionMampara = modeloMampara.getValueAt(m, 3).toString();
-                        if (UbicacionMampara == null ? UbicacionPuerta == null : UbicacionMampara.equals(UbicacionPuerta)) {
-                            areaMampara = Double.parseDouble(modeloMampara.getValueAt(m, 2).toString());
-                            areaCalculada = areaMampara - areaPuerta;
-                            modeloMampara.setValueAt(Math.round(areaCalculada * 100.0) / 100.0, m, 2);
+                    if (modeloMampara.getRowCount() > 0) {
+                        for (int m = 0; m < modeloMampara.getRowCount(); m++) {
+                            UbicacionMampara = modeloMampara.getValueAt(m, 3).toString();
+                            if (UbicacionMampara == null ? UbicacionPuerta == null : UbicacionMampara.equals(UbicacionPuerta)) {
+                                areaMampara = Double.parseDouble(modeloMampara.getValueAt(m, 2).toString());
+                                areaCalculada = areaMampara - areaPuerta;
+                                modeloMampara.setValueAt(Math.round(areaCalculada * 100.0) / 100.0, m, 2);
+                            }
                         }
                     }
                 }
             }
+            modeloAux = modeloMampara;
+
+            groupList(modeloAux, daoProyecto.getComponenteMamparaCalc(modeloAux), 4);
+            ValidTable.hideColumnsTable(viewComponente.tbComponenteMampara, listHide);
         }
-        modeloAux = modeloMampara;
-
-        groupList(modeloAux, daoProyecto.getComponenteMamparaCalc(modeloAux), 4);
-        ValidTable.hideColumnsTable(viewComponente.tbComponenteMampara, listHide);
-
     }
 
     private void calcularPuerta(DefaultTableModel modeloAux) {
