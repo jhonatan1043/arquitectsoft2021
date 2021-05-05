@@ -85,7 +85,7 @@ public class ProyectoController implements ActionListener {
         viewComponente.btnGenerar.setEnabled(false);
         modelo = (DefaultTableModel) viewComponente.tbComponente.getModel();
         modeloVidrioPanel = (DefaultTableModel) viewComponente.tbComponenteVidrioPanel.getModel();
-        modeloPuerta = (DefaultTableModel) viewComponente.tbPuerta.getModel();
+        modeloPuerta = (DefaultTableModel) viewComponente.tbComponentePuerta.getModel();
         modeloTuboMetalico = (DefaultTableModel) viewComponente.tbComponenteTuboMetalico.getModel();
         modeloMampara = (DefaultTableModel) viewComponente.tbComponenteMampara.getModel();
     }
@@ -127,10 +127,12 @@ public class ProyectoController implements ActionListener {
         DefaultTableModel modeloAux = modelo;
         DefaultTableModel modeloVidrioPanelAux = modeloVidrioPanel;
         DefaultTableModel modeloTuboMetalicoAux = modeloTuboMetalico;
+        DefaultTableModel modeloPuertaAux = modeloPuerta;
 
         calcularPerfilMetalico(modeloAux);
         calcularVidrioPanel(modeloVidrioPanelAux);
         calcularTuboMetalicos(modeloTuboMetalicoAux);
+        calcularPuerta(modeloPuertaAux);
         calcularMampara((DefaultTableModel) viewComponente.tbMampara.getModel(), (DefaultTableModel) viewComponente.tbPuerta.getModel());
 
         if (viewComponente.tbComponente.getRowCount() > 0
@@ -227,6 +229,17 @@ public class ProyectoController implements ActionListener {
 
     }
 
+    private void calcularPuerta(DefaultTableModel modeloAux) {
+        ArrayList<ArrayList<Object[]>> list;
+        list = daoComponente.getSubComponentePuertaCalc(viewComponente.tbPuerta.getModel());
+        list.forEach((list1) -> {
+            list1.forEach((data) -> {
+                modeloAux.addRow(data);
+            });
+        });
+        groupList(modeloAux, daoProyecto.getComponentePuertaCalc(modeloAux), 5);
+    }
+
     private void groupList(DefaultTableModel modeloAux, ArrayList<Object[]> list, int bdra) {
         modeloAux.setRowCount(0);
         switch (bdra) {
@@ -252,6 +265,12 @@ public class ProyectoController implements ActionListener {
                 modeloMampara.setRowCount(0);
                 list.forEach((list1) -> {
                     modeloMampara.addRow(list1);
+                });
+                break;
+            case 5:
+                modeloPuerta.setRowCount(0);
+                list.forEach((list1) -> {
+                    modeloPuerta.addRow(list1);
                 });
                 break;
             default:

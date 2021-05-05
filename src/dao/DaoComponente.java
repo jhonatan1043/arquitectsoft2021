@@ -328,4 +328,55 @@ public class DaoComponente implements IComponente {
         return result;
     }
 
+    @Override
+    public ArrayList<ArrayList<Object[]>> getSubComponentePuertaCalc(TableModel modelo) {
+      ArrayList<ArrayList<Object[]>> list = new ArrayList<>();
+        ArrayList<Object[]> listDta;
+        Object[] data;
+
+        for (int i = 0; i < modelo.getRowCount(); i++) {
+            float longitud = 0;
+            ResultSet result;
+            String codigo = modelo.getValueAt(i, 0).toString().trim().replace("\"", "").replace("�", "");
+            String auxLongitud = modelo.getValueAt(i, 2).toString().trim().replace("\"", "");
+            if (!"".equals(auxLongitud)) {
+                longitud = Float.parseFloat(auxLongitud.trim().replace(" ", "").replace("\"", ""));
+            }
+
+            try {
+
+                String query = "call spComponentePerfilesCargar(?,?);";
+
+                try (PreparedStatement preparedStatement = cnx.getConnection().prepareStatement(query)) {
+                    preparedStatement.setString(1, codigo);
+                    preparedStatement.setFloat(2, longitud);
+                    result = preparedStatement.executeQuery();
+
+                    listDta = new ArrayList<>();
+
+                    while (result.next()) {
+                        data = new Object[8];
+                        data[0] = result.getInt(1);
+                        data[1] = result.getInt(2);
+                        data[2] = result.getString(3);
+                        data[3] = result.getString(4);
+                        data[4] = result.getInt(5);
+                        data[5] = result.getString(6);
+                        data[6] = result.getInt(7);
+                        data[7] = "";
+                        listDta.add(data);
+                    }
+
+                    list.add(listDta);
+
+                    result.close();
+                }
+
+            } catch (SQLException ex) {
+                Logger.getLogger(DaoComponente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return list;
+    }
+
 }

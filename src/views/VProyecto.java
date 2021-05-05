@@ -47,7 +47,7 @@ public class VProyecto extends javax.swing.JInternalFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         tbPuerta = new javax.swing.JTable();
         jScrollPane12 = new javax.swing.JScrollPane();
-        tbComponente1 = new javax.swing.JTable();
+        tbComponentePuerta = new javax.swing.JTable();
         jPnUnionPanele = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         tbUnionPaneles = new javax.swing.JTable();
@@ -321,8 +321,8 @@ public class VProyecto extends javax.swing.JInternalFrame {
         ));
         jScrollPane5.setViewportView(tbPuerta);
 
-        tbComponente1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        tbComponente1.setModel(new javax.swing.table.DefaultTableModel(
+        tbComponentePuerta.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        tbComponentePuerta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -345,20 +345,20 @@ public class VProyecto extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        tbComponente1.setEnabled(false);
-        tbComponente1.getTableHeader().setReorderingAllowed(false);
-        jScrollPane12.setViewportView(tbComponente1);
-        if (tbComponente1.getColumnModel().getColumnCount() > 0) {
-            tbComponente1.getColumnModel().getColumn(0).setResizable(false);
-            tbComponente1.getColumnModel().getColumn(1).setResizable(false);
-            tbComponente1.getColumnModel().getColumn(2).setResizable(false);
-            tbComponente1.getColumnModel().getColumn(2).setPreferredWidth(300);
-            tbComponente1.getColumnModel().getColumn(3).setResizable(false);
-            tbComponente1.getColumnModel().getColumn(4).setResizable(false);
-            tbComponente1.getColumnModel().getColumn(5).setResizable(false);
-            tbComponente1.getColumnModel().getColumn(5).setHeaderValue("Medida Calculada");
-            tbComponente1.getColumnModel().getColumn(6).setResizable(false);
-            tbComponente1.getColumnModel().getColumn(6).setHeaderValue("Se Calcula por.");
+        tbComponentePuerta.setEnabled(false);
+        tbComponentePuerta.getTableHeader().setReorderingAllowed(false);
+        jScrollPane12.setViewportView(tbComponentePuerta);
+        if (tbComponentePuerta.getColumnModel().getColumnCount() > 0) {
+            tbComponentePuerta.getColumnModel().getColumn(0).setResizable(false);
+            tbComponentePuerta.getColumnModel().getColumn(1).setResizable(false);
+            tbComponentePuerta.getColumnModel().getColumn(2).setResizable(false);
+            tbComponentePuerta.getColumnModel().getColumn(2).setPreferredWidth(300);
+            tbComponentePuerta.getColumnModel().getColumn(3).setResizable(false);
+            tbComponentePuerta.getColumnModel().getColumn(4).setResizable(false);
+            tbComponentePuerta.getColumnModel().getColumn(5).setResizable(false);
+            tbComponentePuerta.getColumnModel().getColumn(5).setHeaderValue("Medida Calculada");
+            tbComponentePuerta.getColumnModel().getColumn(6).setResizable(false);
+            tbComponentePuerta.getColumnModel().getColumn(6).setHeaderValue("Se Calcula por.");
         }
 
         javax.swing.GroupLayout jPnPuertaLayout = new javax.swing.GroupLayout(jPnPuerta);
@@ -720,8 +720,8 @@ public class VProyecto extends javax.swing.JInternalFrame {
     public javax.swing.JTabbedPane jTabComponentes;
     public javax.swing.JPanel pnlButton;
     public javax.swing.JTable tbComponente;
-    public javax.swing.JTable tbComponente1;
     public javax.swing.JTable tbComponenteMampara;
+    public javax.swing.JTable tbComponentePuerta;
     public javax.swing.JTable tbComponenteTuboMetalico;
     public javax.swing.JTable tbComponenteVidrioPanel;
     public javax.swing.JTable tbMampara;

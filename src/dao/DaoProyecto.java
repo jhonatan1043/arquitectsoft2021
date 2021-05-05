@@ -150,4 +150,49 @@ public class DaoProyecto implements IProyecto {
         return list;
     }
 
+    @Override
+    public ArrayList<Object[]> getComponentePuertaCalc(TableModel modelo) {
+      Conexion cnx = new Conexion();
+        ResultSet result;
+        ArrayList<Object[]> list = new ArrayList<>();
+
+        try {
+            PreparedStatement insertComponenteDetalle;
+            insertComponenteDetalle = cnx.getConnection().prepareStatement(Contans.QUERY_INSERT_PROYECTO);
+
+            for (int i = 0; i < modelo.getRowCount(); i++) {
+                insertComponenteDetalle.setInt(1, Integer.parseInt(modelo.getValueAt(i, 0).toString()));
+                insertComponenteDetalle.setInt(2, Integer.parseInt(modelo.getValueAt(i, 1).toString()));
+                insertComponenteDetalle.setInt(3, Integer.parseInt(modelo.getValueAt(i, 4).toString()));
+                insertComponenteDetalle.setInt(4, Integer.parseInt(modelo.getValueAt(i, 5).toString()));
+                insertComponenteDetalle.setInt(5, Integer.parseInt(modelo.getValueAt(i, 6).toString()));
+                insertComponenteDetalle.executeUpdate();
+            }
+            insertComponenteDetalle.close();
+
+            PreparedStatement preparedStatement = cnx.getConnection().prepareStatement(Contans.QUERY_GET_PROYECTO);
+            result = preparedStatement.executeQuery();
+
+            while (result.next()) {
+                Object[] lists = new Object[7];
+                lists[0] = result.getInt(1);
+                lists[1] = result.getString(2);
+                lists[2] = result.getString(3);
+                lists[3] = result.getInt(4);
+                lists[4] = result.getInt(5);
+                lists[5] = result.getInt(6);
+                lists[6] = result.getString(7);
+                list.add(lists);
+            }
+
+            result.close();
+            cnx.getConnection().close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoProyecto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return list;
+    }
+
 }

@@ -26,6 +26,8 @@ public interface IComponente {
     public ArrayList<Object[]> getComponenteDetalle(int idSubComponente);
 
     public ArrayList<ArrayList<Object[]>> getSubComponenteCalc(TableModel modelo);
+    
+    public ArrayList<ArrayList<Object[]>> getSubComponentePuertaCalc(TableModel modelo);
 
     public Object[] getSubComponente(int idSubComponente);
     

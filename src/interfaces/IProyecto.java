@@ -13,11 +13,13 @@ import javax.swing.table.TableModel;
  * @author Programador 1
  */
 public interface IProyecto {
-    
+
     public ArrayList<Object[]> getComponenteCalc(TableModel modelo);
-    
+
     public ArrayList<Object[]> getComponenteVidrioPanelCalc(TableModel modelo);
-    
+
     public ArrayList<Object[]> getComponenteMamparaCalc(TableModel modelo);
-    
+
+    public ArrayList<Object[]> getComponentePuertaCalc(TableModel modelo);
+
 }
