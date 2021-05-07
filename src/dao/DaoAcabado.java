@@ -28,7 +28,7 @@ public class DaoAcabado implements IAcabado {
         Conexion cnx = new Conexion();
         try {
             try (PreparedStatement psmt = cnx.getConnection().prepareStatement(Contans.QUERY_INSERT_ACABADOS)) {
-                psmt.setInt(1, acabado.getCodigo());
+                psmt.setString(1, acabado.getCodigo());
                 psmt.setString(2, acabado.getDescripcion());
                 psmt.execute();
                 cnx.getConnection().close();
@@ -47,7 +47,7 @@ public class DaoAcabado implements IAcabado {
         Conexion cnx = new Conexion();
         try {
             try (PreparedStatement psmt = cnx.getConnection().prepareStatement(Contans.QUERY_UPDATE_SUBCOMPONENTES)) {
-                psmt.setInt(3, acabado.getCodigo());
+                psmt.setString(3, acabado.getCodigo());
                 psmt.setString(4, acabado.getDescripcion());
             int affectedRows = psmt.executeUpdate();
 

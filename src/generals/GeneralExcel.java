@@ -28,7 +28,8 @@ public class GeneralExcel {
 
     private static final HSSFWorkbook book = new HSSFWorkbook();
 
-    public static void GeneraExcel(String path, JTable table, String nameFile) {
+    public static void GeneraExcel(String path, JTable table,JTable tableVidrio,
+            JTable tablePuerta,JTable tableTubo,JTable tableMampara, String nameFile) {
 
         HSSFSheet sheet = book.createSheet();
         String document = path + nameFile + ".xls";
@@ -69,11 +70,13 @@ public class GeneralExcel {
         }
     }
 
-    public static void saveFile(VPrincipal viewPrincipal, JTable table, String nameFile) {
+    public static void saveFile(VPrincipal viewPrincipal, JTable table,JTable tableVidrio,
+            JTable tablePuerta,JTable tableTubo,JTable tableMampara, String nameFile) {
         JFileChooser saveFile = new JFileChooser();
         
         if (saveFile.showSaveDialog(viewPrincipal) == JFileChooser.APPROVE_OPTION) {
-            GeneraExcel(saveFile.getSelectedFile().getAbsolutePath(), table, nameFile);
+            GeneraExcel(saveFile.getSelectedFile().getAbsolutePath(), 
+                    table,tableVidrio,tablePuerta,tableTubo,tableMampara, nameFile);
         }
         
     }

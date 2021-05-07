@@ -152,8 +152,8 @@ public class SubComponenteController implements ActionListener, FocusListener, K
             viewSubcomponente.txtCodigo.setText(subcomponente.getCodigo());
             viewSubcomponente.txtDescripcion.setText(subcomponente.getDescripcion());
             viewSubcomponente.cbAcabado.setSelectedIndex(subcomponente.getIdAcabado());
-             viewSubcomponente.ckComponenteEspecial.setSelected(subcomponente.isEspecial());
-             System.out.println(subcomponente);
+            viewSubcomponente.ckComponenteEspecial.setSelected(subcomponente.isEspecial());
+            System.out.println(subcomponente);
             System.setProperty("id", "");
             ValidButtonSystem.enabledButton(viewSubcomponente.pnlButton);
             viewSubcomponente.btnSave.setEnabled(false);

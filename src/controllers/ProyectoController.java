@@ -72,7 +72,12 @@ public class ProyectoController implements ActionListener {
         }
         if (e.getSource() == this.viewComponente.btnGenerar) {
 
-            GeneralExcel.GeneraExcel(System.getProperty("java.io.tmpdir"), viewComponente.tbComponente, "perfil");
+            GeneralExcel.GeneraExcel(System.getProperty("java.io.tmpdir"), 
+                    viewComponente.tbComponente,
+                    viewComponente.tbComponenteVidrioPanel,
+                    viewComponente.tbComponentePuerta,
+                    viewComponente.tbComponenteTuboMetalico,
+                    viewComponente.tbComponenteMampara,"perfil");
 
         }
     }

@@ -198,7 +198,7 @@ public class VPrincipal extends javax.swing.JFrame {
 
     private void itemAcabadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAcabadosActionPerformed
         VAcabado viewAcabado = new VAcabado();
-        AcabadoController acabadoCont = new AcabadoController(viewAcabado);
+        AcabadoController acabadoCont = new AcabadoController(viewAcabado, this);
         this.Desktop.add(viewAcabado);
         ValidForm.centeForm(viewAcabado, Desktop);
         viewAcabado.show();
