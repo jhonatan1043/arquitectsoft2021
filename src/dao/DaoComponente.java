@@ -48,7 +48,7 @@ public class DaoComponente implements IComponente {
                     try (PreparedStatement insertComponenteDetalle = cnx.getConnection().prepareStatement(Contans.QUERY_INSERT_COMPONENTE_DETALLE)) {
                         for (int i = 0; i < componente.getModelo().getRowCount(); i++) {
                             unidadCalculada = Integer.parseInt(componente.getModelo().getValueAt(i, 3).toString().split("|")[0]);
-                            if (!Contans.SELECTING.equals(componente.getModelo().getValueAt(i, 8).toString())) {
+                            if (!"--".equals(componente.getModelo().getValueAt(i, 8).toString())) {
                                 corte = Integer.parseInt(componente.getModelo().getValueAt(i, 8).toString());
                             }
                             insertComponenteDetalle.setInt(1, idComponente);
@@ -111,7 +111,7 @@ public class DaoComponente implements IComponente {
 
                     try (PreparedStatement insertComponenteDetalle = cnx.getConnection().prepareStatement(Contans.QUERY_INSERT_COMPONENTE_DETALLE)) {
                         for (int i = 0; i < componente.getModelo().getRowCount(); i++) {
-                            if (!Contans.SELECTING.equals(componente.getModelo().getValueAt(i, 8).toString())) {
+                            if (!"--".equals(componente.getModelo().getValueAt(i, 8).toString())) {
                                 corte = Integer.parseInt(componente.getModelo().getValueAt(i, 8).toString());
                             }
                             unidadCalculada = Integer.parseInt(componente.getModelo().getValueAt(i, 3).toString().split("|")[0]);

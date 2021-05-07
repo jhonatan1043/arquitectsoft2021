@@ -58,6 +58,7 @@ public class GenerarColumns {
                 listColumns.add("Cantidad");
                 listColumns.add("Ubicación");
                 listColumns.add("Area");
+                listColumns.add("N°.Puerta");
                 //-----------------
                 break;
             case 5:
