@@ -28,6 +28,7 @@ public class DaoComponenteEspecial implements IComponenteEspecial {
 
     @Override
     public boolean save(ComponenteEspecial componenteEspecial) {
+        int corte = 0;
         try {
             cnx.getConnection().setAutoCommit(false);
             PreparedStatement insertComponente = cnx.getConnection().prepareStatement(Contans.QUERY_INSERT_COMPONENTES_ESPECIAL, Statement.RETURN_GENERATED_KEYS);
@@ -42,9 +43,19 @@ public class DaoComponenteEspecial implements IComponenteEspecial {
 
                 try (PreparedStatement insertComponenteDetalle = cnx.getConnection().prepareStatement(Contans.QUERY_INSERT_COMPONENTE_ESPECIAL_DETALLE)) {
                     for (int i = 0; i < componenteEspecial.getModelo().getRowCount(); i++) {
+
+                        if (!Contans.SELECTING.equals(componenteEspecial.getModelo().getValueAt(i, 8).toString())) {
+                            corte = Integer.parseInt(componenteEspecial.getModelo().getValueAt(i, 8).toString());
+                        }
+
                         insertComponenteDetalle.setInt(1, idComponente);
                         insertComponenteDetalle.setInt(2, Integer.parseInt(componenteEspecial.getModelo().getValueAt(i, 0).toString()));
                         insertComponenteDetalle.setObject(3, componenteEspecial.getModelo().getValueAt(i, 3) == null ? 0 : componenteEspecial.getModelo().getValueAt(i, 3).toString().split("|")[0]);
+                        insertComponenteDetalle.setInt(4, Integer.parseInt(componenteEspecial.getModelo().getValueAt(i, 4).toString()));
+                        insertComponenteDetalle.setInt(5, Integer.parseInt(componenteEspecial.getModelo().getValueAt(i, 5).toString()));
+                        insertComponenteDetalle.setBoolean(6, Boolean.parseBoolean(componenteEspecial.getModelo().getValueAt(i, 6).toString()));
+                        insertComponenteDetalle.setInt(7, Integer.parseInt(componenteEspecial.getModelo().getValueAt(i, 7).toString()));
+                        insertComponenteDetalle.setInt(8, corte);
                         insertComponenteDetalle.executeUpdate();
                     }
 
@@ -72,6 +83,7 @@ public class DaoComponenteEspecial implements IComponenteEspecial {
 
     @Override
     public boolean update(ComponenteEspecial componenteEspecial) {
+        int corte = 0;
         try {
             cnx.getConnection().setAutoCommit(false);
 
@@ -93,9 +105,19 @@ public class DaoComponenteEspecial implements IComponenteEspecial {
 
                 try (PreparedStatement insertComponenteDetalle = cnx.getConnection().prepareStatement(Contans.QUERY_INSERT_COMPONENTE_ESPECIAL_DETALLE)) {
                     for (int i = 0; i < componenteEspecial.getModelo().getRowCount(); i++) {
+                        
+                        if (!Contans.SELECTING.equals(componenteEspecial.getModelo().getValueAt(i, 8).toString())) {
+                            corte = Integer.parseInt(componenteEspecial.getModelo().getValueAt(i, 8).toString());
+                        }
+                        
                         insertComponenteDetalle.setInt(1, componenteEspecial.getIdComponente());
                         insertComponenteDetalle.setInt(2, Integer.parseInt(componenteEspecial.getModelo().getValueAt(i, 0).toString()));
                         insertComponenteDetalle.setObject(3, componenteEspecial.getModelo().getValueAt(i, 3) == null ? 0 : componenteEspecial.getModelo().getValueAt(i, 3).toString().split("|")[0]);
+                        insertComponenteDetalle.setInt(4, Integer.parseInt(componenteEspecial.getModelo().getValueAt(i, 4).toString()));
+                        insertComponenteDetalle.setInt(5, Integer.parseInt(componenteEspecial.getModelo().getValueAt(i, 5).toString()));
+                        insertComponenteDetalle.setBoolean(6, Boolean.parseBoolean(componenteEspecial.getModelo().getValueAt(i, 6).toString()));
+                        insertComponenteDetalle.setInt(7, Integer.parseInt(componenteEspecial.getModelo().getValueAt(i, 7).toString()));
+                        insertComponenteDetalle.setInt(8, corte);
                         insertComponenteDetalle.executeUpdate();
                     }
 
@@ -192,11 +214,16 @@ public class DaoComponenteEspecial implements IComponenteEspecial {
             result = preparedStatement.executeQuery();
 
             while (result.next()) {
-                Object[] lists = new Object[8];
+                Object[] lists = new Object[9];
                 lists[0] = result.getInt(1);
                 lists[1] = result.getString(2);
                 lists[2] = result.getString(3);
-                lists[3] = result.getObject(4);
+                lists[3] = result.getString(4);
+                lists[4] = result.getInt(5);
+                lists[5] = result.getInt(6);
+                lists[6] = result.getBoolean(7);
+                lists[7] = result.getInt(8);
+                lists[8] = result.getString(9);
                 list.add(lists);
             }
 
@@ -210,7 +237,7 @@ public class DaoComponenteEspecial implements IComponenteEspecial {
 
     @Override
     public Object[] getSubComponenteEspecial(int idSubComponente) {
-        Object[] list = new Object[7];
+        Object[] list = new Object[9];
 
         ResultSet result;
 
@@ -221,6 +248,12 @@ public class DaoComponenteEspecial implements IComponenteEspecial {
                 list[0] = idSubComponente;
                 list[1] = result.getObject(1);
                 list[2] = result.getObject(2);
+                list[3] = "1|Columna primera";
+                list[4] = 1;
+                list[5] = 30;
+                list[6] = false;
+                list[7] = 0;
+                list[8] = Contans.SELECTING;
             }
 
             result.close();
@@ -297,7 +330,7 @@ public class DaoComponenteEspecial implements IComponenteEspecial {
     public boolean saveAuxAnchura(TableModel modelo) {
         boolean result = false;
         String col1, col2, col3, col4, col5, col6;
-        
+
         try {
             PreparedStatement preparedStatement = cnx.getConnection().prepareStatement("truncate tbauxanchura;");
             preparedStatement.execute();
