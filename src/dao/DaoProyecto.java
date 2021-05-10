@@ -80,9 +80,12 @@ public class DaoProyecto implements IProyecto {
 
             for (int i = 0; i < modelo.getRowCount(); i++) {
                 insertComponenteDetalle.setInt(1, Integer.parseInt(modelo.getValueAt(i, 0).toString()));
-                insertComponenteDetalle.setInt(2, Integer.parseInt(modelo.getValueAt(i, 3).toString()));
+                insertComponenteDetalle.setInt(2, Integer.parseInt(modelo.getValueAt(i, 1).toString()));
                 insertComponenteDetalle.setInt(3, Integer.parseInt(modelo.getValueAt(i, 4).toString()));
                 insertComponenteDetalle.setInt(4, Integer.parseInt(modelo.getValueAt(i, 5).toString()));
+                insertComponenteDetalle.setInt(5, Integer.parseInt(modelo.getValueAt(i, 6).toString()));
+                insertComponenteDetalle.setInt(6, Integer.parseInt(modelo.getValueAt(i, 7).toString()));
+                insertComponenteDetalle.setObject(7, modelo.getValueAt(i, 8) == null ? 0 : modelo.getValueAt(i, 8));
                 insertComponenteDetalle.executeUpdate();
             }
             insertComponenteDetalle.close();
@@ -91,13 +94,15 @@ public class DaoProyecto implements IProyecto {
             result = preparedStatement.executeQuery();
 
             while (result.next()) {
-                Object[] lists = new Object[6];
+                Object[] lists = new Object[8];
                 lists[0] = result.getInt(1);
                 lists[1] = result.getString(2);
                 lists[2] = result.getString(3);
                 lists[3] = result.getInt(4);
                 lists[4] = result.getInt(5);
                 lists[5] = result.getInt(6);
+                lists[6] = result.getObject(7);
+                lists[7] = result.getObject(8);
                 list.add(lists);
             }
 
@@ -136,7 +141,7 @@ public class DaoProyecto implements IProyecto {
                 Object[] lists = new Object[3];
                 lists[0] = result.getString(1);
                 lists[1] = result.getString(2);
-                lists[2] = Math.round(result.getDouble(3)*100.0/100.0);
+                lists[2] = Math.round(result.getDouble(3) * 100.0 / 100.0);
                 list.add(lists);
             }
 
@@ -152,7 +157,7 @@ public class DaoProyecto implements IProyecto {
 
     @Override
     public ArrayList<Object[]> getComponentePuertaCalc(TableModel modelo) {
-      Conexion cnx = new Conexion();
+        Conexion cnx = new Conexion();
         ResultSet result;
         ArrayList<Object[]> list = new ArrayList<>();
 

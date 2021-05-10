@@ -9,10 +9,11 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
-import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRichTextString;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -28,41 +29,40 @@ public class GeneralExcel {
 
     private static final HSSFWorkbook book = new HSSFWorkbook();
 
-    public static void GeneraExcel(String path, JTable table,JTable tableVidrio,
-            JTable tablePuerta,JTable tableTubo,JTable tableMampara, String nameFile) {
+    public static void GeneraExcel(String path, ArrayList<DefaultTableModel> list,
+            String nameFile) {
 
-        HSSFSheet sheet = book.createSheet();
         String document = path + nameFile + ".xls";
-        System.out.println(document + "-------------");
         File file = new File(document);
-
-        for (int i = 0; i < table.getRowCount(); i++) {
-            HSSFRow row = sheet.createRow(i);
-            if (i == 0) {
-                for (int j = 0; j < table.getColumnCount(); j++) {
-                    HSSFCell cell = row.createCell(j);
-
-                    cell.setCellValue(new HSSFRichTextString(table.getColumnModel().getColumn(j).getHeaderValue().toString()));
-                }
-            } else {
-                for (int j = 0; j < table.getColumnCount(); j++) {
-                    HSSFCell cell = row.createCell(j);
-                    if (table.getValueAt(i, j) != null) {
-                        cell.setCellValue(new HSSFRichTextString(table.getValueAt(i, j).toString()));
+        //------------------------------------------
+        list.forEach((item) -> {
+            HSSFSheet sheet = book.createSheet();
+            for (int i = 0; i < item.getRowCount(); i++) {
+                HSSFRow row = sheet.createRow(i);
+                for (int j = 0; j < item.getColumnCount(); j++) {
+                    if (i == 0) {
+                        HSSFCell cell = row.createCell(j);
+                        cell.setCellValue(new HSSFRichTextString(item.getColumnName(j)));
+                    } else {
+                        HSSFCell cell = row.createCell(j);
+                        if (item.getValueAt(i, j) != null) {
+                            cell.setCellValue(new HSSFRichTextString(item.getValueAt(i, j).toString()));
+                        }
                     }
                 }
-            }
-            try {
+                try {
 
-                try (FileOutputStream fileOutputStream = new FileOutputStream(file)) {
-                    book.write(fileOutputStream);
-                    fileOutputStream.close();
+                    try (FileOutputStream fileOutputStream = new FileOutputStream(file)) {
+                        book.write(fileOutputStream);
+                        fileOutputStream.close();
+                    }
+
+                } catch (IOException e) {
+                    System.out.println(e.getMessage());
                 }
-
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
             }
-        }
+        });
+        //---------------
         try {
             Desktop.getDesktop().open(file);
         } catch (IOException ex) {
@@ -70,15 +70,13 @@ public class GeneralExcel {
         }
     }
 
-    public static void saveFile(VPrincipal viewPrincipal, JTable table,JTable tableVidrio,
-            JTable tablePuerta,JTable tableTubo,JTable tableMampara, String nameFile) {
+    public static void saveFile(VPrincipal viewPrincipal, ArrayList<DefaultTableModel> list, String nameFile) {
         JFileChooser saveFile = new JFileChooser();
-        
+
         if (saveFile.showSaveDialog(viewPrincipal) == JFileChooser.APPROVE_OPTION) {
-            GeneraExcel(saveFile.getSelectedFile().getAbsolutePath(), 
-                    table,tableVidrio,tablePuerta,tableTubo,tableMampara, nameFile);
+            GeneraExcel(saveFile.getSelectedFile().getAbsolutePath(), list, nameFile);
         }
-        
+
     }
 
 }

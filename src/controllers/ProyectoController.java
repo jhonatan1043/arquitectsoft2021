@@ -12,6 +12,7 @@ import generals.FileTxt;
 import generals.GeneralExcel;
 import generals.ValidTable;
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -41,8 +42,10 @@ public class ProyectoController implements ActionListener {
     BusquedaController busquedaC;
     DaoComponente daoComponente = new DaoComponente();
     DaoComponenteEspecial daoComponenteEspecial = new DaoComponenteEspecial();
+    ArrayList<DefaultTableModel> listModelo;
 
     public ProyectoController(VProyecto viewComponente, VPrincipal viewPrincipal) {
+        this.listModelo = new ArrayList<>();
         this.viewComponente = viewComponente;
         this.viewPrincipal = viewPrincipal;
         start();
@@ -68,16 +71,12 @@ public class ProyectoController implements ActionListener {
             }
         }
         if (e.getSource() == this.viewComponente.btnCalcular) {
+            
             loadSubcomponente();
         }
         if (e.getSource() == this.viewComponente.btnGenerar) {
 
-            GeneralExcel.GeneraExcel(System.getProperty("java.io.tmpdir"), 
-                    viewComponente.tbComponente,
-                    viewComponente.tbComponenteVidrioPanel,
-                    viewComponente.tbComponentePuerta,
-                    viewComponente.tbComponenteTuboMetalico,
-                    viewComponente.tbComponenteMampara,"perfil");
+            GeneralExcel.GeneraExcel(System.getProperty("java.io.tmpdir"), listModelo, "arquisoft");
 
         }
     }
@@ -129,12 +128,12 @@ public class ProyectoController implements ActionListener {
     }
 
     private void loadSubcomponente() {
-
+       
         DefaultTableModel modeloAux = modelo;
         DefaultTableModel modeloVidrioPanelAux = modeloVidrioPanel;
         DefaultTableModel modeloTuboMetalicoAux = modeloTuboMetalico;
         DefaultTableModel modeloPuertaAux = modeloPuerta;
-
+        
         calcularPerfilMetalico(modeloAux);
         calcularVidrioPanel(modeloVidrioPanelAux);
         calcularTuboMetalicos(modeloTuboMetalicoAux);
@@ -146,6 +145,7 @@ public class ProyectoController implements ActionListener {
             viewComponente.btnGenerar.setEnabled(true);
             viewComponente.btnCalcular.setEnabled(false);
         }
+        
     }
 
     private void calcularPerfilMetalico(DefaultTableModel modeloAux) {
@@ -212,10 +212,10 @@ public class ProyectoController implements ActionListener {
             });
 
             for (int p = 0; p < modeloPuertaAux.getRowCount(); p++) {
-                UbicacionPuerta = modeloPuertaAux.getValueAt(p, 9).toString().replace("\"", "");
+                UbicacionPuerta = modeloPuertaAux.getValueAt(p, 10).toString().replace("\"", "");
 
                 if (!"".equals(UbicacionPuerta)) {
-                    areaPuerta = Double.parseDouble(modeloPuertaAux.getValueAt(p, 10).toString().replace("\"", ""));
+                    areaPuerta = Double.parseDouble(modeloPuertaAux.getValueAt(p, 11).toString().replace("\"", ""));
 
                     if (modeloMampara.getRowCount() > 0) {
                         for (int m = 0; m < modeloMampara.getRowCount(); m++) {
@@ -255,30 +255,45 @@ public class ProyectoController implements ActionListener {
                 list.forEach((list1) -> {
                     modelo.addRow(list1);
                 });
+                if (modelo.getRowCount() > 0) {
+                    this.listModelo.add(modelo);
+                }
                 break;
             case 2:
                 modeloVidrioPanel.setRowCount(0);
                 list.forEach((list1) -> {
                     modeloVidrioPanel.addRow(list1);
                 });
+                if (modeloVidrioPanel.getRowCount() > 0) {
+                    this.listModelo.add(modeloVidrioPanel);
+                }
                 break;
             case 3:
                 modeloTuboMetalico.setRowCount(0);
                 list.forEach((list1) -> {
                     modeloTuboMetalico.addRow(list1);
                 });
+                if (modeloTuboMetalico.getRowCount() > 0) {
+                    this.listModelo.add(modeloTuboMetalico);
+                }
                 break;
             case 4:
                 modeloMampara.setRowCount(0);
                 list.forEach((list1) -> {
                     modeloMampara.addRow(list1);
                 });
+                if (modeloMampara.getRowCount() > 0) {
+                    this.listModelo.add(modeloMampara);
+                }
                 break;
             case 5:
                 modeloPuerta.setRowCount(0);
                 list.forEach((list1) -> {
                     modeloPuerta.addRow(list1);
                 });
+                if (modeloPuerta.getRowCount() > 0) {
+                    this.listModelo.add(modeloPuerta);
+                }
                 break;
             default:
                 break;

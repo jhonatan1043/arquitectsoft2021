@@ -115,11 +115,14 @@ public class Contans {
             + "VALUES (?,?,?,?,?)";
 
     public static String QUERY_INSERT_PROYECTO_VIDRIO_PANEL = "INSERT INTO proyecto_vp "
-            + "(Id_Subcomponente, "
-            + " Altura, "
-            + " Anchura,"
-            + " Cantidad) "
-            + "VALUES (?,?,?,?)";
+            + "(Id_Subcomponente,"
+            + "Id_Unidad_Medida, "
+            + "Altura, "
+            + "Anchura,"
+            + "Cantidad,"
+            + "medida,"
+            + "medidaAdicional) "
+            + "VALUES (?,?,?,?,?,?,?)";
 
     public static String QUERY_INSERT_PROYECT_MAMPARA = "INSERT proyecto_mp(codigo,descripcion,medida)Values(?,?,?)";
 

@@ -84,7 +84,7 @@ public final class AcabadoController implements ActionListener,FocusListener,Key
         }
         if (e.getSource() == this.viewAcabado.btnBuscar) {
             VBusqueda busqueda = new VBusqueda(viewPrincipal, true);
-            busquedaC = new BusquedaController(busqueda, viewAcabado, Contans.QUERY_SUBCOMPONENTES, createColumns());
+            busquedaC = new BusquedaController(busqueda, viewAcabado, Contans.QUERY_ACABADO, createColumns());
             busqueda.setVisible(true);
             if (System.getProperty("id") != null || "".equals(System.getProperty("id"))) {
                 loadAcabado(Integer.parseInt(System.getProperty("id")));
