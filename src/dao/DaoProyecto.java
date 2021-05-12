@@ -85,7 +85,7 @@ public class DaoProyecto implements IProyecto {
                 insertComponenteDetalle.setInt(4, Integer.parseInt(modelo.getValueAt(i, 5).toString()));
                 insertComponenteDetalle.setInt(5, Integer.parseInt(modelo.getValueAt(i, 6).toString()));
                 insertComponenteDetalle.setInt(6, Integer.parseInt(modelo.getValueAt(i, 7).toString()));
-                insertComponenteDetalle.setObject(7, modelo.getValueAt(i, 8) == null ? 0 : modelo.getValueAt(i, 8));
+                insertComponenteDetalle.setObject(7, Integer.parseInt(modelo.getValueAt(i, 8).toString()));
                 insertComponenteDetalle.executeUpdate();
             }
             insertComponenteDetalle.close();
@@ -94,7 +94,7 @@ public class DaoProyecto implements IProyecto {
             result = preparedStatement.executeQuery();
 
             while (result.next()) {
-                Object[] lists = new Object[8];
+                Object[] lists = new Object[9];
                 lists[0] = result.getInt(1);
                 lists[1] = result.getString(2);
                 lists[2] = result.getString(3);
@@ -103,6 +103,7 @@ public class DaoProyecto implements IProyecto {
                 lists[5] = result.getInt(6);
                 lists[6] = result.getObject(7);
                 lists[7] = result.getObject(8);
+                lists[8] = result.getObject(9);
                 list.add(lists);
             }
 
