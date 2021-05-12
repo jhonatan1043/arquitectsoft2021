@@ -12,12 +12,10 @@ import generals.FileTxt;
 import generals.GeneralExcel;
 import generals.ValidTable;
 import java.awt.Component;
-import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -258,7 +256,7 @@ public class ProyectoController implements ActionListener {
                 });
                 if (modelo.getRowCount() > 0) {
                     this.listModelo.add(modelo);
-                }
+                } 
                 break;
             case 2:
                 modeloVidrioPanel.setRowCount(0);

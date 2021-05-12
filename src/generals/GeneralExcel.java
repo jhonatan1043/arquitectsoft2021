@@ -36,18 +36,19 @@ public class GeneralExcel {
         File file = new File(document);
         //------------------------------------------
         list.forEach((item) -> {
+
             HSSFSheet sheet = book.createSheet();
+            HSSFCell cell;
+            HSSFRow row;
+
+            crearEncabezado(item, sheet);
+
             for (int i = 0; i < item.getRowCount(); i++) {
-                HSSFRow row = sheet.createRow(i);
+                row = sheet.createRow(i + 1);
                 for (int j = 0; j < item.getColumnCount(); j++) {
-                    if (i == 0) {
-                        HSSFCell cell = row.createCell(j);
-                        cell.setCellValue(new HSSFRichTextString(item.getColumnName(j)));
-                    } else {
-                        HSSFCell cell = row.createCell(j);
-                        if (item.getValueAt(i, j) != null) {
-                            cell.setCellValue(new HSSFRichTextString(item.getValueAt(i, j).toString()));
-                        }
+                    if (item.getValueAt(i, j) != null) {
+                        cell = row.createCell(j);
+                        cell.setCellValue(new HSSFRichTextString(item.getValueAt(i, j).toString()));
                     }
                 }
                 try {
@@ -67,6 +68,16 @@ public class GeneralExcel {
             Desktop.getDesktop().open(file);
         } catch (IOException ex) {
             Logger.getLogger(GeneralExcel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private static void crearEncabezado(DefaultTableModel item, HSSFSheet sheet) {
+        HSSFRow row;
+        HSSFCell cell;
+        row = sheet.createRow(0);
+        for (int j = 0; j < item.getColumnCount(); j++) {
+            cell = row.createCell(j);
+            cell.setCellValue(new HSSFRichTextString(item.getColumnName(j)));
         }
     }
 
