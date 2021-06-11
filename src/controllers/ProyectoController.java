@@ -102,7 +102,6 @@ public class ProyectoController implements ActionListener {
     }
 
     private void hideTab() {
-        System.out.println(viewComponente.jTabComponentes.getTabCount());
         for (Component jPane : viewComponente.jTabComponentes.getComponents()) {
             viewComponente.jTabComponentes.remove(jPane);
         }

@@ -28,7 +28,6 @@ public class ValidTable {
     public static void enableColumnsTableComponente(javax.swing.JTable table) {
 
         for (int i = 0; i < table.getRowCount(); i++) {
-            System.out.println(table.getValueAt(i, 3));
             if (Integer.parseInt(table.getValueAt(i, 3).toString()) == 2
                     || Integer.parseInt(table.getValueAt(i, 3).toString()) == 3) {
                 table.isCellEditable(i, 6);
